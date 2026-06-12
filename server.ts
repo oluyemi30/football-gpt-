@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import fs from 'fs';
 import dotenv from 'dotenv';
 import { WebSocketServer, WebSocket } from 'ws';
@@ -32,9 +31,6 @@ export function broadcastUpdate(type: string, data?: any) {
     }
   });
 }
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -365,7 +361,7 @@ async function setupServer() {
       const url = req.originalUrl;
       try {
         let template = fs.readFileSync(
-          path.resolve(__dirname, 'index.html'),
+          path.resolve(process.cwd(), 'index.html'),
           'utf-8'
         );
 
@@ -381,9 +377,10 @@ async function setupServer() {
     console.log(`[Development] FootballGPT server listening on port ${PORT}`);
   } else {
     // Serve static frontend files in production
-    app.use(express.static(path.join(__dirname, 'dist')));
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
     app.get('*', (req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+      res.sendFile(path.join(distPath, 'index.html'));
     });
     console.log(`[Production] FootballGPT server listening on port ${PORT}`);
   }
