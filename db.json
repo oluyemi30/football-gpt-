@@ -1,0 +1,2784 @@
+{
+  "standings": [
+    {
+      "rank": 1,
+      "teamId": "1118",
+      "teamName": "Netherlands",
+      "played": 3,
+      "won": 2,
+      "drawn": 1,
+      "lost": 0,
+      "goalsFor": 5,
+      "goalsAgainst": 1,
+      "points": 7,
+      "form": "WDWDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "13",
+      "teamName": "Senegal",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 5,
+      "goalsAgainst": 4,
+      "points": 6,
+      "form": "WWLDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "2382",
+      "teamName": "Ecuador",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 3,
+      "points": 4,
+      "form": "LDWDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "1569",
+      "teamName": "Qatar",
+      "played": 3,
+      "won": 0,
+      "drawn": 0,
+      "lost": 3,
+      "goalsFor": 1,
+      "goalsAgainst": 7,
+      "points": 0,
+      "form": "LLLDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "10",
+      "teamName": "England",
+      "played": 3,
+      "won": 2,
+      "drawn": 1,
+      "lost": 0,
+      "goalsFor": 9,
+      "goalsAgainst": 2,
+      "points": 7,
+      "form": "WDWDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "2384",
+      "teamName": "USA",
+      "played": 3,
+      "won": 1,
+      "drawn": 2,
+      "lost": 0,
+      "goalsFor": 2,
+      "goalsAgainst": 1,
+      "points": 5,
+      "form": "WDDDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "22",
+      "teamName": "Iran",
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 4,
+      "goalsAgainst": 7,
+      "points": 3,
+      "form": "LWLDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "767",
+      "teamName": "Wales",
+      "played": 3,
+      "won": 0,
+      "drawn": 1,
+      "lost": 2,
+      "goalsFor": 1,
+      "goalsAgainst": 6,
+      "points": 1,
+      "form": "LLDDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "26",
+      "teamName": "Argentina",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 5,
+      "goalsAgainst": 2,
+      "points": 6,
+      "form": "WWLDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "24",
+      "teamName": "Poland",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 2,
+      "points": 4,
+      "form": "LWDDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "16",
+      "teamName": "Mexico",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 3,
+      "points": 4,
+      "form": "WLDDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "23",
+      "teamName": "Saudi Arabia",
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 3,
+      "goalsAgainst": 5,
+      "points": 3,
+      "form": "LLWDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "2",
+      "teamName": "France",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 6,
+      "goalsAgainst": 3,
+      "points": 6,
+      "form": "LWWDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "20",
+      "teamName": "Australia",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 3,
+      "goalsAgainst": 4,
+      "points": 6,
+      "form": "WWLDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "28",
+      "teamName": "Tunisia",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 1,
+      "goalsAgainst": 1,
+      "points": 4,
+      "form": "WLDDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "21",
+      "teamName": "Denmark",
+      "played": 3,
+      "won": 0,
+      "drawn": 1,
+      "lost": 2,
+      "goalsFor": 1,
+      "goalsAgainst": 3,
+      "points": 1,
+      "form": "LLDDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "12",
+      "teamName": "Japan",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 3,
+      "points": 6,
+      "form": "WLWDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "9",
+      "teamName": "Spain",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 9,
+      "goalsAgainst": 3,
+      "points": 4,
+      "form": "LDWDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "25",
+      "teamName": "Germany",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 6,
+      "goalsAgainst": 5,
+      "points": 4,
+      "form": "WDLDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "29",
+      "teamName": "Costa Rica",
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 3,
+      "goalsAgainst": 11,
+      "points": 3,
+      "form": "LWLDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "31",
+      "teamName": "Morocco",
+      "played": 3,
+      "won": 2,
+      "drawn": 1,
+      "lost": 0,
+      "goalsFor": 4,
+      "goalsAgainst": 1,
+      "points": 7,
+      "form": "WWDDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "3",
+      "teamName": "Croatia",
+      "played": 3,
+      "won": 1,
+      "drawn": 2,
+      "lost": 0,
+      "goalsFor": 4,
+      "goalsAgainst": 1,
+      "points": 5,
+      "form": "DWDDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "1",
+      "teamName": "Belgium",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 1,
+      "goalsAgainst": 2,
+      "points": 4,
+      "form": "DLWDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "5529",
+      "teamName": "Canada",
+      "played": 3,
+      "won": 0,
+      "drawn": 0,
+      "lost": 3,
+      "goalsFor": 2,
+      "goalsAgainst": 7,
+      "points": 0,
+      "form": "LLLDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "6",
+      "teamName": "Brazil",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 3,
+      "goalsAgainst": 1,
+      "points": 6,
+      "form": "LWWDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "15",
+      "teamName": "Switzerland",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 3,
+      "points": 6,
+      "form": "WLWDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "1530",
+      "teamName": "Cameroon",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 4,
+      "points": 4,
+      "form": "WDLDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "14",
+      "teamName": "Serbia",
+      "played": 3,
+      "won": 0,
+      "drawn": 1,
+      "lost": 2,
+      "goalsFor": 5,
+      "goalsAgainst": 8,
+      "points": 1,
+      "form": "LDLDD"
+    },
+    {
+      "rank": 1,
+      "teamId": "27",
+      "teamName": "Portugal",
+      "played": 3,
+      "won": 2,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 6,
+      "goalsAgainst": 4,
+      "points": 6,
+      "form": "LWWDD"
+    },
+    {
+      "rank": 2,
+      "teamId": "17",
+      "teamName": "South Korea",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 4,
+      "goalsAgainst": 4,
+      "points": 4,
+      "form": "WLDDD"
+    },
+    {
+      "rank": 3,
+      "teamId": "7",
+      "teamName": "Uruguay",
+      "played": 3,
+      "won": 1,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 2,
+      "goalsAgainst": 2,
+      "points": 4,
+      "form": "WLDDD"
+    },
+    {
+      "rank": 4,
+      "teamId": "1504",
+      "teamName": "Ghana",
+      "played": 3,
+      "won": 1,
+      "drawn": 0,
+      "lost": 2,
+      "goalsFor": 5,
+      "goalsAgainst": 7,
+      "points": 3,
+      "form": "LWLDD"
+    }
+  ],
+  "teamStats": {
+    "1": {
+      "teamId": "1",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.3,
+      "averageGoalsConceded5": 0.7,
+      "averageGoalsScored10": 0.3,
+      "averageGoalsConceded10": 0.7,
+      "recentForm": "DLWDD",
+      "leaguePosition": 3,
+      "totalInjuries": 2
+    },
+    "2": {
+      "teamId": "2",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 2,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 2,
+      "averageGoalsConceded10": 1,
+      "recentForm": "LWWDD",
+      "leaguePosition": 1,
+      "totalInjuries": 1
+    },
+    "3": {
+      "teamId": "3",
+      "winRate": 33,
+      "drawRate": 67,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 0.3,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 0.3,
+      "recentForm": "DWDDD",
+      "leaguePosition": 2,
+      "totalInjuries": 2
+    },
+    "4": {
+      "teamId": "4",
+      "winRate": 38,
+      "drawRate": 25,
+      "averageGoalsScored5": 2.4,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 2.3,
+      "averageGoalsConceded10": 1.1,
+      "recentForm": "DDDDD",
+      "leaguePosition": 17,
+      "totalInjuries": 3
+    },
+    "5": {
+      "teamId": "5",
+      "winRate": 88,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.4,
+      "averageGoalsConceded5": 1.4,
+      "averageGoalsScored10": 1.5,
+      "averageGoalsConceded10": 1.5,
+      "recentForm": "DDDDD",
+      "leaguePosition": 2,
+      "totalInjuries": 5
+    },
+    "6": {
+      "teamId": "6",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 0.3,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 0.3,
+      "recentForm": "LWWDD",
+      "leaguePosition": 1,
+      "totalInjuries": 3
+    },
+    "7": {
+      "teamId": "7",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.7,
+      "averageGoalsConceded5": 0.7,
+      "averageGoalsScored10": 0.7,
+      "averageGoalsConceded10": 0.7,
+      "recentForm": "WLDDD",
+      "leaguePosition": 3,
+      "totalInjuries": 3
+    },
+    "8": {
+      "teamId": "8",
+      "winRate": 61,
+      "drawRate": 12,
+      "averageGoalsScored5": 2.5,
+      "averageGoalsConceded5": 1.2,
+      "averageGoalsScored10": 2.4,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "WLWWL",
+      "leaguePosition": 3,
+      "totalInjuries": 2
+    },
+    "9": {
+      "teamId": "9",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 3,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 3,
+      "averageGoalsConceded10": 1,
+      "recentForm": "LDWDD",
+      "leaguePosition": 2,
+      "totalInjuries": 1
+    },
+    "10": {
+      "teamId": "10",
+      "winRate": 67,
+      "drawRate": 33,
+      "averageGoalsScored5": 3,
+      "averageGoalsConceded5": 0.7,
+      "averageGoalsScored10": 3,
+      "averageGoalsConceded10": 0.7,
+      "recentForm": "WDWDD",
+      "leaguePosition": 1,
+      "totalInjuries": 3
+    },
+    "12": {
+      "teamId": "12",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1,
+      "recentForm": "WLWDD",
+      "leaguePosition": 1,
+      "totalInjuries": 0
+    },
+    "13": {
+      "teamId": "13",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.7,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1.7,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "WWLDD",
+      "leaguePosition": 2,
+      "totalInjuries": 1
+    },
+    "14": {
+      "teamId": "14",
+      "winRate": 0,
+      "drawRate": 33,
+      "averageGoalsScored5": 1.7,
+      "averageGoalsConceded5": 2.7,
+      "averageGoalsScored10": 1.7,
+      "averageGoalsConceded10": 2.7,
+      "recentForm": "LDLDD",
+      "leaguePosition": 4,
+      "totalInjuries": 0
+    },
+    "15": {
+      "teamId": "15",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1,
+      "recentForm": "WLWDD",
+      "leaguePosition": 2,
+      "totalInjuries": 3
+    },
+    "16": {
+      "teamId": "16",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.7,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 0.7,
+      "averageGoalsConceded10": 1,
+      "recentForm": "WLDDD",
+      "leaguePosition": 3,
+      "totalInjuries": 2
+    },
+    "17": {
+      "teamId": "17",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "WLDDD",
+      "leaguePosition": 2,
+      "totalInjuries": 3
+    },
+    "19": {
+      "teamId": "19",
+      "winRate": 13,
+      "drawRate": 13,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 2.6,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 2.6,
+      "recentForm": "DDDDD",
+      "leaguePosition": 33,
+      "totalInjuries": 1
+    },
+    "20": {
+      "teamId": "20",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "WWLDD",
+      "leaguePosition": 2,
+      "totalInjuries": 3
+    },
+    "21": {
+      "teamId": "21",
+      "winRate": 0,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.3,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 0.3,
+      "averageGoalsConceded10": 1,
+      "recentForm": "LLDDD",
+      "leaguePosition": 4,
+      "totalInjuries": 1
+    },
+    "22": {
+      "teamId": "22",
+      "winRate": 33,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 2.3,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 2.3,
+      "recentForm": "LWLDD",
+      "leaguePosition": 3,
+      "totalInjuries": 0
+    },
+    "23": {
+      "teamId": "23",
+      "winRate": 33,
+      "drawRate": 0,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 1.7,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 1.7,
+      "recentForm": "LLWDD",
+      "leaguePosition": 4,
+      "totalInjuries": 2
+    },
+    "24": {
+      "teamId": "24",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.7,
+      "averageGoalsConceded5": 0.7,
+      "averageGoalsScored10": 0.7,
+      "averageGoalsConceded10": 0.7,
+      "recentForm": "LWDDD",
+      "leaguePosition": 2,
+      "totalInjuries": 1
+    },
+    "25": {
+      "teamId": "25",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 2,
+      "averageGoalsConceded5": 1.7,
+      "averageGoalsScored10": 2,
+      "averageGoalsConceded10": 1.7,
+      "recentForm": "WDLDD",
+      "leaguePosition": 3,
+      "totalInjuries": 2
+    },
+    "26": {
+      "teamId": "26",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.7,
+      "averageGoalsConceded5": 0.7,
+      "averageGoalsScored10": 1.7,
+      "averageGoalsConceded10": 0.7,
+      "recentForm": "WWLDD",
+      "leaguePosition": 1,
+      "totalInjuries": 1
+    },
+    "27": {
+      "teamId": "27",
+      "winRate": 67,
+      "drawRate": 0,
+      "averageGoalsScored5": 2,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 2,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "LWWDD",
+      "leaguePosition": 1,
+      "totalInjuries": 0
+    },
+    "28": {
+      "teamId": "28",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.3,
+      "averageGoalsConceded5": 0.3,
+      "averageGoalsScored10": 0.3,
+      "averageGoalsConceded10": 0.3,
+      "recentForm": "WLDDD",
+      "leaguePosition": 3,
+      "totalInjuries": 3
+    },
+    "29": {
+      "teamId": "29",
+      "winRate": 33,
+      "drawRate": 0,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 3.7,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 3.7,
+      "recentForm": "LWLDD",
+      "leaguePosition": 4,
+      "totalInjuries": 0
+    },
+    "31": {
+      "teamId": "31",
+      "winRate": 67,
+      "drawRate": 33,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 0.3,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 0.3,
+      "recentForm": "WWDDD",
+      "leaguePosition": 1,
+      "totalInjuries": 2
+    },
+    "33": {
+      "teamId": "33",
+      "winRate": 47,
+      "drawRate": 16,
+      "averageGoalsScored5": 1.5,
+      "averageGoalsConceded5": 1.5,
+      "averageGoalsScored10": 1.5,
+      "averageGoalsConceded10": 1.5,
+      "recentForm": "WWLLD",
+      "leaguePosition": 8,
+      "totalInjuries": 2
+    },
+    "34": {
+      "teamId": "34",
+      "winRate": 47,
+      "drawRate": 16,
+      "averageGoalsScored5": 2.2,
+      "averageGoalsConceded5": 1.6,
+      "averageGoalsScored10": 2.2,
+      "averageGoalsConceded10": 1.6,
+      "recentForm": "WLDWW",
+      "leaguePosition": 7,
+      "totalInjuries": 2
+    },
+    "35": {
+      "teamId": "35",
+      "winRate": 34,
+      "drawRate": 24,
+      "averageGoalsScored5": 1.4,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 1.4,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "LLLWW",
+      "leaguePosition": 12,
+      "totalInjuries": 0
+    },
+    "36": {
+      "teamId": "36",
+      "winRate": 34,
+      "drawRate": 21,
+      "averageGoalsScored5": 1.4,
+      "averageGoalsConceded5": 1.6,
+      "averageGoalsScored10": 1.4,
+      "averageGoalsConceded10": 1.6,
+      "recentForm": "WLDDL",
+      "leaguePosition": 13,
+      "totalInjuries": 2
+    },
+    "39": {
+      "teamId": "39",
+      "winRate": 34,
+      "drawRate": 18,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.7,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.7,
+      "recentForm": "LLLWL",
+      "leaguePosition": 14,
+      "totalInjuries": 2
+    },
+    "40": {
+      "teamId": "40",
+      "winRate": 63,
+      "drawRate": 26,
+      "averageGoalsScored5": 2.3,
+      "averageGoalsConceded5": 1.1,
+      "averageGoalsScored10": 2.3,
+      "averageGoalsConceded10": 1.1,
+      "recentForm": "WDWDL",
+      "leaguePosition": 3,
+      "totalInjuries": 2
+    },
+    "42": {
+      "teamId": "42",
+      "winRate": 74,
+      "drawRate": 13,
+      "averageGoalsScored5": 2.4,
+      "averageGoalsConceded5": 0.8,
+      "averageGoalsScored10": 2.4,
+      "averageGoalsConceded10": 0.8,
+      "recentForm": "WWWWW",
+      "leaguePosition": 2,
+      "totalInjuries": 1
+    },
+    "44": {
+      "teamId": "44",
+      "winRate": 13,
+      "drawRate": 24,
+      "averageGoalsScored5": 1.1,
+      "averageGoalsConceded5": 2.1,
+      "averageGoalsScored10": 1.1,
+      "averageGoalsConceded10": 2.1,
+      "recentForm": "LLLDW",
+      "leaguePosition": 19,
+      "totalInjuries": 3
+    },
+    "45": {
+      "teamId": "45",
+      "winRate": 34,
+      "drawRate": 24,
+      "averageGoalsScored5": 1.1,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1.1,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "LWDWW",
+      "leaguePosition": 15,
+      "totalInjuries": 0
+    },
+    "47": {
+      "teamId": "47",
+      "winRate": 53,
+      "drawRate": 16,
+      "averageGoalsScored5": 1.9,
+      "averageGoalsConceded5": 1.6,
+      "averageGoalsScored10": 1.9,
+      "averageGoalsConceded10": 1.6,
+      "recentForm": "WLWLL",
+      "leaguePosition": 5,
+      "totalInjuries": 2
+    },
+    "48": {
+      "teamId": "48",
+      "winRate": 37,
+      "drawRate": 26,
+      "averageGoalsScored5": 1.6,
+      "averageGoalsConceded5": 1.9,
+      "averageGoalsScored10": 1.6,
+      "averageGoalsConceded10": 1.9,
+      "recentForm": "LWLDL",
+      "leaguePosition": 9,
+      "totalInjuries": 0
+    },
+    "49": {
+      "teamId": "49",
+      "winRate": 47,
+      "drawRate": 24,
+      "averageGoalsScored5": 2,
+      "averageGoalsConceded5": 1.7,
+      "averageGoalsScored10": 2,
+      "averageGoalsConceded10": 1.7,
+      "recentForm": "WWWWW",
+      "leaguePosition": 6,
+      "totalInjuries": 3
+    },
+    "50": {
+      "teamId": "50",
+      "winRate": 74,
+      "drawRate": 18,
+      "averageGoalsScored5": 2.5,
+      "averageGoalsConceded5": 0.9,
+      "averageGoalsScored10": 2.5,
+      "averageGoalsConceded10": 0.9,
+      "recentForm": "WWWWW",
+      "leaguePosition": 1,
+      "totalInjuries": 1
+    },
+    "51": {
+      "teamId": "51",
+      "winRate": 32,
+      "drawRate": 32,
+      "averageGoalsScored5": 1.4,
+      "averageGoalsConceded5": 1.6,
+      "averageGoalsScored10": 1.4,
+      "averageGoalsConceded10": 1.6,
+      "recentForm": "LLDWL",
+      "leaguePosition": 11,
+      "totalInjuries": 1
+    },
+    "52": {
+      "teamId": "52",
+      "winRate": 34,
+      "drawRate": 26,
+      "averageGoalsScored5": 1.5,
+      "averageGoalsConceded5": 1.5,
+      "averageGoalsScored10": 1.5,
+      "averageGoalsConceded10": 1.5,
+      "recentForm": "WWWDW",
+      "leaguePosition": 10,
+      "totalInjuries": 2
+    },
+    "55": {
+      "teamId": "55",
+      "winRate": 26,
+      "drawRate": 24,
+      "averageGoalsScored5": 1.5,
+      "averageGoalsConceded5": 1.7,
+      "averageGoalsScored10": 1.5,
+      "averageGoalsConceded10": 1.7,
+      "recentForm": "LWDLW",
+      "leaguePosition": 16,
+      "totalInjuries": 1
+    },
+    "57": {
+      "teamId": "57",
+      "winRate": 100,
+      "drawRate": 0,
+      "averageGoalsScored5": 2.9,
+      "averageGoalsConceded5": 0.5,
+      "averageGoalsScored10": 2.9,
+      "averageGoalsConceded10": 0.5,
+      "recentForm": "DDDDD",
+      "leaguePosition": 1,
+      "totalInjuries": 1
+    },
+    "61": {
+      "teamId": "61",
+      "winRate": 63,
+      "drawRate": 13,
+      "averageGoalsScored5": 2.1,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 2.1,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "DDDDD",
+      "leaguePosition": 6,
+      "totalInjuries": 2
+    },
+    "62": {
+      "teamId": "62",
+      "winRate": 8,
+      "drawRate": 18,
+      "averageGoalsScored5": 0.9,
+      "averageGoalsConceded5": 2.7,
+      "averageGoalsScored10": 0.9,
+      "averageGoalsConceded10": 2.7,
+      "recentForm": "LLLLL",
+      "leaguePosition": 20,
+      "totalInjuries": 3
+    },
+    "64": {
+      "teamId": "64",
+      "winRate": 75,
+      "drawRate": 0,
+      "averageGoalsScored5": 2.5,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 2.5,
+      "averageGoalsConceded10": 1,
+      "recentForm": "DDDDD",
+      "leaguePosition": 3,
+      "totalInjuries": 3
+    },
+    "65": {
+      "teamId": "65",
+      "winRate": 24,
+      "drawRate": 24,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "WLWLL",
+      "leaguePosition": 17,
+      "totalInjuries": 2
+    },
+    "66": {
+      "teamId": "66",
+      "winRate": 53,
+      "drawRate": 21,
+      "averageGoalsScored5": 2,
+      "averageGoalsConceded5": 1.6,
+      "averageGoalsScored10": 2,
+      "averageGoalsConceded10": 1.6,
+      "recentForm": "LDLDW",
+      "leaguePosition": 4,
+      "totalInjuries": 1
+    },
+    "67": {
+      "teamId": "67",
+      "winRate": 50,
+      "drawRate": 25,
+      "averageGoalsScored5": 2.1,
+      "averageGoalsConceded5": 0.9,
+      "averageGoalsScored10": 2.1,
+      "averageGoalsConceded10": 0.9,
+      "recentForm": "DDDDD",
+      "leaguePosition": 12,
+      "totalInjuries": 0
+    },
+    "73": {
+      "teamId": "73",
+      "winRate": 63,
+      "drawRate": 25,
+      "averageGoalsScored5": 2.1,
+      "averageGoalsConceded5": 0.9,
+      "averageGoalsScored10": 2.1,
+      "averageGoalsConceded10": 0.9,
+      "recentForm": "DDDDD",
+      "leaguePosition": 4,
+      "totalInjuries": 0
+    },
+    "77": {
+      "teamId": "77",
+      "winRate": 25,
+      "drawRate": 25,
+      "averageGoalsScored5": 1.1,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 1.1,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "DDDDD",
+      "leaguePosition": 29,
+      "totalInjuries": 2
+    },
+    "78": {
+      "teamId": "78",
+      "winRate": 50,
+      "drawRate": 13,
+      "averageGoalsScored5": 2.1,
+      "averageGoalsConceded5": 1.9,
+      "averageGoalsScored10": 2.1,
+      "averageGoalsConceded10": 1.9,
+      "recentForm": "DDDDD",
+      "leaguePosition": 14,
+      "totalInjuries": 0
+    },
+    "81": {
+      "teamId": "81",
+      "winRate": 63,
+      "drawRate": 13,
+      "averageGoalsScored5": 2.8,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 2.8,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "DDDDD",
+      "leaguePosition": 5,
+      "totalInjuries": 3
+    },
+    "86": {
+      "teamId": "86",
+      "winRate": 63,
+      "drawRate": 0,
+      "averageGoalsScored5": 2.6,
+      "averageGoalsConceded5": 1.5,
+      "averageGoalsScored10": 2.6,
+      "averageGoalsConceded10": 1.5,
+      "recentForm": "DDDDD",
+      "leaguePosition": 9,
+      "totalInjuries": 2
+    },
+    "94": {
+      "teamId": "94",
+      "winRate": 0,
+      "drawRate": 13,
+      "averageGoalsScored5": 0.6,
+      "averageGoalsConceded5": 2.3,
+      "averageGoalsScored10": 0.6,
+      "averageGoalsConceded10": 2.3,
+      "recentForm": "DDDDD",
+      "leaguePosition": 35,
+      "totalInjuries": 1
+    },
+    "102": {
+      "teamId": "102",
+      "winRate": 50,
+      "drawRate": 13,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "DDDDD",
+      "leaguePosition": 15,
+      "totalInjuries": 2
+    },
+    "108": {
+      "teamId": "108",
+      "winRate": 63,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.9,
+      "averageGoalsConceded5": 0.9,
+      "averageGoalsScored10": 1.9,
+      "averageGoalsConceded10": 0.9,
+      "recentForm": "DDDDD",
+      "leaguePosition": 10,
+      "totalInjuries": 3
+    },
+    "109": {
+      "teamId": "109",
+      "winRate": 38,
+      "drawRate": 50,
+      "averageGoalsScored5": 1.8,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1.8,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "DDDDD",
+      "leaguePosition": 13,
+      "totalInjuries": 0
+    },
+    "113": {
+      "teamId": "113",
+      "winRate": 25,
+      "drawRate": 25,
+      "averageGoalsScored5": 1.1,
+      "averageGoalsConceded5": 1.9,
+      "averageGoalsScored10": 1.1,
+      "averageGoalsConceded10": 1.9,
+      "recentForm": "DDDDD",
+      "leaguePosition": 30,
+      "totalInjuries": 2
+    },
+    "498": {
+      "teamId": "498",
+      "winRate": 63,
+      "drawRate": 13,
+      "averageGoalsScored5": 2.1,
+      "averageGoalsConceded5": 1.4,
+      "averageGoalsScored10": 2.1,
+      "averageGoalsConceded10": 1.4,
+      "recentForm": "DDDDD",
+      "leaguePosition": 7,
+      "totalInjuries": 3
+    },
+    "516": {
+      "teamId": "516",
+      "winRate": 38,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.4,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 1.4,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "DDDDD",
+      "leaguePosition": 25,
+      "totalInjuries": 2
+    },
+    "524": {
+      "teamId": "524",
+      "winRate": 50,
+      "drawRate": 25,
+      "averageGoalsScored5": 2.6,
+      "averageGoalsConceded5": 1.4,
+      "averageGoalsScored10": 2.6,
+      "averageGoalsConceded10": 1.4,
+      "recentForm": "DDDDD",
+      "leaguePosition": 11,
+      "totalInjuries": 3
+    },
+    "548": {
+      "teamId": "548",
+      "winRate": 25,
+      "drawRate": 50,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "DDDDD",
+      "leaguePosition": 21,
+      "totalInjuries": 0
+    },
+    "610": {
+      "teamId": "610",
+      "winRate": 38,
+      "drawRate": 13,
+      "averageGoalsScored5": 1.1,
+      "averageGoalsConceded5": 1.4,
+      "averageGoalsScored10": 1.1,
+      "averageGoalsConceded10": 1.4,
+      "recentForm": "DDDDD",
+      "leaguePosition": 20,
+      "totalInjuries": 2
+    },
+    "611": {
+      "teamId": "611",
+      "winRate": 38,
+      "drawRate": 13,
+      "averageGoalsScored5": 1.6,
+      "averageGoalsConceded5": 2.6,
+      "averageGoalsScored10": 1.6,
+      "averageGoalsConceded10": 2.6,
+      "recentForm": "DDDDD",
+      "leaguePosition": 22,
+      "totalInjuries": 1
+    },
+    "654": {
+      "teamId": "654",
+      "winRate": 38,
+      "drawRate": 25,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.8,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.8,
+      "recentForm": "DDDDD",
+      "leaguePosition": 18,
+      "totalInjuries": 3
+    },
+    "674": {
+      "teamId": "674",
+      "winRate": 25,
+      "drawRate": 25,
+      "averageGoalsScored5": 2,
+      "averageGoalsConceded5": 2,
+      "averageGoalsScored10": 2,
+      "averageGoalsConceded10": 2,
+      "recentForm": "DDDDD",
+      "leaguePosition": 28,
+      "totalInjuries": 1
+    },
+    "678": {
+      "teamId": "678",
+      "winRate": 25,
+      "drawRate": 0,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 2.6,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 2.6,
+      "recentForm": "DDDDD",
+      "leaguePosition": 32,
+      "totalInjuries": 1
+    },
+    "767": {
+      "teamId": "767",
+      "winRate": 0,
+      "drawRate": 33,
+      "averageGoalsScored5": 0.3,
+      "averageGoalsConceded5": 2,
+      "averageGoalsScored10": 0.3,
+      "averageGoalsConceded10": 2,
+      "recentForm": "LLDDD",
+      "leaguePosition": 4,
+      "totalInjuries": 1
+    },
+    "851": {
+      "teamId": "851",
+      "winRate": 38,
+      "drawRate": 13,
+      "averageGoalsScored5": 1.9,
+      "averageGoalsConceded5": 2.1,
+      "averageGoalsScored10": 1.9,
+      "averageGoalsConceded10": 2.1,
+      "recentForm": "DDDDD",
+      "leaguePosition": 19,
+      "totalInjuries": 0
+    },
+    "930": {
+      "teamId": "930",
+      "winRate": 0,
+      "drawRate": 38,
+      "averageGoalsScored5": 0.6,
+      "averageGoalsConceded5": 2.4,
+      "averageGoalsScored10": 0.6,
+      "averageGoalsConceded10": 2.4,
+      "recentForm": "DDDDD",
+      "leaguePosition": 34,
+      "totalInjuries": 1
+    },
+    "1118": {
+      "teamId": "1118",
+      "winRate": 67,
+      "drawRate": 33,
+      "averageGoalsScored5": 1.7,
+      "averageGoalsConceded5": 0.3,
+      "averageGoalsScored10": 1.7,
+      "averageGoalsConceded10": 0.3,
+      "recentForm": "WDWDD",
+      "leaguePosition": 1,
+      "totalInjuries": 3
+    },
+    "1359": {
+      "teamId": "1359",
+      "winRate": 16,
+      "drawRate": 21,
+      "averageGoalsScored5": 1.4,
+      "averageGoalsConceded5": 2.2,
+      "averageGoalsScored10": 1.4,
+      "averageGoalsConceded10": 2.2,
+      "recentForm": "LLDLL",
+      "leaguePosition": 18,
+      "totalInjuries": 0
+    },
+    "1504": {
+      "teamId": "1504",
+      "winRate": 33,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.7,
+      "averageGoalsConceded5": 2.3,
+      "averageGoalsScored10": 1.7,
+      "averageGoalsConceded10": 2.3,
+      "recentForm": "LWLDD",
+      "leaguePosition": 4,
+      "totalInjuries": 0
+    },
+    "1530": {
+      "teamId": "1530",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.3,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.3,
+      "recentForm": "WDLDD",
+      "leaguePosition": 3,
+      "totalInjuries": 1
+    },
+    "1569": {
+      "teamId": "1569",
+      "winRate": 0,
+      "drawRate": 0,
+      "averageGoalsScored5": 0.3,
+      "averageGoalsConceded5": 2.3,
+      "averageGoalsScored10": 0.3,
+      "averageGoalsConceded10": 2.3,
+      "recentForm": "LLLDD",
+      "leaguePosition": 4,
+      "totalInjuries": 1
+    },
+    "1876": {
+      "teamId": "1876",
+      "winRate": 25,
+      "drawRate": 25,
+      "averageGoalsScored5": 1.5,
+      "averageGoalsConceded5": 2.6,
+      "averageGoalsScored10": 1.5,
+      "averageGoalsConceded10": 2.6,
+      "recentForm": "DDDDD",
+      "leaguePosition": 31,
+      "totalInjuries": 2
+    },
+    "1903": {
+      "teamId": "1903",
+      "winRate": 38,
+      "drawRate": 0,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1.5,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1.5,
+      "recentForm": "DDDDD",
+      "leaguePosition": 24,
+      "totalInjuries": 0
+    },
+    "2382": {
+      "teamId": "2382",
+      "winRate": 33,
+      "drawRate": 33,
+      "averageGoalsScored5": 1.3,
+      "averageGoalsConceded5": 1,
+      "averageGoalsScored10": 1.3,
+      "averageGoalsConceded10": 1,
+      "recentForm": "LDWDD",
+      "leaguePosition": 3,
+      "totalInjuries": 0
+    },
+    "2384": {
+      "teamId": "2384",
+      "winRate": 33,
+      "drawRate": 67,
+      "averageGoalsScored5": 0.7,
+      "averageGoalsConceded5": 0.3,
+      "averageGoalsScored10": 0.7,
+      "averageGoalsConceded10": 0.3,
+      "recentForm": "WDDDD",
+      "leaguePosition": 2,
+      "totalInjuries": 3
+    },
+    "3929": {
+      "teamId": "3929",
+      "winRate": 38,
+      "drawRate": 0,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 2.1,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 2.1,
+      "recentForm": "DDDDD",
+      "leaguePosition": 27,
+      "totalInjuries": 0
+    },
+    "5529": {
+      "teamId": "5529",
+      "winRate": 0,
+      "drawRate": 0,
+      "averageGoalsScored5": 0.7,
+      "averageGoalsConceded5": 2.3,
+      "averageGoalsScored10": 0.7,
+      "averageGoalsConceded10": 2.3,
+      "recentForm": "LLLDD",
+      "leaguePosition": 4,
+      "totalInjuries": 0
+    },
+    "5721": {
+      "teamId": "5721",
+      "winRate": 25,
+      "drawRate": 38,
+      "averageGoalsScored5": 1.8,
+      "averageGoalsConceded5": 1.9,
+      "averageGoalsScored10": 1.8,
+      "averageGoalsConceded10": 1.9,
+      "recentForm": "DDDDD",
+      "leaguePosition": 23,
+      "totalInjuries": 1
+    },
+    "10601": {
+      "teamId": "10601",
+      "winRate": 0,
+      "drawRate": 13,
+      "averageGoalsScored5": 0.9,
+      "averageGoalsConceded5": 2.8,
+      "averageGoalsScored10": 0.9,
+      "averageGoalsConceded10": 2.8,
+      "recentForm": "DDDDD",
+      "leaguePosition": 36,
+      "totalInjuries": 2
+    },
+    "11034": {
+      "teamId": "11034",
+      "winRate": 25,
+      "drawRate": 38,
+      "averageGoalsScored5": 1,
+      "averageGoalsConceded5": 1.4,
+      "averageGoalsScored10": 1,
+      "averageGoalsConceded10": 1.4,
+      "recentForm": "DDDDD",
+      "leaguePosition": 26,
+      "totalInjuries": 2
+    }
+  },
+  "headToHeads": [
+    {
+      "teamA": "1",
+      "teamB": "2",
+      "matchesPlayed": 14,
+      "winsA": 6,
+      "winsB": 5,
+      "draws": 3,
+      "lastMatches": [
+        {
+          "date": "2025-11-10",
+          "score": "2-1",
+          "winner": "home"
+        },
+        {
+          "date": "2025-04-12",
+          "score": "1-1",
+          "winner": "draw"
+        },
+        {
+          "date": "2024-10-21",
+          "score": "3-1",
+          "winner": "home"
+        }
+      ]
+    },
+    {
+      "teamA": "3",
+      "teamB": "4",
+      "matchesPlayed": 18,
+      "winsA": 8,
+      "winsB": 6,
+      "draws": 4,
+      "lastMatches": [
+        {
+          "date": "2025-12-01",
+          "score": "2-2",
+          "winner": "draw"
+        },
+        {
+          "date": "2025-03-05",
+          "score": "1-0",
+          "winner": "home"
+        },
+        {
+          "date": "2024-11-14",
+          "score": "3-2",
+          "winner": "home"
+        }
+      ]
+    },
+    {
+      "teamA": "1",
+      "teamB": "3",
+      "matchesPlayed": 16,
+      "winsA": 4,
+      "winsB": 9,
+      "draws": 3,
+      "lastMatches": [
+        {
+          "date": "2025-10-18",
+          "score": "0-2",
+          "winner": "away"
+        },
+        {
+          "date": "2025-02-28",
+          "score": "1-1",
+          "winner": "draw"
+        }
+      ]
+    },
+    {
+      "teamA": "6",
+      "teamB": "7",
+      "matchesPlayed": 24,
+      "winsA": 11,
+      "winsB": 9,
+      "draws": 4,
+      "lastMatches": [
+        {
+          "date": "2025-10-25",
+          "score": "3-2",
+          "winner": "home"
+        },
+        {
+          "date": "2025-03-22",
+          "score": "1-2",
+          "winner": "away"
+        }
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "f_1",
+      "date": "2026-06-12",
+      "time": "12:30",
+      "homeTeam": {
+        "id": "1",
+        "name": "Arsenal",
+        "shortName": "ARS"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "Chelsea",
+        "shortName": "CHE"
+      },
+      "league": "Premier League",
+      "status": "scheduled"
+    },
+    {
+      "id": "f_2",
+      "date": "2026-06-12",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "3",
+        "name": "Manchester City",
+        "shortName": "MCI"
+      },
+      "awayTeam": {
+        "id": "4",
+        "name": "Liverpool",
+        "shortName": "LIV"
+      },
+      "league": "Premier League",
+      "status": "scheduled"
+    },
+    {
+      "id": "f_3",
+      "date": "2026-06-12",
+      "time": "17:30",
+      "homeTeam": {
+        "id": "6",
+        "name": "Real Madrid",
+        "shortName": "RMA"
+      },
+      "awayTeam": {
+        "id": "7",
+        "name": "Barcelona",
+        "shortName": "BAR"
+      },
+      "league": "La Liga",
+      "status": "scheduled"
+    },
+    {
+      "id": "f_4",
+      "date": "2026-06-12",
+      "time": "20:00",
+      "homeTeam": {
+        "id": "8",
+        "name": "Bayern Munich",
+        "shortName": "FCB"
+      },
+      "awayTeam": {
+        "id": "9",
+        "name": "Paris Saint-Germain",
+        "shortName": "PSG"
+      },
+      "league": "Champions League",
+      "status": "scheduled"
+    },
+    {
+      "id": "f_5",
+      "date": "2026-06-12",
+      "time": "21:00",
+      "homeTeam": {
+        "id": "5",
+        "name": "Manchester United",
+        "shortName": "MUN"
+      },
+      "awayTeam": {
+        "id": "10",
+        "name": "AC Milan",
+        "shortName": "ACM"
+      },
+      "league": "Friendly Cup",
+      "status": "scheduled"
+    },
+    {
+      "id": "f_1781269320897",
+      "date": "2026-06-12",
+      "time": "19:45",
+      "homeTeam": {
+        "id": "10",
+        "name": "Morocco",
+        "shortName": "MAR"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA"
+      },
+      "league": "FIFA World Cup",
+      "status": "scheduled"
+    },
+    {
+      "id": "f_1781269322835",
+      "date": "2026-06-12",
+      "time": "19:45",
+      "homeTeam": {
+        "id": "10",
+        "name": "Morocco",
+        "shortName": "MAR"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA"
+      },
+      "league": "FIFA World Cup",
+      "status": "finished",
+      "score": {
+        "home": 0,
+        "away": 0
+      }
+    },
+    {
+      "id": "f_1781271059987",
+      "date": "2026-06-12",
+      "time": "19:45",
+      "homeTeam": {
+        "id": "1",
+        "name": "Argentina",
+        "shortName": "ARG"
+      },
+      "awayTeam": {
+        "id": "9",
+        "name": "Senegal",
+        "shortName": "SEN"
+      },
+      "league": "FIFA World Cup",
+      "status": "scheduled"
+    },
+    {
+      "id": "apif_855764",
+      "date": "2022-11-30",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "24",
+        "name": "Poland",
+        "shortName": "POL",
+        "logoUrl": "https://media.api-sports.io/football/teams/24.png"
+      },
+      "awayTeam": {
+        "id": "26",
+        "name": "Argentina",
+        "shortName": "ARG",
+        "logoUrl": "https://media.api-sports.io/football/teams/26.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 0,
+        "away": 2
+      }
+    },
+    {
+      "id": "apif_855766",
+      "date": "2022-12-01",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "3",
+        "name": "Croatia",
+        "shortName": "CRO",
+        "logoUrl": "https://media.api-sports.io/football/teams/3.png"
+      },
+      "awayTeam": {
+        "id": "1",
+        "name": "Belgium",
+        "shortName": "BEL",
+        "logoUrl": "https://media.api-sports.io/football/teams/1.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 0,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_855767",
+      "date": "2022-12-01",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "5529",
+        "name": "Canada",
+        "shortName": "CAN",
+        "logoUrl": "https://media.api-sports.io/football/teams/5529.png"
+      },
+      "awayTeam": {
+        "id": "31",
+        "name": "Morocco",
+        "shortName": "MOR",
+        "logoUrl": "https://media.api-sports.io/football/teams/31.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 2
+      }
+    },
+    {
+      "id": "apif_855768",
+      "date": "2022-12-01",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "12",
+        "name": "Japan",
+        "shortName": "JAP",
+        "logoUrl": "https://media.api-sports.io/football/teams/12.png"
+      },
+      "awayTeam": {
+        "id": "9",
+        "name": "Spain",
+        "shortName": "SPA",
+        "logoUrl": "https://media.api-sports.io/football/teams/9.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_871855",
+      "date": "2022-12-01",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "29",
+        "name": "Costa Rica",
+        "shortName": "COS",
+        "logoUrl": "https://media.api-sports.io/football/teams/29.png"
+      },
+      "awayTeam": {
+        "id": "25",
+        "name": "Germany",
+        "shortName": "GER",
+        "logoUrl": "https://media.api-sports.io/football/teams/25.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 4
+      }
+    },
+    {
+      "id": "apif_855769",
+      "date": "2022-12-02",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "17",
+        "name": "South Korea",
+        "shortName": "SOU",
+        "logoUrl": "https://media.api-sports.io/football/teams/17.png"
+      },
+      "awayTeam": {
+        "id": "27",
+        "name": "Portugal",
+        "shortName": "POR",
+        "logoUrl": "https://media.api-sports.io/football/teams/27.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_855770",
+      "date": "2022-12-02",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "1504",
+        "name": "Ghana",
+        "shortName": "GHA",
+        "logoUrl": "https://media.api-sports.io/football/teams/1504.png"
+      },
+      "awayTeam": {
+        "id": "7",
+        "name": "Uruguay",
+        "shortName": "URU",
+        "logoUrl": "https://media.api-sports.io/football/teams/7.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 0,
+        "away": 2
+      }
+    },
+    {
+      "id": "apif_855772",
+      "date": "2022-12-02",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "14",
+        "name": "Serbia",
+        "shortName": "SER",
+        "logoUrl": "https://media.api-sports.io/football/teams/14.png"
+      },
+      "awayTeam": {
+        "id": "15",
+        "name": "Switzerland",
+        "shortName": "SWI",
+        "logoUrl": "https://media.api-sports.io/football/teams/15.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 3
+      }
+    },
+    {
+      "id": "apif_855771",
+      "date": "2022-12-02",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "1530",
+        "name": "Cameroon",
+        "shortName": "CAM",
+        "logoUrl": "https://media.api-sports.io/football/teams/1530.png"
+      },
+      "awayTeam": {
+        "id": "6",
+        "name": "Brazil",
+        "shortName": "BRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/6.png"
+      },
+      "league": "World Cup",
+      "round": "Group Stage - 3",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_976533",
+      "date": "2022-12-03",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "1118",
+        "name": "Netherlands",
+        "shortName": "NET",
+        "logoUrl": "https://media.api-sports.io/football/teams/1118.png"
+      },
+      "awayTeam": {
+        "id": "2384",
+        "name": "USA",
+        "shortName": "USA",
+        "logoUrl": "https://media.api-sports.io/football/teams/2384.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_976642",
+      "date": "2022-12-03",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "26",
+        "name": "Argentina",
+        "shortName": "ARG",
+        "logoUrl": "https://media.api-sports.io/football/teams/26.png"
+      },
+      "awayTeam": {
+        "id": "20",
+        "name": "Australia",
+        "shortName": "AUS",
+        "logoUrl": "https://media.api-sports.io/football/teams/20.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_976643",
+      "date": "2022-12-04",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/2.png"
+      },
+      "awayTeam": {
+        "id": "24",
+        "name": "Poland",
+        "shortName": "POL",
+        "logoUrl": "https://media.api-sports.io/football/teams/24.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_976534",
+      "date": "2022-12-04",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "10",
+        "name": "England",
+        "shortName": "ENG",
+        "logoUrl": "https://media.api-sports.io/football/teams/10.png"
+      },
+      "awayTeam": {
+        "id": "13",
+        "name": "Senegal",
+        "shortName": "SEN",
+        "logoUrl": "https://media.api-sports.io/football/teams/13.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_977344",
+      "date": "2022-12-05",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "12",
+        "name": "Japan",
+        "shortName": "JAP",
+        "logoUrl": "https://media.api-sports.io/football/teams/12.png"
+      },
+      "awayTeam": {
+        "id": "3",
+        "name": "Croatia",
+        "shortName": "CRO",
+        "logoUrl": "https://media.api-sports.io/football/teams/3.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_977705",
+      "date": "2022-12-05",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "6",
+        "name": "Brazil",
+        "shortName": "BRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/6.png"
+      },
+      "awayTeam": {
+        "id": "17",
+        "name": "South Korea",
+        "shortName": "SOU",
+        "logoUrl": "https://media.api-sports.io/football/teams/17.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 4,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_977345",
+      "date": "2022-12-06",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "31",
+        "name": "Morocco",
+        "shortName": "MOR",
+        "logoUrl": "https://media.api-sports.io/football/teams/31.png"
+      },
+      "awayTeam": {
+        "id": "9",
+        "name": "Spain",
+        "shortName": "SPA",
+        "logoUrl": "https://media.api-sports.io/football/teams/9.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 0,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_977706",
+      "date": "2022-12-06",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "27",
+        "name": "Portugal",
+        "shortName": "POR",
+        "logoUrl": "https://media.api-sports.io/football/teams/27.png"
+      },
+      "awayTeam": {
+        "id": "15",
+        "name": "Switzerland",
+        "shortName": "SWI",
+        "logoUrl": "https://media.api-sports.io/football/teams/15.png"
+      },
+      "league": "World Cup",
+      "round": "Round of 16",
+      "status": "finished",
+      "score": {
+        "home": 6,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_978072",
+      "date": "2022-12-09",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "3",
+        "name": "Croatia",
+        "shortName": "CRO",
+        "logoUrl": "https://media.api-sports.io/football/teams/3.png"
+      },
+      "awayTeam": {
+        "id": "6",
+        "name": "Brazil",
+        "shortName": "BRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/6.png"
+      },
+      "league": "World Cup",
+      "round": "Quarter-finals",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_977794",
+      "date": "2022-12-09",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "1118",
+        "name": "Netherlands",
+        "shortName": "NET",
+        "logoUrl": "https://media.api-sports.io/football/teams/1118.png"
+      },
+      "awayTeam": {
+        "id": "26",
+        "name": "Argentina",
+        "shortName": "ARG",
+        "logoUrl": "https://media.api-sports.io/football/teams/26.png"
+      },
+      "league": "World Cup",
+      "round": "Quarter-finals",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 2
+      }
+    },
+    {
+      "id": "apif_978088",
+      "date": "2022-12-10",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "31",
+        "name": "Morocco",
+        "shortName": "MOR",
+        "logoUrl": "https://media.api-sports.io/football/teams/31.png"
+      },
+      "awayTeam": {
+        "id": "27",
+        "name": "Portugal",
+        "shortName": "POR",
+        "logoUrl": "https://media.api-sports.io/football/teams/27.png"
+      },
+      "league": "World Cup",
+      "round": "Quarter-finals",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_978036",
+      "date": "2022-12-10",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "10",
+        "name": "England",
+        "shortName": "ENG",
+        "logoUrl": "https://media.api-sports.io/football/teams/10.png"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/2.png"
+      },
+      "league": "World Cup",
+      "round": "Quarter-finals",
+      "status": "finished",
+      "score": {
+        "home": 1,
+        "away": 2
+      }
+    },
+    {
+      "id": "apif_978279",
+      "date": "2022-12-13",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "26",
+        "name": "Argentina",
+        "shortName": "ARG",
+        "logoUrl": "https://media.api-sports.io/football/teams/26.png"
+      },
+      "awayTeam": {
+        "id": "3",
+        "name": "Croatia",
+        "shortName": "CRO",
+        "logoUrl": "https://media.api-sports.io/football/teams/3.png"
+      },
+      "league": "World Cup",
+      "round": "Semi-finals",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_978488",
+      "date": "2022-12-14",
+      "time": "19:00",
+      "homeTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/2.png"
+      },
+      "awayTeam": {
+        "id": "31",
+        "name": "Morocco",
+        "shortName": "MOR",
+        "logoUrl": "https://media.api-sports.io/football/teams/31.png"
+      },
+      "league": "World Cup",
+      "round": "Semi-finals",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "id": "apif_979138",
+      "date": "2022-12-17",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "3",
+        "name": "Croatia",
+        "shortName": "CRO",
+        "logoUrl": "https://media.api-sports.io/football/teams/3.png"
+      },
+      "awayTeam": {
+        "id": "31",
+        "name": "Morocco",
+        "shortName": "MOR",
+        "logoUrl": "https://media.api-sports.io/football/teams/31.png"
+      },
+      "league": "World Cup",
+      "round": "3rd Place Final",
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "id": "apif_979139",
+      "date": "2022-12-18",
+      "time": "15:00",
+      "homeTeam": {
+        "id": "26",
+        "name": "Argentina",
+        "shortName": "ARG",
+        "logoUrl": "https://media.api-sports.io/football/teams/26.png"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA",
+        "logoUrl": "https://media.api-sports.io/football/teams/2.png"
+      },
+      "league": "World Cup",
+      "round": "Final",
+      "status": "finished",
+      "score": {
+        "home": 3,
+        "away": 3
+      }
+    }
+  ],
+  "predictions": [
+    {
+      "id": "p_h_1",
+      "matchId": "f_h_1",
+      "matchDate": "2026-06-11",
+      "homeTeam": {
+        "id": "1",
+        "name": "Arsenal",
+        "shortName": "ARS"
+      },
+      "awayTeam": {
+        "id": "5",
+        "name": "Manchester United",
+        "shortName": "MUN"
+      },
+      "league": "Premier League",
+      "prediction": {
+        "homeWin": 58,
+        "draw": 22,
+        "awayWin": 20
+      },
+      "confidence": "high",
+      "status": "resolved",
+      "actualResult": "home",
+      "actualScore": {
+        "home": 3,
+        "away": 1
+      },
+      "isAccurate": true,
+      "analysis": {
+        "prediction": {
+          "homeWin": 58,
+          "draw": 22,
+          "awayWin": 20
+        },
+        "confidence": "high",
+        "reasoning": [
+          "Arsenal averages 2.1 goals at home",
+          "Man United struggles on defense, conceding 1.5 goals away",
+          "Recent form of Arsenal is WWWDD versus DWLDW"
+        ],
+        "keyInsight": "Arsenal has a highly dominant home form rendering a clear victory."
+      },
+      "socialPack": {
+        "twitter": "⚽ FootballGPT Prediction\n\nArsenal vs Man United\n🥇 Home Win: 58%\n🤝 Draw: 22%\n🔥 Away Win: 20%\n\nKey Insight:\nArsenal enters this match with a massive home goal rating. Do you agree?",
+        "linkedin": "⚽ FootballGPT Match Analysis\n\nArsenal is anticipated to win with a 58% probability. Their offensive patterns make them highly competitive.\n\n#FootballPredictions #FootballGPT",
+        "whatsapp": "⚽ FootballGPT Match Summary:\nArsenal vs Man United: 58% Home Win probability.",
+        "tiktok": "💥 Big match prediction! Today we analyzed Arsenal vs Chelsea, and our model outputs 58% home win!"
+      }
+    },
+    {
+      "id": "p_h_2",
+      "matchId": "f_h_2",
+      "matchDate": "2026-06-10",
+      "homeTeam": {
+        "id": "6",
+        "name": "Real Madrid",
+        "shortName": "RMA"
+      },
+      "awayTeam": {
+        "id": "8",
+        "name": "Bayern Munich",
+        "shortName": "FCB"
+      },
+      "league": "Champions League",
+      "prediction": {
+        "homeWin": 45,
+        "draw": 28,
+        "awayWin": 27
+      },
+      "confidence": "medium",
+      "status": "resolved",
+      "actualResult": "home",
+      "actualScore": {
+        "home": 2,
+        "away": 1
+      },
+      "isAccurate": true
+    },
+    {
+      "id": "p_h_3",
+      "matchId": "f_h_3",
+      "matchDate": "2026-06-09",
+      "homeTeam": {
+        "id": "10",
+        "name": "AC Milan",
+        "shortName": "ACM"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "Chelsea",
+        "shortName": "CHE"
+      },
+      "league": "Champions League",
+      "prediction": {
+        "homeWin": 30,
+        "draw": 25,
+        "awayWin": 45
+      },
+      "confidence": "medium",
+      "status": "resolved",
+      "actualResult": "draw",
+      "actualScore": {
+        "home": 1,
+        "away": 1
+      },
+      "isAccurate": false
+    },
+    {
+      "id": "p_1781269237920_326",
+      "matchId": "f_1",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "1",
+        "name": "Arsenal",
+        "shortName": "ARS"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "Chelsea",
+        "shortName": "CHE"
+      },
+      "league": "Premier League",
+      "prediction": {
+        "homeWin": 45,
+        "draw": 23,
+        "awayWin": 32
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 45,
+          "draw": 23,
+          "awayWin": 32
+        },
+        "confidence": "medium",
+        "reasoning": [
+          "Arsenal maintains a superior defensive record, conceding only 0.8 goals per game over their last five, providing a solid foundation against Chelsea's 1.2 rate.",
+          "The historical head-to-head data significantly favors Arsenal at the Emirates, where they have secured victory in two of the last three encounters.",
+          "Chelsea's injury list of four key players compared to Arsenal's two creates a depth disparity that likely impacts their 32% away win probability."
+        ],
+        "keyInsight": "Arsenal enters this London Derby as the statistical favorite with a 45% win probability, anchored by their robust form and defensive discipline. While Chelsea's recent resurgence and 1.8 goals-per-game average keeps them in contention, their higher goal-conceded rate and injury concerns make the Emirates a challenging venue for them to secure all three points, pointing toward a home-leaning outcome with a balanced draw contingency."
+      },
+      "socialPack": {
+        "twitter": "The Emirates Stadium is set for a thriller! 🏟️ Arsenal holds a 45% win probability against Chelsea in our latest model. Will the Gunners' defense hold strong or will the Blues pull an upset? ⚽🔥 #ArsenalVsChelsea #PL #FootballAnalytics #COYG",
+        "linkedin": "As the Premier League intensifies, our latest analytical breakdown of Arsenal versus Chelsea highlights the impact of defensive consistency on match outcomes. With Arsenal showing a superior goals-conceded ratio (0.8) and maintaining strong home field advantage, the predictive model favors the hosts at 45%. Analyzing injury depth and tactical trends remains crucial in modern sports performance metrics. #SportsAnalytics #DataScience #PremierLeague #FootballStrategy",
+        "whatsapp": "Match Preview: Arsenal vs Chelsea ⚽\n- Arsenal Win Probability: 45%\n- Draw: 23%\n- Chelsea Win Probability: 32%\n\nKey takeaway: Arsenal's solid defense at home gives them the edge, but don't count out a high-scoring draw given Chelsea's recent form!",
+        "tiktok": "HOOK: London Derby time! Why Arsenal might just edge out Chelsea this weekend. Visual: Split screen with Arsenal logo on left, Chelsea on right. SPEAKER: Arsenal is looking sharp at home with a 45% win probability. The data shows they concede less than a goal per game. Chelsea is fighting hard, but with double the injuries, can they handle the pressure? Drop your score predictions in the comments!"
+      },
+      "confidence": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781269245001_224",
+      "matchId": "f_2",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "3",
+        "name": "Manchester City",
+        "shortName": "MCI"
+      },
+      "awayTeam": {
+        "id": "4",
+        "name": "Liverpool",
+        "shortName": "LIV"
+      },
+      "league": "Premier League",
+      "prediction": {
+        "homeWin": 50,
+        "draw": 18,
+        "awayWin": 32
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 50,
+          "draw": 18,
+          "awayWin": 32
+        },
+        "confidence": "high",
+        "reasoning": [
+          "Manchester City displays superior defensive consistency, conceding only 0.6 goals per game over their last five compared to Liverpool's 1.0, providing a significant edge at the Etihad.",
+          "City's dominant home form and league-leading position are bolstered by a high 74% season win rate, while Liverpool navigates a more inconsistent recent stretch with higher injury count.",
+          "Historical head-to-head metrics reveal City's tactical superiority at home, having secured wins in two of the last three encounters, consistently outpacing Liverpool's defensive structure."
+        ],
+        "keyInsight": "Manchester City enters this fixture as the clear favorite due to their exceptional defensive stability and unmatched home rhythm. While Liverpool possesses elite offensive output, their defensive frailty in recent matches leaves them vulnerable to City's tactical press. The model reflects a 50% probability for a home victory, accounting for the high stakes of a top-of-the-table clash and City's clinical ability to secure points against direct rivals."
+      },
+      "socialPack": {
+        "twitter": "Title decider vibes! ⚽️ Manchester City hold a 50% edge over Liverpool this weekend. Can Pep tactical genius overcome the Reds' firepower? 🏟️ #MCILIV #PL #ManCity #LFC #FootballPredictions",
+        "linkedin": "In this high-stakes Premier League encounter, Manchester City's analytical indicators point toward a 50% win probability. Data trends suggest their superior defensive efficiency and current goal-per-game metrics are the key differentiators against Liverpool. A fascinating case study in tactical consistency vs. offensive volatility. #FootballAnalytics #PremierLeague #DataDrivenSports #SportsScience",
+        "whatsapp": "Match Day Analysis: Man City vs Liverpool! ⚽️ The data likes City for the win (50%) given their form (WWWDW). Liverpool (32% win) will need to tighten up defensively to take the points. Looking like a high-intensity game!",
+        "tiktok": "HOOK: Is the title race over? CITY vs LIVERPOOL breakdown! 🎥 Visual: Flash graphics of league table and stats. Speaker: 'Manchester City leads with a 50% win chance. Why? Look at that defensive record! 0.6 goals conceded. Liverpool's attack is dangerous, but the home advantage is too much to ignore. Drop your score predictions in the comments!'"
+      },
+      "confidence": "high",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781269253104_443",
+      "matchId": "f_3",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "6",
+        "name": "Real Madrid",
+        "shortName": "RMA"
+      },
+      "awayTeam": {
+        "id": "7",
+        "name": "Barcelona",
+        "shortName": "BAR"
+      },
+      "league": "La Liga",
+      "prediction": {
+        "homeWin": 50,
+        "draw": 19,
+        "awayWin": 31
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 50,
+          "draw": 19,
+          "awayWin": 31
+        },
+        "confidence": "high",
+        "reasoning": [
+          "Real Madrid maintains a superior defensive record, conceding only 0.6 goals per game over their last five compared to Barcelona's 1.0, providing a significant edge in high-stakes encounters.",
+          "Real Madrid’s current form of WWWWD coupled with a 76% season win rate establishes them as the dominant force in the league standings.",
+          "Head-to-head metrics favor Real Madrid with 11 wins in 24 matches, and their ability to sustain a high goal-scoring output of 2.3 per game over the last 10 fixtures makes them the statistical favorite."
+        ],
+        "keyInsight": "Real Madrid enters the El Clásico as the clear favorite, supported by a more consistent defensive structure and a better recent form trajectory than Barcelona. While Barcelona remains a potent offensive threat, their higher goal concession rate and current injury list suggest they will struggle to contain Real Madrid’s balanced attack, leading to a 50% probability of a home victory."
+      },
+      "socialPack": {
+        "twitter": "It’s El Clásico time! ⚽️ Real Madrid holds a 50% edge to take the win over Barcelona based on current form and defensive dominance. Will they extend their lead at the top of the table? 🏆 #ElClasico #RealMadrid #LaLiga #SoccerAnalytics",
+        "linkedin": "A deep dive into the upcoming El Clásico reveals a strategic advantage for Real Madrid. With a 76% win rate and a superior defensive efficiency of 0.6 goals conceded per match, the data-driven outlook favors a home victory. Analyzing tactical discipline and injury reports remains critical in modern sports performance prediction. #SportsAnalytics #DataScience #FootballTactics #RealMadridVsBarcelona",
+        "whatsapp": "Match Day Preview: Real Madrid vs. Barcelona! 🇪🇸 - Real Madrid are favorites (50% win chance) - Strong recent form (WWWWD) - Madrid’s defense (0.6 goals conceded) beats Barca’s (1.0) - Expect a high-intensity battle at the top of the table!",
+        "tiktok": "Hook: Think you know who wins El Clásico? ⚽️ Visual: Split screen showing Real Madrid and Barcelona logos. Transcript: Real Madrid is at 50% to take this one home. Why? Their defensive record is elite, conceding almost half as much as Barca recently. Madrid’s form is untouchable right now. Drop your score predictions in the comments!"
+      },
+      "confidence": "high",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781269271110_163",
+      "matchId": "f_4",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "8",
+        "name": "Bayern Munich",
+        "shortName": "FCB"
+      },
+      "awayTeam": {
+        "id": "9",
+        "name": "Paris Saint-Germain",
+        "shortName": "PSG"
+      },
+      "league": "Champions League",
+      "prediction": {
+        "homeWin": 34,
+        "draw": 25,
+        "awayWin": 41
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 34,
+          "draw": 25,
+          "awayWin": 41
+        },
+        "confidence": "medium",
+        "reasoning": [
+          "PSG's superior defensive record, conceding only 1.0 goal per game over their last 10 matches, provides a tactical edge over Bayern's higher conceding rate of 1.3.",
+          "The head-to-head history shows a highly competitive deadlock, with 50% of the last four meetings ending in draws, suggesting a tight, low-margin affair.",
+          "While Bayern boasts a higher scoring average of 2.5 goals in their last five, PSG's top league position and consistent form reflect a more disciplined tactical setup required for high-stakes fixtures."
+        ],
+        "keyInsight": "The match projects as a extremely tactical stalemate where PSG holds a slight edge due to defensive efficiency and superior league standing. Although Bayern Munich maintains explosive offensive output, their defensive vulnerabilities against PSG’s structured play tilt the win probability slightly toward the visitors at 41%. The high frequency of recent draws in this matchup confirms that a share of the points remains a very high-probability outcome."
+      },
+      "socialPack": {
+        "twitter": "Big clash in Europe! ⚽ Bayern vs PSG is set to be a tactical masterclass. Our model likes the away side at 41%, but expect fireworks! 📈 🇩🇪🇫🇷 #UCL #BayernPSG #FootballAnalytics #SoccerPrediction",
+        "linkedin": "In tonight's high-profile European fixture between Bayern Munich and Paris Saint-Germain, our analytical model highlights the critical balance between Bayern's aggressive offensive output and PSG's defensive discipline. With a 41% win probability projected for PSG, we look at how league standing and defensive efficiency trends inform these high-level outcomes. #SportsAnalytics #DataScience #FootballIntelligence #TacticalAnalysis",
+        "whatsapp": "Bayern vs PSG prediction update! ⚽️\n- Away Win (PSG): 41%\n- Home Win (Bayern): 34%\n- Draw: 25%\nExpect a tight game given the history of stalemates between these two. PSG’s form makes them the narrow favorites!",
+        "tiktok": "Hook: Can Bayern break down PSG's wall? Visual: Split screen of both clubs' badges. Speaker: Bayern scores heaps of goals, but PSG is top of the table for a reason! Our model gives PSG a 41% chance to take the win. Who are you backing? Drop your score in the comments! #Football #SoccerPrediction #PSG #BayernMunich"
+      },
+      "confidence": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781269283551_347",
+      "matchId": "f_5",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "5",
+        "name": "Manchester United",
+        "shortName": "MUN"
+      },
+      "awayTeam": {
+        "id": "10",
+        "name": "AC Milan",
+        "shortName": "ACM"
+      },
+      "league": "Friendly Cup",
+      "prediction": {
+        "homeWin": 32,
+        "draw": 35,
+        "awayWin": 33
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 32,
+          "draw": 35,
+          "awayWin": 33
+        },
+        "confidence": "medium",
+        "reasoning": [
+          "Statistical parity is highlighted by the near-identical win probabilities (32% vs 33%) and a 35% chance of a draw, reflecting the evenly matched tactical profiles of both clubs.",
+          "AC Milan enters with superior season-long form, boasting a higher win rate (53%) and a more efficient goal differential (1.7 scored vs 1.2 conceded) over their last 10 games compared to Manchester United's 1.5 goal averages.",
+          "The head-to-head history heavily favors a deadlock, with 50% of the last four meetings ending in a draw, suggesting a cautious tactical approach from both managers when facing elite European opposition."
+        ],
+        "keyInsight": "This matchup is essentially a coin-flip scenario defined by high defensive parity and recent stalemate history. While AC Milan holds a slight edge in league positioning and offensive efficiency, Manchester United's inconsistent 'DWLDW' form creates a fragile dynamic at Old Trafford. Given the tactical nature of these teams and their mutual 50% draw rate in recent head-to-heads, the most probable outcome is a low-scoring tactical affair where neither side risks enough to break the deadlock."
+      },
+      "socialPack": {
+        "twitter": "It's a dead heat at Old Trafford! 🏟️ Manchester United (32%) vs AC Milan (33%) with a 35% chance of a draw. This one is too close to call! Who takes the lead? ⚽️🔥 #MUFC #ACMilan #UCL #FootballPredictions",
+        "linkedin": "Analyzing the tactical equilibrium between Manchester United and AC Milan. With win probabilities separated by only 1%, the data suggests a high likelihood of a draw. Milan's superior goal-scoring efficiency (1.7/game) is offset by United's historical resilience in this head-to-head matchup. A classic case of statistical variance meeting strategic caution. #SportsAnalytics #DataDriven #FootballPerformance",
+        "whatsapp": "Match Preview: Man Utd vs AC Milan ⚽️\n- Very tight odds: 32% Utd, 33% Milan, 35% Draw\n- Milan are in better league form\n- History shows 50% draws in recent meetings\n- Expect a tactical grind! Predictions?",
+        "tiktok": "HOOK: Is the Man Utd vs AC Milan game already set for a draw? VISUAL: Show stat comparison cards of form and goal ratios. SPEAKER: Manchester United and AC Milan are locked in an absolute tactical stalemate. Data shows a 35% chance of a draw and barely 1% separating their win rates. Who breaks the deadlock? Drop your scoreline in the comments!"
+      },
+      "confidence": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781269618331",
+      "matchId": "f_1781269320897",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "10",
+        "name": "Morocco",
+        "shortName": "MAR"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA"
+      },
+      "league": "FIFA World Cup",
+      "prediction": {
+        "homeWin": 34,
+        "draw": 35,
+        "awayWin": 31
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 34,
+          "draw": 35,
+          "awayWin": 31
+        },
+        "confidence": "medium",
+        "reasoning": [
+          "Recent head-to-head history heavily supports a close contest, with the last two matches between these sides ending in stalemates (1-1 in 2025 and 0-0 in 2024).",
+          "Both teams showcase identical overall season win rates at 53% and match each other with exactly 4 injuries apiece, indicating a highly balanced matchup.",
+          "While France boasts superior recent form (LWWWD) and slightly higher goal-scoring metrics (1.8 average goals in last 5), Morocco's defensive stability at home (conceding 1.2 goals average over 10 matches) offsets the French attacking threat."
+        ],
+        "keyInsight": "The predictive model projects an exceptionally tight fixture, placing the highest probability on a Draw at 35%, with Morocco at 34% and France at 31%. This distribution reflects the statistical equilibrium between the two sides. France enters with stronger momentum (3 wins in their last 5 games compared to Morocco's 1), but historical H2H records show a strong trend toward stalemates. Combined with Morocco's resilient home defense and France's defensive vulnerabilities (conceding 1.4 goals on average over 10 matches), a highly tactical, low-scoring draw remains the most probable outcome."
+      },
+      "socialPack": {
+        "twitter": "Morocco vs France is set to be an absolute tactical chess match! 🇲🇦 vs 🇫🇷 Model Predicts: Home Win 34% | Draw 35% | Away Win 31%. With identical 53% win rates and the last 2 H2Hs ending in draws, a stalemate looks highly likely! Who takes it? #MoroccoFrance #FootballAnalytics #Predictions",
+        "linkedin": "Analytical Preview: Morocco vs France. Our predictive model indicates a remarkably balanced encounter with a 35% probability of a draw, slightly edgeing a Morocco home win (34%) and a France away victory (31%). Tactically, France carries better momentum (recent form LWWWD, averaging 1.8 goals/match) but faces a robust Moroccan defensive structure allowing just 1.2 goals over a 10-match sample. Historically, 50% of their head-to-heads have ended in draws, confirming that market equilibrium is backed by statistical reality. #SportsAnalytics #DataScience #PredictiveModeling #FootballAnalysis #MoroccoVsFrance",
+        "whatsapp": "*⚽ MOROCCO vs FRANCE PREDICTION ⚽*\n\nHey group! Big match coming up and the stats are insanely close:\n\n*Odds:* \n🇲🇦 Morocco Win: 34%\n🤝 Draw: 35%\n🇫🇷 France Win: 31%\n\n*Key Stats:*\n• Recent H2H: 1-1 (2025) and 0-0 (2024)\n• Both teams have a 53% season win rate\n• France has better recent form (LWWWD) but Morocco is tough to break down at home.\n\nPrediction: A hard-fought 1-1 draw! What are your score predictions? 🤔",
+        "tiktok": "[Host stands in front of a green screen showing Morocco and France lineups] \nHost: Is this the closest match prediction of the year?! 😳 Morocco versus France is statistically a dead heat! \n[Visual: Cut to H2H stats showing two straight draws] \nHost: The model has a DRAW as the favorite outcome at 35%, with Morocco at 34% and France at 31%. Literally anything can happen! France has the form, but Morocco has the home defense. \n[Visual: Zoom on 1-1 and 0-0 historical scores] \nHost: Their last two games? Both draws. \nComment below with your exact score predictions and hit that follow button for daily analytical tips!"
+      },
+      "confidence": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781271115588",
+      "matchId": "f_1781271059987",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "1",
+        "name": "Argentina",
+        "shortName": "ARG"
+      },
+      "awayTeam": {
+        "id": "9",
+        "name": "Senegal",
+        "shortName": "SEN"
+      },
+      "league": "FIFA World Cup",
+      "prediction": {
+        "homeWin": 33,
+        "draw": 27,
+        "awayWin": 40
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 33,
+          "draw": 27,
+          "awayWin": 40
+        },
+        "confidence": "medium",
+        "reasoning": [
+          "Senegal holds a marginal statistical edge with a 40% win probability, bolstered by their top position in the standings.",
+          "Both squads exhibit potent attacking profiles, with both Argentina and Senegal averaging over 2.0 goals scored per match in their last 5 and 10 games.",
+          "The defensive stability of Argentina (conceding 0.8 goals per game in the last 5) clashes with Senegal's high-efficiency transitions, making a deadlock a highly viable outcome as seen in their past two draws."
+        ],
+        "keyInsight": "The predictive model places Senegal as a slight favorite at 40%, despite Argentina's impressive unbeaten run in their last five fixtures (WWWDD) and superior defensive metrics. With both teams displaying identical 10-match scoring averages of 2.1 goals per game, the match promises to be an elite offensive showcase. Given that their historical matchups have frequently ended in tight draws (including recent 1-1 and 0-0 results), the 27% draw probability represents significant value in what promises to be a tactically dense encounter."
+      },
+      "socialPack": {
+        "twitter": "⚔ Argentina vs Senegal! The model predicts a razor-thin edge for Senegal (40%) over Argentina (33%) with a 27% draw chance. Both averaging 2+ goals per game! Who takes this epic clash?  #ARGvsSEN #FootballAnalytics #MatchPrediction #SportsData",
+        "linkedin": "Our predictive sports model highlights an intriguing clash between Argentina and Senegal. Despite Argentina's impressive defensive structure (conceding just 0.8 goals/game over their last 5) and unbeaten run, Senegal holds a 40% win probability due to their high-intensity offensive metrics and table-topping league position. Given their historical deadlock in head-to-head matches, this fixture will test tactical discipline in transition. #SportsAnalytics #DataScience #PredictiveModeling #FootballTactics",
+        "whatsapp": "*Match Preview: Argentina vs Senegal*\n\n*Win Probabilities:*\n* Senegal: 40%\n* Argentina: 33%\n* Draw: 27%\n\n*Key Insights:*\n- Both sides average a fierce 2.1 goals per game.\n- Argentina's defense has been stellar, conceding only 0.8 goals per game in their last 5 matches.\n- History points to a close battle, with the last two matches ending in draws.",
+        "tiktok": "[Screen Text: ARGENTINA VS SENEGAL PREDICTION] [Host]: Who wins this absolute powerhouse matchup? Argentina versus Senegal! [Visual: Display Argentina 33% vs Senegal 40%] [Host]: The data models are giving Senegal a slight 40% edge, but do not write off Argentina! They are unbeaten in their last 5 games and letting in less than a goal per match. [Visual: Highlight Argentina's recent form WWWDD] [Host]: Both teams average over 2 goals a game, and their last two meetings ended in tight draws! Drop your score predictions in the comments and hit follow for more elite football data!"
+      },
+      "confidence": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781272845639",
+      "matchId": "api_552095",
+      "matchDate": "2026-05-05",
+      "homeTeam": {
+        "id": "57",
+        "name": "Arsenal FC",
+        "shortName": "ARS",
+        "logoUrl": "https://crests.football-data.org/57.png"
+      },
+      "awayTeam": {
+        "id": "78",
+        "name": "Club Atlético de Madrid",
+        "shortName": "ATL",
+        "logoUrl": "https://crests.football-data.org/78.png"
+      },
+      "league": "UEFA Champions League",
+      "prediction": {
+        "homeWin": 61,
+        "draw": 15,
+        "awayWin": 24
+      },
+      "analysis": {
+        "prediction": {
+          "homeWin": 61,
+          "draw": 15,
+          "awayWin": 24
+        },
+        "confidence": "high",
+        "reasoning": [
+          "Arsenal exhibits elite dominance in the league, maintaining a 100% win rate and a superior goal differential of 2.9 scored versus 0.5 conceded per match over their last 10 games.",
+          "Atlético de Madrid shows significant defensive instability on the road, conceding an average of 1.9 goals per match, which leaves them vulnerable against Arsenal's high-octane attack.",
+          "Despite historical parity in head-to-head records, current form heavily favors the Gunners, who lead the league standings compared to Atlético's struggle in 14th place."
+        ],
+        "keyInsight": "The predictive model heavily favors Arsenal due to the massive discrepancy in form and consistency. With Arsenal maintaining a perfect win rate and a formidable defensive record, they are well-positioned to exploit Atlético's leaky backline. While previous head-to-head results suggest competitive grit, the current statistical gulf in both league positioning and average goal efficiency makes a home victory the high-probability outcome."
+      },
+      "socialPack": {
+        "twitter": "Arsenal look set to dominate at home! 🏟️ With a 61% win probability and league-leading form, the Gunners are ready to overwhelm Atlético. Can they keep the streak alive? 🔴⚪ #Arsenal #UCL #FootballPredictions #COYG",
+        "linkedin": "In-depth analytics for this week's marquee matchup: Arsenal FC vs. Atlético de Madrid. The data highlights a distinct advantage for the home side, underpinned by a 2.9 goal-per-game average and a top-of-table standing. Tactical adjustments will be crucial for Atlético to manage the defensive deficit in this fixture. #SportsAnalytics #FootballData #TacticalAnalysis #EPL",
+        "whatsapp": "Big match analysis for Arsenal vs. Atlético! ⚽ - Arsenal win probability: 61% - Stats: Arsenal averaging 2.9 goals/match, Atlético conceding 1.9. - Recommendation: Expect Arsenal to control possession and push for a multi-goal victory. Worth keeping an eye on the over 2.5 goals market!",
+        "tiktok": "Hook: Is Arsenal about to run away with this one? Visual: Split screen with Arsenal logo on left, Atlético on right. Speaker: 'Look at the stats! Arsenal, top of the table, 100% win rate. Atlético, struggling in 14th. The model gives the Gunners a massive 61% chance to win. Drop a comment: Will Atlético pull an upset or will Arsenal cruise? Like for more daily predictions!'"
+      },
+      "confidence": "high",
+      "status": "pending"
+    },
+    {
+      "id": "p_1781272860875",
+      "matchId": "f_1781269322835",
+      "matchDate": "2026-06-12",
+      "homeTeam": {
+        "id": "10",
+        "name": "Morocco",
+        "shortName": "MAR"
+      },
+      "awayTeam": {
+        "id": "2",
+        "name": "France",
+        "shortName": "FRA"
+      },
+      "league": "FIFA World Cup",
+      "prediction": {
+        "homeWin": 34,
+        "draw": 35,
+        "awayWin": 31
+      },
+      "confidence": "medium",
+      "status": "resolved",
+      "actualResult": "draw",
+      "actualScore": {
+        "home": 0,
+        "away": 0
+      },
+      "isAccurate": true
+    }
+  ]
+}

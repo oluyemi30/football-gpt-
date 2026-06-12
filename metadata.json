@@ -1,0 +1,6 @@
+{
+  "name": "FootballGPT",
+  "description": "An AI-powered football match outcome predictor and automated social media content generator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
