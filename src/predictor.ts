@@ -1,5 +1,12 @@
 import { getTeamStats, getHeadToHead } from './dataService';
 import { PredictionResult } from './types';
+import { TEAMS } from './db';
+
+// Gets the team confederation from our static team mapping, helper for cross-confederation scaling
+function getTeamConfederation(teamId: string): string | undefined {
+  const mappedTeam = TEAMS[teamId];
+  return mappedTeam ? mappedTeam.confederation : undefined;
+}
 
 // Converts form letters (e.g. "WWWLD") to numerical point averages
 function parseFormPoints(form: string): number {
@@ -87,6 +94,28 @@ export function calculatePrediction(homeId: string, awayId: string, league?: str
   } else {
     console.log(`[Prediction Engine] Neutral ground detected for ${league}. Bypassing home field advantage multiplier.`);
   }
+
+  // 4.5 Apply Confederation Quality Factor (essential for cross-confederation fixtures like FIFA World Cup)
+  // This correctly offsets inflated stats recorded in weaker regions (e.g. AFC) versus highly competitive leagues (e.g. UEFA)
+  const getConfMultiplier = (conf?: string): number => {
+    if (!conf) return 1.0;
+    const c = conf.toUpperCase();
+    if (c.includes('UEFA')) return 1.25;      // highly competitive European football
+    if (c.includes('CONMEBOL')) return 1.22;  // robust South American tactical intensity
+    if (c.includes('CAF')) return 0.95;       // strong African athletic transitions
+    if (c.includes('CONCACAF')) return 0.90;  // competitive North/Central American structures
+    if (c.includes('AFC')) return 0.85;       // developing Asian quality
+    if (c.includes('OFC')) return 0.70;       // Oceania baseline status
+    return 1.0;
+  };
+
+  const homeConf = getTeamConfederation(homeId);
+  const awayConf = getTeamConfederation(awayId);
+  const homeConfMultiplier = getConfMultiplier(homeConf);
+  const awayConfMultiplier = getConfMultiplier(awayConf);
+
+  homeCalculatedStrength *= homeConfMultiplier;
+  awayCalculatedStrength *= awayConfMultiplier;
 
   // 5. Account for head-to-head records
   if (h2h.matchesPlayed > 0) {
