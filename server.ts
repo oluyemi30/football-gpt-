@@ -99,13 +99,14 @@ app.post('/api/predict', async (req: Request, res: Response) => {
     }
 
     // A. Use ML model algorithm to output probabilities
-    const predictionProbabilities = calculatePrediction(fixture.homeTeam.id, fixture.awayTeam.id);
+    const predictionProbabilities = calculatePrediction(fixture.homeTeam.id, fixture.awayTeam.id, fixture.league);
 
     // B. Call FootballGPT Service to write reasoning + social media copy
     const analysisWrapper = await generateFootballGptAnalysis(
       fixture.homeTeam,
       fixture.awayTeam,
-      predictionProbabilities
+      predictionProbabilities,
+      fixture.league
     );
 
     // C. Check if we already have a prediction stored for this match, update or add
@@ -210,7 +211,11 @@ app.post('/api/fixtures/resolve', (req: Request, res: Response) => {
       pred.isAccurate = (modelDecision === winner);
     } else {
       // Create a prediction if it didn't exist first, then resolve it
-      const predictionProbabilities = calculatePrediction(db.fixtures[fixtureIndex].homeTeam.id, db.fixtures[fixtureIndex].awayTeam.id);
+      const predictionProbabilities = calculatePrediction(
+        db.fixtures[fixtureIndex].homeTeam.id,
+        db.fixtures[fixtureIndex].awayTeam.id,
+        db.fixtures[fixtureIndex].league
+      );
       const isHomeWinPredictedMax = predictionProbabilities.homeWin >= predictionProbabilities.awayWin && predictionProbabilities.homeWin >= predictionProbabilities.draw;
       const isAwayWinPredictedMax = predictionProbabilities.awayWin >= predictionProbabilities.homeWin && predictionProbabilities.awayWin >= predictionProbabilities.draw;
 
@@ -262,11 +267,12 @@ app.post('/api/automation/run', async (req: Request, res: Response) => {
       const alreadyPredicted = db.predictions.some(p => p.matchId === fixture.id && p.analysis);
       if (alreadyPredicted) continue;
 
-      const predictionProbabilities = calculatePrediction(fixture.homeTeam.id, fixture.awayTeam.id);
+      const predictionProbabilities = calculatePrediction(fixture.homeTeam.id, fixture.awayTeam.id, fixture.league);
       const analysisWrapper = await generateFootballGptAnalysis(
         fixture.homeTeam,
         fixture.awayTeam,
-        predictionProbabilities
+        predictionProbabilities,
+        fixture.league
       );
 
       const savedPredict: SavedPrediction = {

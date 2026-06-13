@@ -24,7 +24,8 @@ function getGenAiClient(): GoogleGenAI | null {
 export function generateLocalFallbackAnalysis(
   homeTeam: Team, 
   awayTeam: Team, 
-  prediction: PredictionResult
+  prediction: PredictionResult,
+  league?: string
 ): { analysis: FootballGptAnalysis; socialPack: SocialMediaPack } {
   const hStats = getTeamStats(homeTeam.id);
   const aStats = getTeamStats(awayTeam.id);
@@ -35,11 +36,22 @@ export function generateLocalFallbackAnalysis(
 
   const reasoning: string[] = [];
 
+  const isWorldCup = league && (
+    league.toLowerCase().includes('world cup') || 
+    league.toLowerCase().includes('wc') || 
+    league.toLowerCase().includes('fifa') ||
+    league.toLowerCase().includes('neutral')
+  );
+
+  if (isWorldCup) {
+    reasoning.push(`This FIFA World Cup match is contested on entirely neutral territory, neutralizing any historic home or away bias.`);
+  }
+
   // Determine reasoning items based on actual stats
   if (hStats) {
     reasoning.push(`${homeTeam.name} enter this fixture with recent form rated '${hStats.recentForm}' and average ${homeGoals.toFixed(1)} goals per match.`);
   } else {
-    reasoning.push(`${homeTeam.name} show consistent offensive performance at home averages.`);
+    reasoning.push(`${homeTeam.name} show consistent offensive performance in tournament averages.`);
   }
 
   if (aStats) {
@@ -55,12 +67,22 @@ export function generateLocalFallbackAnalysis(
   const confidence = maxProb > 55 ? ('high' as const) : maxProb > 40 ? ('medium' as const) : ('low' as const);
 
   let keyInsight = '';
-  if (prediction.homeWin > prediction.awayWin && prediction.homeWin > prediction.draw) {
-    keyInsight = `${homeTeam.name} show considerable domestic stability and are heavily favored due to home-field advantage and stronger build-up averages.`;
-  } else if (prediction.awayWin > prediction.homeWin && prediction.awayWin > prediction.draw) {
-    keyInsight = `${awayTeam.name} are expected to take command of this fixture, leveraging dominant forward counters, despite being away from home.`;
+  if (isWorldCup) {
+    if (prediction.homeWin > prediction.awayWin && prediction.homeWin > prediction.draw) {
+      keyInsight = `${homeTeam.name} exhibit superior stats and are favored on neutral ground due to stronger squads and structured tactical setups.`;
+    } else if (prediction.awayWin > prediction.homeWin && prediction.awayWin > prediction.draw) {
+      keyInsight = `${awayTeam.name} are expected to control the tempo of this neutral ground matchup, utilizing efficient high-press transitions.`;
+    } else {
+      keyInsight = `A very defense-first matchup on neutral territory with closely matched stats. A hard fought draw is highly expected.`;
+    }
   } else {
-    keyInsight = `An extremely defense-first matchup with closely matched stats. A hard fought draw appears likely.`;
+    if (prediction.homeWin > prediction.awayWin && prediction.homeWin > prediction.draw) {
+      keyInsight = `${homeTeam.name} show considerable domestic stability and are heavily favored due to home-field advantage and stronger build-up averages.`;
+    } else if (prediction.awayWin > prediction.homeWin && prediction.awayWin > prediction.draw) {
+      keyInsight = `${awayTeam.name} are expected to take command of this fixture, leveraging dominant forward counters, despite being away from home.`;
+    } else {
+      keyInsight = `An extremely defense-first matchup with closely matched stats. A hard fought draw appears likely.`;
+    }
   }
 
   const analysis: FootballGptAnalysis = {
@@ -92,11 +114,12 @@ function generateSocialMediaPackLocally(
 export async function generateFootballGptAnalysis(
   homeTeam: Team,
   awayTeam: Team,
-  prediction: PredictionResult
+  prediction: PredictionResult,
+  league?: string
 ): Promise<{ analysis: FootballGptAnalysis; socialPack: SocialMediaPack }> {
   const ai = getGenAiClient();
   if (!ai) {
-    return generateLocalFallbackAnalysis(homeTeam, awayTeam, prediction);
+    return generateLocalFallbackAnalysis(homeTeam, awayTeam, prediction, league);
   }
 
   const hStats = getTeamStats(homeTeam.id);
@@ -109,12 +132,22 @@ export async function generateFootballGptAnalysis(
     prediction,
     homeTeamStats: hStats,
     awayTeamStats: aStats,
-    headToHead: h2h
+    headToHead: h2h,
+    league: league || "FIFA World Cup"
   };
+
+  const isWorldCup = league && (
+    league.toLowerCase().includes('world cup') || 
+    league.toLowerCase().includes('wc') || 
+    league.toLowerCase().includes('fifa') ||
+    league.toLowerCase().includes('neutral')
+  );
 
   const systemInstruction = `You are FootballGPT, an elite football match predictor engine and expert football analyst. 
 Given a match matchup, the computed prediction percentages, and raw match metrics, you must write a highly detailed professional soccer match summary.
-Your return format MUST be a valid JSON object matching the requested schema. Ensure all fields are filled accurately and realistically without placeholder text.`;
+Your return format MUST be a valid JSON object matching the requested schema. Ensure all fields are filled accurately and realistically without placeholder text.
+
+${isWorldCup ? "IMPORTANT: This match is a neutral-ground tournament match (FIFA World Cup). There is NO home field advantage or home turf bias. Do NOT assign any analytical advantage or credit to 'home support', 'home-field comfort', 'stadium noise', or 'travel fatigue of the away team'." : ""}`;
 
   const prompt = `Analyze this football match fixture based on statistics and predictive outputs.
 Data structure:
@@ -135,7 +168,9 @@ Please return a single JSON object with the exact custom structure:
     "whatsapp": "A friendly bulleted message suitable for sports group sharing.",
     "tiktok": "Engaging Tiktok screenplay/script featuring hook, visual cues, speaker transcript lines, and call to action."
   }
-}`;
+}
+
+${isWorldCup ? "Note that because this is a neutral territory FIFA World Cup matchup, you must base your reasoning entirely on squad quality, current tactical formation, form, and athletic metrics, rather than home/away geographical locations." : ""}`;
 
   const schema = {
     type: Type.OBJECT,

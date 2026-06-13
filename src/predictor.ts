@@ -12,7 +12,7 @@ function parseFormPoints(form: string): number {
   return pts;
 }
 
-export function calculatePrediction(homeId: string, awayId: string): PredictionResult {
+export function calculatePrediction(homeId: string, awayId: string, league?: string): PredictionResult {
   const homeStats = getTeamStats(homeId);
   const awayStats = getTeamStats(awayId);
   const h2h = getHeadToHead(homeId, awayId);
@@ -73,9 +73,20 @@ export function calculatePrediction(homeId: string, awayId: string): PredictionR
     (awayFormWeight * 5.0) +
     (15 / a.leaguePosition);
 
-  // 4. Apply Home Advantage (historically +3.5 to +6.5 points bias depending on team quality)
-  const HOME_ADVANTAGE_MULTIPLIER = 1.15; // 15% boost to home attack
-  homeCalculatedStrength *= HOME_ADVANTAGE_MULTIPLIER;
+  // 4. Apply Home Advantage (disabled on neutral grounds like the FIFA World Cup)
+  const isNeutralGround = league && (
+    league.toLowerCase().includes('world cup') || 
+    league.toLowerCase().includes('wc') || 
+    league.toLowerCase().includes('fifa') ||
+    league.toLowerCase().includes('neutral')
+  );
+
+  if (!isNeutralGround) {
+    const HOME_ADVANTAGE_MULTIPLIER = 1.15; // 15% boost to home attack
+    homeCalculatedStrength *= HOME_ADVANTAGE_MULTIPLIER;
+  } else {
+    console.log(`[Prediction Engine] Neutral ground detected for ${league}. Bypassing home field advantage multiplier.`);
+  }
 
   // 5. Account for head-to-head records
   if (h2h.matchesPlayed > 0) {

@@ -984,8 +984,13 @@ export default function App() {
               {/* Fixture Identity Header */}
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#30363D]/40 pb-6">
                 <div className="flex flex-col gap-1.5">
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#58A6FF] font-semibold uppercase">
+                  <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#58A6FF] font-semibold uppercase">
                     <span>{selectedFixture.league}</span>
+                    {['world cup', 'wc', 'fifa', 'neutral'].some(term => selectedFixture.league?.toLowerCase().includes(term)) && (
+                      <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 text-[9px] font-bold tracking-widest font-mono animate-pulse">
+                        ⚖️ Neutral Venue (No Home/Away Advantage)
+                      </span>
+                    )}
                     <span className="opacity-30">•</span>
                     <span>Game Analysis REPORT</span>
                   </div>
@@ -1066,7 +1071,7 @@ export default function App() {
                   <div id="home-win-card" className="bg-[#161B22] p-5 rounded border border-[#30363D] relative overflow-hidden transition-all hover:border-[#3FB950]/55">
                     <div className="absolute top-2 right-2 flex items-center gap-1 text-[8px] font-mono text-slate-500 uppercase tracking-widest">
                       <span className="w-1 h-1 rounded-full bg-[#3FB950]"></span>
-                      <span>HOME CAP</span>
+                      <span>{selectedFixture.league && ['world cup', 'wc', 'fifa', 'neutral'].some(term => selectedFixture.league.toLowerCase().includes(term)) ? 'NEUTRAL CAP' : 'HOME CAP'}</span>
                     </div>
                     <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">
                       {selectedFixture.homeTeam.shortName || 'HOME'} WIN
@@ -1102,7 +1107,7 @@ export default function App() {
                   <div id="away-win-card" className="bg-[#161B22] p-5 rounded border border-[#30363D] relative overflow-hidden transition-all hover:border-[#F85149]/55">
                     <div className="absolute top-2 right-2 flex items-center gap-1 text-[8px] font-mono text-slate-500 uppercase tracking-widest">
                       <span className="w-1 h-1 rounded-full bg-[#F85149]"></span>
-                      <span>AWAY CAP</span>
+                      <span>{selectedFixture.league && ['world cup', 'wc', 'fifa', 'neutral'].some(term => selectedFixture.league.toLowerCase().includes(term)) ? 'NEUTRAL CAP' : 'AWAY CAP'}</span>
                     </div>
                     <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">
                       {selectedFixture.awayTeam.shortName || 'AWAY'} WIN
