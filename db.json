@@ -2780,5 +2780,11 @@
       },
       "isAccurate": true
     }
-  ]
+  ],
+  "telegram": {
+    "token": "8702990599:AAFeNJU0VddH3ZePKJz1GHaKXQHWYq_dz0o",
+    "enabled": true,
+    "chatId": "",
+    "lastUpdateId": 0
+  }
 }
