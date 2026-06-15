@@ -137,6 +137,24 @@ export function calculatePnLStats(): {
   };
 }
 
+// Robust base URL derivation with environment indicators, reverse-proxy SSL forwarders, and fallbacks
+export function getBaseUrl(): string {
+  let url = process.env.APP_URL || '';
+  if (!url) {
+    const config = getTelegramConfig();
+    url = config.publicUrl || '';
+  }
+  if (!url) {
+    url = 'https://ai.studio/build';
+  }
+  url = url.trim().replace(/\/+$/, '');
+  // Force HTTPS for non-localhost endpoints to support Telegram client restrictions and mixed-content policies
+  if (url.startsWith('http://') && !url.includes('localhost') && !url.includes('127.0.0.1') && !url.includes('0.0.0.0')) {
+    url = url.replace('http://', 'https://');
+  }
+  return url;
+}
+
 // Escape HTML helper to prevent Telegram API formatting issues
 export function escapeHtml(text: string): string {
   if (!text) return '';
@@ -154,8 +172,7 @@ export function formatTextPredictionCard(homeTeam: Team, awayTeam: Team, prob: {
   };
 
   const escapedInsight = escapeHtml(insight);
-  const config = getTelegramConfig();
-  const baseUrl = config.publicUrl || 'https://ai.studio/build';
+  const baseUrl = getBaseUrl();
   const downloadCardUrl = `${baseUrl}/api/telegram/card/prediction/${homeTeam.id}/${awayTeam.id}`;
 
   return `🤖 <b>FOOTBALLGPT ANALYTICS CARD</b> 🤖\n` +
@@ -225,8 +242,7 @@ export async function processTelegramMessage(text: string, username_sender: stri
   // 3. PNL Command
   if (cleanText === '/pnl' || cleanText === '/pnl@FootballGptBot') {
     const pnl = calculatePnLStats();
-    const config = getTelegramConfig();
-    const baseUrl = config.publicUrl || 'https://ai.studio/build';
+    const baseUrl = getBaseUrl();
     const downloadPnlUrl = `${baseUrl}/api/telegram/card/pnl`;
 
     const pnlMsg = `📈 <b>FOOTBALLGPT PERFORMANCE PROFILE</b> 📈\n` +

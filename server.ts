@@ -362,7 +362,11 @@ app.post('/api/football-data/sync', async (req: Request, res: Response) => {
 
 // 1. Get current telegram configuration
 app.get('/api/telegram/config', (req: Request, res: Response) => {
-  const hostUrl = req.protocol + '://' + req.get('host');
+  const proto = req.headers['x-forwarded-proto'] || req.protocol || 'http';
+  let hostUrl = proto + '://' + req.get('host');
+  if (hostUrl.startsWith('http://') && !hostUrl.includes('localhost') && !hostUrl.includes('127.0.0.1') && !hostUrl.includes('0.0.0.0')) {
+    hostUrl = hostUrl.replace('http://', 'https://');
+  }
   updateTelegramConfig({ publicUrl: hostUrl });
   res.json(getTelegramConfig());
 });
@@ -370,7 +374,11 @@ app.get('/api/telegram/config', (req: Request, res: Response) => {
 // 2. Update and active toggle telegram polling
 app.post('/api/telegram/config', (req: Request, res: Response) => {
   try {
-    const hostUrl = req.protocol + '://' + req.get('host');
+    const proto = req.headers['x-forwarded-proto'] || req.protocol || 'http';
+    let hostUrl = proto + '://' + req.get('host');
+    if (hostUrl.startsWith('http://') && !hostUrl.includes('localhost') && !hostUrl.includes('127.0.0.1') && !hostUrl.includes('0.0.0.0')) {
+      hostUrl = hostUrl.replace('http://', 'https://');
+    }
     const updatePayload = { ...req.body, publicUrl: hostUrl };
     updateTelegramConfig(updatePayload);
     const config = getTelegramConfig();
@@ -584,6 +592,7 @@ app.get('/api/telegram/card/pnl', (req: Request, res: Response) => {
     const stats = calculatePnLStats();
     const svgCode = generatePnLCardSvg(stats);
     res.setHeader('Content-Type', 'image/svg+xml');
+    res.setHeader('Content-Disposition', 'attachment; filename="pnl_report.svg"');
     res.send(svgCode);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
@@ -603,6 +612,7 @@ app.get('/api/telegram/card/prediction/:homeId/:awayId', (req: Request, res: Res
     const prob = calculatePrediction(homeId, awayId, 'FIFA World Cup');
     const svgCode = generatePredictionCardSvg(homeTeam, awayTeam, prob);
     res.setHeader('Content-Type', 'image/svg+xml');
+    res.setHeader('Content-Disposition', `attachment; filename="prediction_${homeId}_vs_${awayId}.svg"`);
     res.send(svgCode);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
