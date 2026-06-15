@@ -18,11 +18,12 @@ import {
   Play,
   Check,
   Award,
-  Download
+  Download,
+  Send,
+  MessageSquare
 } from 'lucide-react';
 import { MatchFixture, SavedPrediction, Team, Standing, AccuracyMetrics } from './types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-import Bet9jaPredictorSlip from './components/Bet9jaPredictorSlip';
 
 // Helper to get 10-match win rate percentage trend for any team in db.ts
 function getTeamWinRateTrend(teamId: string): { match: string; rate: number }[] {
@@ -60,10 +61,21 @@ export default function App() {
   const [fixtureFilter, setFixtureFilter] = useState<'scheduled' | 'finished' | 'all'>('all');
   
   // World Cup 2026 Qualified Teams tabs state variables
-  const [centerTab, setCenterTab] = useState<'analysis' | 'countries'>('countries');
+  const [centerTab, setCenterTab] = useState<'analysis' | 'countries' | 'telegram'>('countries');
   const [countrySearch, setCountrySearch] = useState<string>('');
   const [confederationFilter, setConfederationFilter] = useState<string>('All');
   const [selectedCountry, setSelectedCountry] = useState<Team | null>(null);
+
+  // Telegram Bot integration state variables
+  const [tgToken, setTgToken] = useState<string>('');
+  const [tgEnabled, setTgEnabled] = useState<boolean>(false);
+  const [tgChatId, setTgChatId] = useState<string>('');
+  const [tgLogs, setTgLogs] = useState<{ timestamp: string; type: 'info' | 'message' | 'response' | 'error'; text: string }[]>([]);
+  const [tgSimulateText, setTgSimulateText] = useState<string>('/predict Switzerland vs Qatar');
+  const [tgSimulateUser, setTgSimulateUser] = useState<string>('sopadeoluyemi');
+  const [isTgSimulating, setIsTgSimulating] = useState<boolean>(false);
+  const [isSavingTgConfig, setIsSavingTgConfig] = useState<boolean>(false);
+  const [activeCardView, setActiveCardView] = useState<'pnl' | 'predict'>('pnl');
   
   // Loading indicators
   const [isPredicting, setIsPredicting] = useState<boolean>(false);
@@ -172,13 +184,34 @@ export default function App() {
     }
   };
 
+  const fetchTelegramData = async () => {
+    try {
+      const configRes = await fetch('/api/telegram/config');
+      if (configRes.ok) {
+        const config = await configRes.json();
+        setTgToken(config.token || '');
+        setTgEnabled(config.enabled || false);
+        setTgChatId(config.chatId || '');
+      }
+      const logsRes = await fetch('/api/telegram/logs');
+      if (logsRes.ok) {
+        const logsData = await logsRes.json();
+        setTgLogs(logsData || []);
+      }
+    } catch (err) {
+      console.error("Error loading Telegram Bot statistics", err);
+    }
+  };
+
   useEffect(() => {
     fetchAllData();
+    fetchTelegramData();
     
-    // Poll updates every 30 seconds for live feel
+    // Poll updates every 15 seconds for live feel
     const interval = setInterval(() => {
       fetchAllData(true);
-    }, 30000);
+      fetchTelegramData();
+    }, 15000);
     return () => clearInterval(interval);
   }, []);
 
@@ -223,6 +256,7 @@ export default function App() {
               
               // Direct silent synchronisation of core states
               fetchAllData(true);
+              fetchTelegramData();
               
               // Log corresponding action info to analytical console UI
               let friendlyMessage = "Server state database updated.";
@@ -236,6 +270,10 @@ export default function App() {
                 friendlyMessage = `Global morning predictions automated for ${parsed.data.processedCount || 0} fixtures.`;
               } else if (parsed.type === 'football_data_synced') {
                 friendlyMessage = `Real-world telemetry ingested. Loaded ${parsed.data.teamsCount || 0} teams and ${parsed.data.fixturesCount || 0} matches.`;
+              } else if (parsed.type === 'telegram_config_updated') {
+                friendlyMessage = `Telegram Bot server configurations updated and applied.`;
+              } else if (parsed.type === 'telegram_log_added') {
+                friendlyMessage = `Telegram Bot Poller message activity detected.`;
               }
               
               log(`[Realtime Live Sync] ${friendlyMessage}`);
@@ -336,6 +374,58 @@ export default function App() {
       setAlertMessage({ type: 'error', text: 'Prediction analysis request failed. Check API connectivity.' });
     } finally {
       setIsPredicting(false);
+    }
+  };
+
+  const handleSaveTelegramConfig = async () => {
+    setIsSavingTgConfig(true);
+    try {
+      const response = await fetch('/api/telegram/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: tgToken,
+          enabled: tgEnabled,
+          chatId: tgChatId
+        })
+      });
+      if (response.ok) {
+        setAlertMessage({ type: 'success', text: `Telegram Configuration saved! Polling: ${tgEnabled ? 'ACTIVE' : 'STANDBY'}` });
+        log(`Telegram secrets updated. Polling toggle state matches: ${tgEnabled ? 'ON' : 'OFF'}`);
+      } else {
+        throw new Error('Failed to update config');
+      }
+    } catch (err: any) {
+      setAlertMessage({ type: 'error', text: `Failed to save Telegram credentials: ${err.message}` });
+    } finally {
+      setIsSavingTgConfig(false);
+    }
+  };
+
+  const handleSimulateTelegramMsg = async () => {
+    if (!tgSimulateText.trim()) return;
+    setIsTgSimulating(true);
+    log(`Sending mock simulator packet: "${tgSimulateText}" as @${tgSimulateUser}`);
+    try {
+      const response = await fetch('/api/telegram/simulate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: tgSimulateText,
+          username: tgSimulateUser
+        })
+      });
+      if (response.ok) {
+        setAlertMessage({ type: 'success', text: 'Simulated dialogue processed successfully!' });
+        fetchAllData(true);
+        fetchTelegramData();
+      } else {
+        throw new Error('Simulation endpoint failed');
+      }
+    } catch (err: any) {
+      setAlertMessage({ type: 'error', text: `Chat simulation pipeline failure: ${err.message}` });
+    } finally {
+      setIsTgSimulating(false);
     }
   };
 
@@ -976,6 +1066,18 @@ export default function App() {
               <Trophy className="w-3.5 h-3.5 text-yellow-500" />
               <span>World Cup Teams ({teams.length || 48})</span>
             </button>
+            <button
+              id="center-tab-telegram"
+              onClick={() => setCenterTab('telegram')}
+              className={`flex-1 py-1.5 rounded text-[11px] font-mono font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 border ${
+                centerTab === 'telegram'
+                  ? 'bg-[#0D1117] text-cyan-400 border-[#30363D]'
+                  : 'bg-transparent text-slate-400 border-transparent hover:text-slate-200'
+              }`}
+            >
+              <Send className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Telegram Bot</span>
+            </button>
           </div>
 
           {centerTab === 'analysis' ? (
@@ -1188,14 +1290,6 @@ export default function App() {
                 </div>
               )}
 
-              {/* BET9JA PREMIUM BOOKING SIMULATOR */}
-              {activePrediction && (
-                <Bet9jaPredictorSlip
-                  fixture={selectedFixture}
-                  prediction={activePrediction}
-                />
-              )}
-
               {/* ACCURACY RESOLVER TOOL (Section 7) */}
               <div id="resolver-tool" className="bg-[#161B22] p-6 rounded-lg border border-[#30363D] mt-auto">
                 <div className="flex items-center justify-between border-b border-[#30363D]/60 pb-3 mb-4">
@@ -1300,7 +1394,7 @@ export default function App() {
               <AlertTriangle className="w-12 h-12 text-yellow-500 animate-pulse" />
               <span>Select a match on the left panel to begin analysis report forecasting.</span>
             </div>
-          )) : (
+          )) : centerTab === 'countries' ? (
             <div id="countries-explorer-root" className="flex flex-grow flex-col gap-5">
               <div className="border-b border-[#30363D]/40 pb-4">
                 <h3 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
@@ -1487,6 +1581,266 @@ export default function App() {
                       </div>
                     );
                   })}
+              </div>
+            </div>
+          ) : (
+            <div id="telegram-hub-root" className="flex flex-col gap-6 animate-fadeIn">
+              <div className="border-b border-[#30363D]/40 pb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Send className="w-5 h-5 text-cyan-400" />
+                  <h3 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
+                    <span>FootballGPT Telegram Bot Console</span>
+                    <span className={`text-[9px] px-2 py-0.5 rounded-full border tracking-widest uppercase font-mono font-bold ${
+                      tgEnabled && tgToken
+                        ? 'bg-green-500/10 text-green-400 border-green-500/30'
+                        : 'bg-slate-500/10 text-slate-400 border-slate-500/20'
+                    }`}>
+                      {tgEnabled && tgToken ? '🟢 Live API Connected' : '⚪ Polling Standby'}
+                    </span>
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-400">
+                  Manage background pulling update streams from your Telegram bot directly. Monitor incoming simulated user queries, and retrieve live high-contrast PNG/SVG yield certificate cards.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                {/* CONFIGURATION & SIMULATOR FORM */}
+                <div className="lg:col-span-7 flex flex-col gap-5">
+                  
+                  {/* CONFIG CARD */}
+                  <div className="bg-[#161B22] border border-[#30363D] rounded-lg p-5 flex flex-col gap-4">
+                    <h4 className="text-xs font-mono font-bold uppercase text-[#58A6FF] tracking-wider flex items-center gap-1.5 border-b border-[#30363D]/50 pb-2">
+                      <Cpu className="w-3.5 h-3.5" />
+                      <span>API Secret Token</span>
+                    </h4>
+
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1.5">BOT API TOKEN (FROM @BOTFATHER):</label>
+                        <input
+                          type="password"
+                          placeholder="e.g. 7481959302:AAH92vYg0KqF..."
+                          value={tgToken}
+                          onChange={(e) => setTgToken(e.target.value)}
+                          className="w-full h-10 px-3 py-1.5 bg-[#0D1117] border border-[#30363D] rounded text-[#E6EDF3] text-xs font-mono outline-none focus:border-cyan-400"
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-between bg-[#0D1117] p-3 rounded border border-[#30363D]/60 mt-1">
+                        <div>
+                          <p className="text-xs font-bold text-white">Enable Bot Polling</p>
+                          <p className="text-[10px] text-slate-400">Pull incoming channel/chat events and post predictions automatically</p>
+                        </div>
+                        <button
+                          onClick={() => setTgEnabled(!tgEnabled)}
+                          className={`w-12 h-6 rounded-full p-1 transition-all ${
+                            tgEnabled ? 'bg-green-500' : 'bg-slate-600'
+                          } flex items-center shrink-0 cursor-pointer`}
+                        >
+                          <div className={`w-4 h-4 bg-white rounded-full transition-all transform ${tgEnabled ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                        </button>
+                      </div>
+
+                      <button
+                        onClick={handleSaveTelegramConfig}
+                        disabled={isSavingTgConfig}
+                        className="w-full py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold font-mono text-xs rounded uppercase tracking-widest disabled:opacity-50 transition-all cursor-pointer shadow-md mt-1"
+                      >
+                        {isSavingTgConfig ? 'SAVING SECRET KEY...' : 'APPLY TELEGRAM CREDENTIALS'}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* SIMULATOR */}
+                  <div className="bg-[#161B22] border border-[#30363D] rounded-lg p-5 flex flex-col gap-4">
+                    <h4 className="text-xs font-mono font-bold uppercase text-yellow-500 tracking-wider flex items-center gap-1.5 border-b border-[#30363D]/50 pb-2">
+                      <Brain className="w-3.5 h-3.5" />
+                      <span>Command Simulator Console</span>
+                    </h4>
+                    
+                    <p className="text-[11px] text-slate-400 leading-relaxed">
+                      Instant testing framework! Simulate how the bot responds when raw text messages arrive from a Telegram chat. You can test predicting matches, drafting analyses, or retrieving PnL sheets directly.
+                    </p>
+
+                    <div className="flex flex-col gap-3">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">MOCK TELEGRAM USER:</label>
+                          <input
+                            type="text"
+                            value={tgSimulateUser}
+                            onChange={(e) => setTgSimulateUser(e.target.value)}
+                            className="w-full h-8 px-2.5 bg-[#0D1117] border border-[#30363D] rounded text-white text-xs font-mono outline-none"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">PRESET COMMANDS:</label>
+                          <select
+                            onChange={(e) => setTgSimulateText(e.target.value)}
+                            className="w-full h-8 px-2 bg-[#0D1117] border border-[#30363D] rounded text-slate-300 text-[11px] font-mono outline-none cursor-pointer"
+                          >
+                            <option value="/predict Switzerland vs Qatar">/predict Switzerland vs Qatar (Custom Match)</option>
+                            <option value="/predict f_1">/predict f_1 (Live Scheduled Match)</option>
+                            <option value="/analysis Switzerland vs Qatar">/analysis Switzerland vs Qatar (Gemini tactical breakdown)</option>
+                            <option value="/pnl">/pnl (Live system performance ledger)</option>
+                            <option value="/list">/list (View today's Scheduled Games list)</option>
+                            <option value="/start">/start (Start system welcome page)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">SIMULATED MESSAGE CONTENT:</label>
+                        <input
+                          type="text"
+                          value={tgSimulateText}
+                          onChange={(e) => setTgSimulateText(e.target.value)}
+                          className="w-full h-10 px-3 bg-[#0D1117] border border-[#30363D] rounded text-white text-xs font-mono outline-none focus:border-yellow-500"
+                        />
+                      </div>
+
+                      <button
+                        onClick={handleSimulateTelegramMsg}
+                        disabled={isTgSimulating}
+                        className="w-full py-2.5 bg-yellow-500 hover:bg-yellow-400 text-black font-bold font-mono text-xs rounded uppercase tracking-widest disabled:opacity-50 transition-all cursor-pointer shadow-md"
+                      >
+                        {isTgSimulating ? 'SIMULATING REQ/ANS DIALOGUE...' : 'TRIGGER MOCK MESSAGE PULL'}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* ACTIVE SYSTEM POLLER STREAM LOGS */}
+                  <div className="bg-[#0D1117] border border-[#30363D] rounded-lg p-4 flex flex-col gap-3">
+                    <div className="flex items-center justify-between border-b border-[#30363D]/40 pb-2">
+                      <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping mr-1"></span>
+                        BOT POLLER EVENT LIVE STREAM
+                      </span>
+                      <button 
+                        onClick={async () => {
+                          const res = await fetch('/api/telegram/logs');
+                          if (res.ok) setTgLogs(await res.json());
+                        }}
+                        className="text-[9px] font-mono text-[#58A6FF] hover:underline cursor-pointer"
+                      >
+                        Refresh Logs
+                      </button>
+                    </div>
+                    
+                    <div className="h-44 overflow-y-auto font-mono text-[10px] space-y-2 custom-scrollbar bg-black/40 p-3 rounded border border-[#30363D]/40">
+                      {tgLogs.length === 0 ? (
+                        <div className="text-slate-600 italic">No network poller traffic recorded. Connected to a Telegram API to see live streaming logs here.</div>
+                      ) : (
+                        tgLogs.map((lg, i) => (
+                          <div key={i} className="flex flex-col gap-[2px] leading-relaxed">
+                            <span className="text-slate-500">[{new Date(lg.timestamp).toLocaleTimeString()}]</span>
+                            <span className={
+                              lg.type === 'message' ? 'text-amber-400' :
+                              lg.type === 'response' ? 'text-green-400' :
+                              lg.type === 'error' ? 'text-red-500 font-bold' : 'text-slate-300'
+                            }>
+                              {lg.type === 'message' ? '📥 ' : lg.type === 'response' ? '📤 ' : lg.type === 'error' ? '❌ ' : 'ℹ️ '}
+                              {lg.text}
+                            </span>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* GRAPHICAL PNL & PREDICTION VECTOR CARD PREVIEWS */}
+                <div className="lg:col-span-5 flex flex-col gap-5">
+                  <div className="bg-[#161B22] border border-[#30363D] rounded-lg p-5 flex flex-col gap-4">
+                    <div className="flex items-center justify-between border-b border-[#30363D]/50 pb-2">
+                      <h4 className="text-xs font-mono font-bold uppercase text-[#56E39F] tracking-wider flex items-center gap-1.5">
+                        <Award className="w-3.5 h-3.5" />
+                        <span>Interactive Vector yields</span>
+                      </h4>
+                      <div className="flex gap-1">
+                        <button
+                          onClick={() => setActiveCardView('pnl')}
+                          className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold cursor-pointer ${
+                            activeCardView === 'pnl' ? 'bg-[#21262D] text-[#56E39F] border border-[#30363D]' : 'text-slate-400 bg-transparent'
+                          }`}
+                        >
+                          PnL Card
+                        </button>
+                        <button
+                          onClick={() => setActiveCardView('predict')}
+                          className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold cursor-pointer ${
+                            activeCardView === 'predict' ? 'bg-[#21262D] text-[#56E39F] border border-[#30363D]' : 'text-slate-400 bg-transparent'
+                          }`}
+                        >
+                          Predict Card
+                        </button>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-slate-400">
+                      Our system automatically converts simulated performance matrices or match likelihood statistics into dynamic vector elements! These images can be dynamically retrieved inside our telegram pipeline:
+                    </p>
+
+                    <div className="relative border border-[#30363D] bg-[#0D1117] rounded-lg overflow-hidden flex items-center justify-center p-2 min-h-[260px]">
+                      {activeCardView === 'pnl' ? (
+                        <img 
+                          src={`/api/telegram/card/pnl?cache_bust=${Date.now()}`}
+                          alt="Live performance vector card"
+                          className="w-full h-auto rounded-lg shadow-2xl object-contain object-center"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <img 
+                          src={`/api/telegram/card/prediction/${selectedFixture?.homeTeam?.id || '2'}/${selectedFixture?.awayTeam?.id || '4'}?cache_bust=${Date.now()}`}
+                          alt="Live prediction matchup vector card"
+                          className="w-full h-auto rounded-lg shadow-2xl object-contain object-center"
+                          referrerPolicy="no-referrer"
+                        />
+                      )}
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-1">
+                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">ASSET CARD CDN ENDPOINTS:</span>
+                      
+                      <div className="flex items-center justify-between bg-[#0D1117] px-2.5 py-1.5 rounded border border-[#30363D]/60 select-all">
+                        <code className="text-[9px] text-[#58A6FF] truncate font-mono">
+                          {activeCardView === 'pnl' 
+                            ? `${window.location.origin}/api/telegram/card/pnl` 
+                            : `${window.location.origin}/api/telegram/card/prediction/${selectedFixture?.homeTeam?.id || '2'}/${selectedFixture?.awayTeam?.id || '4'}`}
+                        </code>
+                        <button
+                          onClick={() => {
+                            const url = activeCardView === 'pnl' 
+                              ? `${window.location.origin}/api/telegram/card/pnl` 
+                              : `${window.location.origin}/api/telegram/card/prediction/${selectedFixture?.homeTeam?.id || '2'}/${selectedFixture?.awayTeam?.id || '4'}`;
+                            navigator.clipboard.writeText(url);
+                            setAlertMessage({ type: 'success', text: 'Graphical Card asset URL copied to clipboard!' });
+                          }}
+                          className="text-slate-400 hover:text-white shrink-0 ml-1.5"
+                          title="Copy Asset path"
+                        >
+                          <Copy className="w-3 h-3" />
+                        </button>
+                      </div>
+
+                      <div className="flex gap-2 mt-2">
+                        <a 
+                          href={activeCardView === 'pnl' ? '/api/telegram/card/pnl' : `/api/telegram/card/prediction/${selectedFixture?.homeTeam?.id || '2'}/${selectedFixture?.awayTeam?.id || '4'}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-grow text-center py-2 bg-[#21262D] hover:bg-[#30363D] border border-[#30363D] text-slate-300 font-mono text-[10px] font-bold tracking-wider rounded uppercase flex items-center justify-center gap-1.5"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                          <span>Download SVG Asset</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           )}

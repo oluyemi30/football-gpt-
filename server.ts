@@ -11,6 +11,16 @@ import { calculatePrediction } from './src/predictor.js';
 import { generateFootballGptAnalysis } from './src/footballGptService.js';
 import { SavedPrediction } from './src/types.js';
 import { syncStandingsFromApiFootball, syncFixturesFromApiFootball } from './src/apiFootballService.js';
+import { 
+  getTelegramConfig, 
+  updateTelegramConfig, 
+  getTelegramLogs, 
+  processTelegramMessage, 
+  startTelegramPolling, 
+  stopTelegramPolling,
+  calculatePnLStats,
+  matchTeamByName
+} from './src/telegramService.js';
 
 dotenv.config();
 
@@ -57,16 +67,6 @@ app.get('/api/standings', (req: Request, res: Response) => {
   try {
     const db = readDb();
     res.json(db.standings);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Get All Team Stats (safely served to client)
-app.get('/api/team-stats', (req: Request, res: Response) => {
-  try {
-    const db = readDb();
-    res.json(db.teamStats);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
@@ -358,6 +358,253 @@ app.post('/api/football-data/sync', async (req: Request, res: Response) => {
   }
 });
 
+// --- TELEGRAM INTEGRATION SERVICES AND RENDERERS ---
+
+// 1. Get current telegram configuration
+app.get('/api/telegram/config', (req: Request, res: Response) => {
+  res.json(getTelegramConfig());
+});
+
+// 2. Update and active toggle telegram polling
+app.post('/api/telegram/config', (req: Request, res: Response) => {
+  try {
+    updateTelegramConfig(req.body);
+    const config = getTelegramConfig();
+    if (config.enabled && config.token) {
+      startTelegramPolling();
+    } else {
+      stopTelegramPolling();
+    }
+    broadcastUpdate('telegram_config_updated', config);
+    res.json({ success: true, config });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 3. Fetch log entries for real-time console streaming
+app.get('/api/telegram/logs', (req: Request, res: Response) => {
+  res.json(getTelegramLogs());
+});
+
+// 4. Manual client simulation for instant testing of message actions
+app.post('/api/telegram/simulate', async (req: Request, res: Response) => {
+  try {
+    const { text, username } = req.body;
+    if (!text) {
+      res.status(400).json({ error: 'Message text is required' });
+      return;
+    }
+    const result = await processTelegramMessage(text, username || 'Tester');
+    broadcastUpdate('telegram_log_added', getTelegramLogs());
+    res.json({ success: true, replyText: result.replyText, metadata: result.metadata });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Helper functions for SVG Graphics Card Generation
+function generatePnLCardSvg(pnl: any): string {
+  const accuracy = pnl.accuracyRate;
+  const pnlText = pnl.virtualPnL > 0 ? `+${pnl.virtualPnL}` : `${pnl.virtualPnL}`;
+  const winCount = pnl.correctCount;
+  const loseCount = pnl.incorrectCount;
+  const total = pnl.resolvedCount;
+  const streakSquares = pnl.streak.map((s: string, idx: number) => {
+    const color = s.includes('W') ? '#3FB950' : '#FF4F56';
+    const text = s.includes('W') ? 'W' : 'L';
+    const x = 160 + idx * 45;
+    return `
+      <g transform="translate(${x}, 305)">
+        <rect width="36" height="36" rx="8" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="1.5" />
+        <text x="18" y="22" font-family="'Inter', -apple-system, sans-serif" font-size="12" font-weight="950" fill="${color}" text-anchor="middle" alignment-baseline="middle">${text}</text>
+      </g>
+    `;
+  }).join('');
+
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="400">
+      <defs>
+        <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0D1117" />
+          <stop offset="50%" stop-color="#161B22" />
+          <stop offset="100%" stop-color="#0A0B0E" stop-opacity="0.95" />
+        </linearGradient>
+        <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#58A6FF" stop-opacity="0.3" />
+          <stop offset="100%" stop-color="#3FB950" stop-opacity="0.02" />
+        </linearGradient>
+        <linearGradient id="accentGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#58A6FF" />
+          <stop offset="100%" stop-color="#1F6FEB" />
+        </linearGradient>
+        <linearGradient id="greenGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#56E39F" />
+          <stop offset="100%" stop-color="#3FB950" />
+        </linearGradient>
+      </defs>
+
+      <rect width="600" height="400" rx="16" fill="url(#bgGrad)" stroke="#30363D" stroke-width="2" />
+      <rect width="596" height="396" x="2" y="2" rx="14" fill="none" stroke="url(#glowGrad)" stroke-width="3" />
+
+      <circle cx="25" cy="25" r="2" fill="#58A6FF" opacity="0.4" />
+      <circle cx="575" cy="25" r="2" fill="#3FB950" opacity="0.4" />
+
+      <g transform="translate(40, 50)">
+        <rect width="36" height="36" rx="10" fill="url(#accentGrad)" opacity="0.1" />
+        <path d="M12 10l12 6-12 6V10z" fill="#58A6FF" transform="translate(6, 4)" />
+        <text x="50" y="24" font-family="'Inter', -apple-system, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">FOOTBALLGPT AI</text>
+        <text x="350" y="24" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#58A6FF" letter-spacing="1" text-anchor="end">SYS_HEALTH: OPTIMAL</text>
+      </g>
+
+      <line x1="40" y1="100" x2="560" y2="100" stroke="#30363D" stroke-width="1" stroke-dasharray="4" />
+
+      <g id="stats_row" transform="translate(40, 120)">
+        <g transform="translate(0, 0)">
+          <rect width="150" height="120" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1.5" />
+          <text x="75" y="35" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="700" fill="#8B949E" letter-spacing="0.5" text-anchor="middle">ACCURACY RATE</text>
+          <text x="75" y="85" font-family="'JetBrains Mono', monospace" font-size="36" font-weight="900" fill="url(#greenGrad)" text-anchor="middle">${accuracy}%</text>
+        </g>
+
+        <g transform="translate(180, 0)">
+          <rect width="150" height="120" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1.5" />
+          <text x="75" y="35" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="700" fill="#8B949E" letter-spacing="0.5" text-anchor="middle">NET PROFIT</text>
+          <text x="75" y="85" font-family="'JetBrains Mono', monospace" font-size="34" font-weight="900" fill="${pnl.virtualPnL >= 0 ? '#3FB950' : '#FF4F56'}" text-anchor="middle">${pnlText}u</text>
+        </g>
+
+        <g transform="translate(360, 0)">
+          <rect width="160" height="120" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1.5" />
+          <text x="80" y="35" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="700" fill="#8B949E" letter-spacing="0.5" text-anchor="middle">RESOLVED W/L</text>
+          <text x="80" y="75" font-family="'JetBrains Mono', monospace" font-size="22" font-weight="800" fill="#FFFFFF" text-anchor="middle">${winCount}W - ${loseCount}L</text>
+          <text x="80" y="100" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="500" fill="#8B949E" text-anchor="middle">Total Samples: ${total}</text>
+        </g>
+      </g>
+
+      <g>
+        <text x="40" y="328" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="700" fill="#8B949E">RECENT STREAK:</text>
+        ${streakSquares ? streakSquares : `<text x="160" y="328" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-style="italic" fill="#8B949E">Awaiting Resolved Fixtures</text>`}
+      </g>
+
+      <text x="560" y="380" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" fill="#8B949E" text-anchor="end" opacity="0.6">© WORLD CUP MODEL ENGINE • REAL-TIME TELEMETRY</text>
+    </svg>
+  `;
+}
+
+function generatePredictionCardSvg(homeTeam: any, awayTeam: any, prob: any): string {
+  const getProgressBarWidth = (percentage: number) => {
+    return Math.max(10, Math.round(percentage * 2.1));
+  };
+
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="400">
+      <defs>
+        <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#07090E" />
+          <stop offset="50%" stop-color="#0F141C" />
+          <stop offset="100%" stop-color="#040609" />
+        </linearGradient>
+        <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#58A6FF" stop-opacity="0.25" />
+          <stop offset="100%" stop-color="#8B949E" stop-opacity="0.0" />
+        </linearGradient>
+        <linearGradient id="probGradHome" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#1F6FEB" />
+          <stop offset="100%" stop-color="#58A6FF" />
+        </linearGradient>
+        <linearGradient id="probGradAway" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#E28743" />
+          <stop offset="100%" stop-color="#FFBD59" />
+        </linearGradient>
+        <linearGradient id="drawGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#30363D" />
+          <stop offset="100%" stop-color="#8B949E" />
+        </linearGradient>
+      </defs>
+
+      <rect width="600" height="400" rx="16" fill="url(#bgGrad)" stroke="#30363D" stroke-width="2" />
+      <rect width="596" height="396" x="2" y="2" rx="14" fill="none" stroke="url(#glowGrad)" stroke-width="2" />
+
+      <g transform="translate(40, 45)">
+        <text x="0" y="0" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="900" fill="#58A6FF" letter-spacing="2">FOOTBALLGPT AI • MATCH ESTIMATE</text>
+        <text x="520" y="0" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="700" fill="#8B949E" text-anchor="end">XGBOOST SIM</text>
+      </g>
+
+      <line x1="40" y1="65" x2="560" y2="65" stroke="#30363D" opacity="0.5" />
+
+      <g transform="translate(40, 110)">
+        <text x="0" y="15" font-family="'Inter', -apple-system, sans-serif" font-size="28" font-weight="900" fill="#FFFFFF">${homeTeam.emoji || '🏳️'} ${homeTeam.name}</text>
+        <text x="0" y="47" font-family="'Inter', -apple-system, sans-serif" font-size="14" font-style="italic" font-weight="400" fill="#8B949E">versus</text>
+        <text x="0" y="85" font-family="'Inter', -apple-system, sans-serif" font-size="28" font-weight="900" fill="#FFFFFF">${awayTeam.emoji || '🏳️'} ${awayTeam.name}</text>
+      </g>
+
+      <g transform="translate(310, 100)">
+        <rect width="250" height="190" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1" />
+        
+        <text x="20" y="30" font-family="'Inter', -apple-system, sans-serif" font-size="10" font-weight="800" fill="#8B949E" letter-spacing="1">FORECAST PROBABILITIES</text>
+
+        <g transform="translate(20, 42)">
+          <text x="0" y="15" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="700" fill="#A8B4C4">${homeTeam.shortName} Win</text>
+          <text x="210" y="15" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="800" fill="#58A6FF" text-anchor="end">${prob.homeWin}%</text>
+          <rect y="23" width="210" height="8" rx="4" fill="#0D1117" />
+          <rect y="23" width="${getProgressBarWidth(prob.homeWin)}" height="8" rx="4" fill="url(#probGradHome)" />
+        </g>
+
+        <g transform="translate(20, 84)">
+          <text x="0" y="15" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="700" fill="#A8B4C4">Draw</text>
+          <text x="210" y="15" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="800" fill="#8B949E" text-anchor="end">${prob.draw}%</text>
+          <rect y="23" width="210" height="8" rx="4" fill="#0D1117" />
+          <rect y="23" width="${getProgressBarWidth(prob.draw)}" height="8" rx="4" fill="url(#drawGrad)" />
+        </g>
+
+        <g transform="translate(20, 126)">
+          <text x="0" y="15" font-family="'Inter', -apple-system, sans-serif" font-size="11" font-weight="700" fill="#A8B4C4">${awayTeam.shortName} Win</text>
+          <text x="210" y="15" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="800" fill="#FFBD59" text-anchor="end">${prob.awayWin}%</text>
+          <rect y="23" width="210" height="8" rx="4" fill="#0D1117" />
+          <rect y="23" width="${getProgressBarWidth(prob.awayWin)}" height="8" rx="4" fill="url(#probGradAway)" />
+        </g>
+      </g>
+
+      <g transform="translate(40, 335)">
+        <rect width="520" height="34" rx="6" fill="#161B22" stroke="#30363D" stroke-width="0.5" />
+        <text x="12" y="21" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-weight="500" fill="#8B949E">🤖 Direct command active in chat channel: /predict ${homeTeam.shortName} vs ${awayTeam.shortName}</text>
+      </g>
+
+      <text x="40" y="310" font-family="'Inter', -apple-system, sans-serif" font-size="9" font-style="italic" fill="#8B949E" opacity="0.8">Neutral ground vectors, confederation rating factors integrated.</text>
+    </svg>
+  `;
+}
+
+// 5. SVG Render Route for PnL stats
+app.get('/api/telegram/card/pnl', (req: Request, res: Response) => {
+  try {
+    const stats = calculatePnLStats();
+    const svgCode = generatePnLCardSvg(stats);
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.send(svgCode);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 6. SVG Render Route for Prediction Matchups
+app.get('/api/telegram/card/prediction/:homeId/:awayId', (req: Request, res: Response) => {
+  try {
+    const { homeId, awayId } = req.params;
+    const homeTeam = TEAMS[homeId];
+    const awayTeam = TEAMS[awayId];
+    if (!homeTeam || !awayTeam) {
+      res.status(404).send('One or both teams not found.');
+      return;
+    }
+    const prob = calculatePrediction(homeId, awayId, 'FIFA World Cup');
+    const svgCode = generatePredictionCardSvg(homeTeam, awayTeam, prob);
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.send(svgCode);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Integrate Vite Dev Server middleware or Static Server
 async function setupServer() {
   const isProd = process.env.NODE_ENV === 'production';
@@ -435,6 +682,19 @@ async function setupServer() {
       console.log('[WebSocket Server] Client disconnected');
     });
   });
+
+  // Bootstrap Telegram polling automatically if bot configuration is active and enabled
+  try {
+    const config = getTelegramConfig();
+    if (config.enabled && config.token) {
+      console.log(`[Telegram Bot Setup] Automatic trigger initializing on server boot...`);
+      startTelegramPolling();
+    } else {
+      console.log(`[Telegram Bot Setup] Bot is inactive or token not specified. Polling standby.`);
+    }
+  } catch (err: any) {
+    console.error("Failed to start Telegram Poller automatically on boot:", err.message);
+  }
 }
 
 setupServer().catch(err => {
