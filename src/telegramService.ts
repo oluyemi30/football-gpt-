@@ -171,9 +171,7 @@ export function formatTextPredictionCard(homeTeam: Team, awayTeam: Team, prob: {
          `🔑 <b>AI Tactical Outlook:</b>\n` +
          `<i>"${escapedInsight}"</i>\n` +
          `━━━━━━━━━━━━━━━━━━━━━━\n` +
-         `💡 <i>Predict on Web App ID:</i> <code>${escapeHtml(matchId || 'Custom Match')}</code>\n` +
-         `🖼️ <i>Download Infocard SVG:</i> <a href="${downloadCardUrl}">Download Image</a>\n` +
-         `🔗 <i>Interactive Dashboard:</i> <a href="${baseUrl}">View Live</a>`;
+         `🖼️ <i>Download Infocard SVG:</i> <a href="${downloadCardUrl}">Download Image</a>`;
 }
 
 // Process arbitrary message payload and returns responsive text and optional card actions
@@ -239,8 +237,7 @@ export async function processTelegramMessage(text: string, username_sender: stri
                    `💎 <b>Virtual Net Profit:</b> <code>${pnl.virtualPnL > 0 ? '+' : ''}${pnl.virtualPnL} Units</code>\n\n` +
                    `🔥 <b>Recent Streak:</b> \n${pnl.streak.length > 0 ? escapeHtml(pnl.streak.join(' → ')) : '<i>No matches resolved yet!</i>'}\n` +
                    `━━━━━━━━━━━━━━━━━━━━━━\n` +
-                   `🖼️ <b>Download PnL Report SVG:</b> <a href="${downloadPnlUrl}">Download PnL Card</a>\n` +
-                   `💡 <b>PNL Verification:</b> \n<a href="${baseUrl}/ledger">Open Virtual PNL Ledger</a>`;
+                   `🖼️ <b>Download PnL Report SVG:</b> <a href="${downloadPnlUrl}">Download PnL Card</a>`;
 
     addTelegramLog('response', `[Sent live analytical PnL metrics]`);
     return { 
