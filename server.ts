@@ -362,13 +362,17 @@ app.post('/api/football-data/sync', async (req: Request, res: Response) => {
 
 // 1. Get current telegram configuration
 app.get('/api/telegram/config', (req: Request, res: Response) => {
+  const hostUrl = req.protocol + '://' + req.get('host');
+  updateTelegramConfig({ publicUrl: hostUrl });
   res.json(getTelegramConfig());
 });
 
 // 2. Update and active toggle telegram polling
 app.post('/api/telegram/config', (req: Request, res: Response) => {
   try {
-    updateTelegramConfig(req.body);
+    const hostUrl = req.protocol + '://' + req.get('host');
+    const updatePayload = { ...req.body, publicUrl: hostUrl };
+    updateTelegramConfig(updatePayload);
     const config = getTelegramConfig();
     if (config.enabled && config.token) {
       startTelegramPolling();

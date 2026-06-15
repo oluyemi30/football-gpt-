@@ -1611,45 +1611,33 @@ export default function App() {
                   
                   {/* CONFIG CARD */}
                   <div className="bg-[#161B22] border border-[#30363D] rounded-lg p-5 flex flex-col gap-4">
-                    <h4 className="text-xs font-mono font-bold uppercase text-[#58A6FF] tracking-wider flex items-center gap-1.5 border-b border-[#30363D]/50 pb-2">
-                      <Cpu className="w-3.5 h-3.5" />
-                      <span>API Secret Token</span>
+                    <h4 className="text-xs font-mono font-bold uppercase text-cyan-400 tracking-wider flex items-center gap-1.5 border-b border-[#30363D]/50 pb-2">
+                      <Cpu className="w-3.5 h-3.5 animate-pulse" />
+                      <span>FootballGPT Master Bot Status</span>
                     </h4>
 
                     <div className="flex flex-col gap-3">
-                      <div>
-                        <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1.5">BOT API TOKEN (FROM @BOTFATHER):</label>
-                        <input
-                          type="password"
-                          placeholder="e.g. 7481959302:AAH92vYg0KqF..."
-                          value={tgToken}
-                          onChange={(e) => setTgToken(e.target.value)}
-                          className="w-full h-10 px-3 py-1.5 bg-[#0D1117] border border-[#30363D] rounded text-[#E6EDF3] text-xs font-mono outline-none focus:border-cyan-400"
-                        />
-                      </div>
-
-                      <div className="flex items-center justify-between bg-[#0D1117] p-3 rounded border border-[#30363D]/60 mt-1">
-                        <div>
-                          <p className="text-xs font-bold text-white">Enable Bot Polling</p>
-                          <p className="text-[10px] text-slate-400">Pull incoming channel/chat events and post predictions automatically</p>
+                      <div className="bg-[#0D1117] p-4 rounded border border-[#30363D]/60 flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shrink-0"></span>
+                          <span className="text-xs font-bold text-green-400 uppercase tracking-wider font-mono">Master Live Bot Active</span>
                         </div>
-                        <button
-                          onClick={() => setTgEnabled(!tgEnabled)}
-                          className={`w-12 h-6 rounded-full p-1 transition-all ${
-                            tgEnabled ? 'bg-green-500' : 'bg-slate-600'
-                          } flex items-center shrink-0 cursor-pointer`}
-                        >
-                          <div className={`w-4 h-4 bg-white rounded-full transition-all transform ${tgEnabled ? 'translate-x-6' : 'translate-x-0'}`}></div>
-                        </button>
+                        <p className="text-[11px] font-mono text-slate-400 bg-black/40 px-2 py-2 rounded select-none border border-[#30363D]/30 tracking-widest leading-none">
+                          8702990599:AAFeNJU0VddH3ZePKJz1GHa... (🔒 Sealed)
+                        </p>
                       </div>
 
-                      <button
-                        onClick={handleSaveTelegramConfig}
-                        disabled={isSavingTgConfig}
-                        className="w-full py-2.5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold font-mono text-xs rounded uppercase tracking-widest disabled:opacity-50 transition-all cursor-pointer shadow-md mt-1"
-                      >
-                        {isSavingTgConfig ? 'SAVING SECRET KEY...' : 'APPLY TELEGRAM CREDENTIALS'}
-                      </button>
+                      <div className="bg-amber-500/5 p-3 rounded border border-amber-500/25 text-[11px] text-amber-200 leading-relaxed flex items-start gap-2">
+                        <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                        <div>
+                          <p className="font-bold text-amber-400 font-mono text-[10px] uppercase tracking-wider">Access Restricted to Server Owner</p>
+                          <p className="text-slate-400 mt-0.5">This platform runs on the owner's pre-configured Telegram prediction stream. Standard guest accounts are blocked from overriding credentials to prevent tampering.</p>
+                        </div>
+                      </div>
+
+                      <span className="text-[10px] font-mono font-bold text-center text-slate-500 uppercase tracking-widest mt-1">
+                        🔒 SYSTEM CHANNEL OPERATING SECURELY
+                      </span>
                     </div>
                   </div>
 
