@@ -62,6 +62,16 @@ app.get('/api/standings', (req: Request, res: Response) => {
   }
 });
 
+// Get All Team Stats (safely served to client)
+app.get('/api/team-stats', (req: Request, res: Response) => {
+  try {
+    const db = readDb();
+    res.json(db.teamStats);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // 4. Get Saved Predictions & Analyses
 app.get('/api/predictions', (req: Request, res: Response) => {
   try {

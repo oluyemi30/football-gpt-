@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { MatchFixture, SavedPrediction, Team, Standing, AccuracyMetrics } from './types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import Bet9jaPredictorSlip from './components/Bet9jaPredictorSlip';
 
 // Helper to get 10-match win rate percentage trend for any team in db.ts
 function getTeamWinRateTrend(teamId: string): { match: string; rate: number }[] {
@@ -1185,6 +1186,14 @@ export default function App() {
                     </button>
                   </div>
                 </div>
+              )}
+
+              {/* BET9JA PREMIUM BOOKING SIMULATOR */}
+              {activePrediction && (
+                <Bet9jaPredictorSlip
+                  fixture={selectedFixture}
+                  prediction={activePrediction}
+                />
               )}
 
               {/* ACCURACY RESOLVER TOOL (Section 7) */}
