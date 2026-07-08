@@ -126,6 +126,73 @@ The server automatically maps the public URL of the platform via forward headers
 
 ---
 
+## 💻 Running the Prediction Engine in Terminal (CLI)
+
+FootballGPT includes a fully featured interactive terminal client. This allows developers, sports analysts, and content creators to simulate matches, calculate prediction probability spreads, and query Gemini-powered tactical reports directly in their terminal of choice.
+
+### Quick Start:
+To run the terminal CLI client, simply execute:
+```bash
+npm run cli
+```
+*(Alternative manual execution: `npx tsx src/cli.ts`)*
+
+### Key CLI Features:
+1.  **Interactive Selection**: Displays an elegant ANSI-colorized table of 48 national team database IDs and flag emojis.
+2.  **Visual ASCII Probability Metrics**: Instantly generates progress bars showing matchup outcomes:
+    *   **Home Win Probability** (Green `█` bar)
+    *   **Draw Probability** (Yellow `█` bar)
+    *   **Away Win Probability** (Blue `█` bar)
+3.  **Metrics Breakdown**: Displays physical stats comparison like recent form strings (e.g., `[WWWDW]`), 5-game average goals scored, and current injury rates.
+4.  **On-Demand AI Reports**: Option `[A]` requests a live tactical analytical evaluation from Gemini (or runs the local fallback processor if no key is configured), outputting:
+    *   **Reasoning Matrices**: Concrete numbered bullet points detailing team structures.
+    *   **Key Insight**: A cohesive natural language summary block.
+    *   **Ready-to-Use Social Packs**: Automatically formats viral posts with hashtags for X (Twitter), LinkedIn, WhatsApp, and TikTok video hook script screenplays!
+
+---
+
+## 🧠 Core AI Architecture & Model Setup
+
+The heart of FootballGPT's analytical insight is driven by **Google Gemini LLM** models, integrating the modern `@google/genai` TypeScript SDK:
+
+### 1. Active Models
+*   **Primary Model**: `gemini-3.5-flash` - Leveraged for ultra-fast, high-reasoning, low-latency tactical match breakdowns and programmatic JSON schema responses.
+*   **Secondary Model**: `gemini-3.1-flash-lite` - Leveraged as an active standby fallback to handle potential rate limits or high-traffic spikes.
+
+### 2. High-Fidelity Schema Enforcement (JSON Mode)
+Instead of returning unstructured conversational text, FootballGPT communicates using Gemini's Native Structured Output (`responseSchema`). This ensures that the model returns perfectly formed JSON arrays and nested string blocks mapping to the system's TypeScript interfaces:
+```typescript
+interface FootballGptAnalysis {
+  prediction: PredictionResult;
+  confidence: 'high' | 'medium' | 'low';
+  reasoning: string[];
+  keyInsight: string;
+}
+```
+
+### 3. Fault-Tolerant Fallback System
+If no `GEMINI_API_KEY` is present or if the network fails, the system bypasses API crashes by instantly loading a **Local Analytical Matrix Generator** (located in `src/footballGptService.ts`). This calculates highly aligned, data-derived tactical summaries, ensuring zero user-facing downtime and allowing offline developers to test features smoothly.
+
+---
+
+## 🔌 API Connectors & Integrations
+
+For your video breakdown, here are the main APIs driving this codebase:
+
+1.  **Telegram Bot API**:
+    *   Uses long-polling via `/getUpdates` with a dynamic standby back-off mechanism.
+    *   Features active **409 Conflict standby auto-recovery**: If multiple dev containers start up in the cloud, the poller identifies conflict codes, triggers `/deleteWebhook` to clean sessions, and staggers the polling interval smoothly to avoid token lockout.
+2.  **Google Gemini Developer API**:
+    *   Instantiated server-side via `@google/genai` to safeguard secret API keys from appearing in browser DevTools.
+3.  **SVG Asset Distribution APIs**:
+    *   `/api/telegram/card/prediction/:homeId/:awayId`
+    *   `/api/telegram/card/pnl`
+    *   These endpoints render customized SVG graphics containing live scoreboard visualizations. They set standard `image/svg+xml` headers combined with `Content-Disposition: attachment` files, making it simple for users to download them instantly to their mobile devices directly from Telegram.
+4.  **Sports Data Connectors**:
+    *   Integrates option-based API hooks for `football-data.org` and `api-football.com` inside `src/apiFootballService.ts` and `src/footballDataService.ts` to fetch official league standings and live score sheets when enabled.
+
+---
+
 ## 🏗️ Build and Development Scripts
 
 FootballGPT compiles the server into a bundle to ensure rapid cold starts and bypass strict relative ESM imports:
