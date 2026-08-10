@@ -169,7 +169,6 @@ export function calculatePrediction(homeId: string, awayId: string, league?: str
   // Adjust mathematically to sum to exactly 100%
   const difference = 100 - (homeWinPct + DrawPct + awayWinPct);
   if (difference !== 0) {
-    // Apply correction to the largest probability
     if (homeWinPct >= DrawPct && homeWinPct >= awayWinPct) {
       homeWinPct += difference;
     } else if (awayWinPct >= homeWinPct && awayWinPct >= DrawPct) {
@@ -179,9 +178,72 @@ export function calculatePrediction(homeId: string, awayId: string, league?: str
     }
   }
 
+  // 9. Calculate expected Goals (xG)
+  const homeXG = Number(((homeAttackScore * 0.7) + (awayDefenseScore * 0.3) + (isNeutralGround ? 0 : 0.15)).toFixed(2));
+  const awayXG = Number(((awayAttackScore * 0.7) + (homeDefenseScore * 0.3)).toFixed(2));
+
+  // Poisson distribution calculation helper
+  const poisson = (k: number, lambda: number): number => {
+    return (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
+  };
+
+  const factorial = (n: number): number => {
+    if (n <= 1) return 1;
+    let res = 1;
+    for (let i = 2; i <= n; i++) res *= i;
+    return res;
+  };
+
+  // Generate score probabilities matrix up to 5x5
+  const scoreMatrix: { score: string; prob: number; homeGoals: number; awayGoals: number }[] = [];
+  let totalProb = 0;
+
+  for (let hG = 0; hG <= 5; hG++) {
+    for (let aG = 0; aG <= 5; aG++) {
+      const p = poisson(hG, Math.max(0.2, homeXG)) * poisson(aG, Math.max(0.2, awayXG));
+      scoreMatrix.push({ score: `${hG}-${aG}`, prob: p, homeGoals: hG, awayGoals: aG });
+      totalProb += p;
+    }
+  }
+
+  // Normalize score probabilities
+  scoreMatrix.forEach(s => s.prob = s.prob / totalProb);
+
+  // Over/Under 2.5
+  const over25Prob = scoreMatrix.filter(s => s.homeGoals + s.awayGoals >= 3).reduce((acc, s) => acc + s.prob, 0);
+  const over25Pct = Math.round(over25Prob * 100);
+  const under25Pct = 100 - over25Pct;
+
+  // Both Teams To Score (BTTS)
+  const bttsProb = scoreMatrix.filter(s => s.homeGoals >= 1 && s.awayGoals >= 1).reduce((acc, s) => acc + s.prob, 0);
+  const bttsPct = Math.round(bttsProb * 100);
+  const bttsNoPct = 100 - bttsPct;
+
+  // Clean Sheets
+  const csHomeProb = scoreMatrix.filter(s => s.awayGoals === 0).reduce((acc, s) => acc + s.prob, 0);
+  const csAwayProb = scoreMatrix.filter(s => s.homeGoals === 0).reduce((acc, s) => acc + s.prob, 0);
+
+  // Top 3 most likely correct scores
+  const topScores = [...scoreMatrix]
+    .sort((a, b) => b.prob - a.prob)
+    .slice(0, 3)
+    .map(s => ({
+      score: s.score,
+      probability: Math.round(s.prob * 100)
+    }));
+
   return {
     homeWin: homeWinPct,
     draw: DrawPct,
     awayWin: awayWinPct,
+    over25Goals: over25Pct,
+    under25Goals: under25Pct,
+    bttsYes: bttsPct,
+    bttsNo: bttsNoPct,
+    expectedGoalsHome: homeXG,
+    expectedGoalsAway: awayXG,
+    cleanSheetHome: Math.round(csHomeProb * 100),
+    cleanSheetAway: Math.round(csAwayProb * 100),
+    topCorrectScores: topScores
   };
 }

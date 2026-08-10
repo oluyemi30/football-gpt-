@@ -61,7 +61,25 @@ export const TEAMS: Record<string, Team> = {
   '45': { id: '45', name: 'Scotland', shortName: 'SCO', confederation: 'UEFA (Europe)', emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
   '46': { id: '46', name: 'Sweden', shortName: 'SWE', confederation: 'UEFA (Europe)', emoji: '🇸🇪' },
   '47': { id: '47', name: 'Switzerland', shortName: 'SUI', confederation: 'UEFA (Europe)', emoji: '🇨🇭' },
-  '48': { id: '48', name: 'Türkiye', shortName: 'TUR', confederation: 'UEFA (Europe)', emoji: '🇹🇷' }
+  '48': { id: '48', name: 'Türkiye', shortName: 'TUR', confederation: 'UEFA (Europe)', emoji: '🇹🇷' },
+
+  // Top Global Clubs
+  '49': { id: '49', name: 'Arsenal', shortName: 'ARS', confederation: 'UEFA (Europe)', emoji: '🔴' },
+  '50': { id: '50', name: 'Real Madrid', shortName: 'RMA', confederation: 'UEFA (Europe)', emoji: '👑' },
+  '51': { id: '51', name: 'Manchester City', shortName: 'MCI', confederation: 'UEFA (Europe)', emoji: '🩵' },
+  '52': { id: '52', name: 'Barcelona', shortName: 'BAR', confederation: 'UEFA (Europe)', emoji: '🔵🔴' },
+  '53': { id: '53', name: 'Bayern Munich', shortName: 'BAY', confederation: 'UEFA (Europe)', emoji: '🔴' },
+  '54': { id: '54', name: 'Paris Saint-Germain', shortName: 'PSG', confederation: 'UEFA (Europe)', emoji: '🔵🔴' },
+  '55': { id: '55', name: 'Liverpool', shortName: 'LIV', confederation: 'UEFA (Europe)', emoji: '🔴' },
+  '56': { id: '56', name: 'Inter Milan', shortName: 'INT', confederation: 'UEFA (Europe)', emoji: '⚫🔵' },
+  '57': { id: '57', name: 'Chelsea', shortName: 'CHE', confederation: 'UEFA (Europe)', emoji: '🔵' },
+  '58': { id: '58', name: 'Juventus', shortName: 'JUV', confederation: 'UEFA (Europe)', emoji: '⚪⚫' },
+  '59': { id: '59', name: 'Bayer Leverkusen', shortName: 'B04', confederation: 'UEFA (Europe)', emoji: '🔴⚫' },
+  '60': { id: '60', name: 'Borussia Dortmund', shortName: 'BVB', confederation: 'UEFA (Europe)', emoji: '🟡⚫' },
+  '61': { id: '61', name: 'Atletico Madrid', shortName: 'ATM', confederation: 'UEFA (Europe)', emoji: '🔴⚪' },
+  '62': { id: '62', name: 'Sporting CP', shortName: 'SCP', confederation: 'UEFA (Europe)', emoji: '🟢⚪' },
+  '63': { id: '63', name: 'Al Hilal', shortName: 'HIL', confederation: 'AFC (Asia)', emoji: '🔵' },
+  '64': { id: '64', name: 'Inter Miami', shortName: 'MIA', confederation: 'CONCACAF (North/Central America)', emoji: '🩷' }
 };
 
 interface DbSchema {
@@ -109,6 +127,17 @@ const defaultDb: DbSchema = {
     { id: 'f_3', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['5'], awayTeam: TEAMS['7'], league: 'FIFA World Cup', status: 'scheduled' },
     { id: 'f_4', date: new Date().toISOString().split('T')[0], time: '22:00', homeTeam: TEAMS['4'], awayTeam: TEAMS['9'], league: 'FIFA World Cup', status: 'scheduled' },
     { id: 'f_5', date: new Date().toISOString().split('T')[0], time: '23:30', homeTeam: TEAMS['8'], awayTeam: TEAMS['10'], league: 'FIFA World Cup', status: 'scheduled' },
+    
+    // Premier League
+    { id: 'f_pl_1', date: new Date().toISOString().split('T')[0], time: '16:30', homeTeam: TEAMS['49'], awayTeam: TEAMS['57'], league: 'Premier League', status: 'scheduled' },
+    { id: 'f_pl_2', date: new Date().toISOString().split('T')[0], time: '18:00', homeTeam: TEAMS['51'], awayTeam: TEAMS['55'], league: 'Premier League', status: 'scheduled' },
+
+    // UEFA Champions League
+    { id: 'f_cl_1', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['50'], awayTeam: TEAMS['53'], league: 'UEFA Champions League', status: 'scheduled' },
+    { id: 'f_cl_2', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['54'], awayTeam: TEAMS['56'], league: 'UEFA Champions League', status: 'scheduled' },
+
+    // La Liga
+    { id: 'f_pd_1', date: new Date().toISOString().split('T')[0], time: '21:00', homeTeam: TEAMS['52'], awayTeam: TEAMS['61'], league: 'La Liga', status: 'scheduled' },
   ],
   predictions: [
     {

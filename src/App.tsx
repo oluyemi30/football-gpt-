@@ -97,6 +97,10 @@ export default function App() {
   const [selectedTrendTeamId, setSelectedTrendTeamId] = useState<string>('1');
   const [wsStatus, setWsStatus] = useState<'connecting' | 'connected' | 'disconnected'>('disconnected');
 
+  // Global Search & Competition State
+  const [globalSearch, setGlobalSearch] = useState<string>('');
+  const [selectedLeagueFilter, setSelectedLeagueFilter] = useState<string>('ALL');
+
   // Logs terminal state (to trace daily scheduler actions)
   const [logs, setLogs] = useState<string[]>([
     "System bootstrap complete.",
@@ -193,13 +197,20 @@ export default function App() {
         setTgEnabled(config.enabled || false);
         setTgChatId(config.chatId || '');
       }
+    } catch (err) {
+      // Soft fall-through for optional background stats poll
+      console.warn("Telegram bot config unavailable:", err);
+    }
+
+    try {
       const logsRes = await fetch('/api/telegram/logs');
       if (logsRes.ok) {
         const logsData = await logsRes.json();
         setTgLogs(logsData || []);
       }
     } catch (err) {
-      console.error("Error loading Telegram Bot statistics", err);
+      // Soft fall-through for optional background logs poll
+      console.warn("Telegram bot logs unavailable:", err);
     }
   };
 
@@ -852,9 +863,36 @@ export default function App() {
 
 
   const filteredFixtures = fixtures.filter(f => {
-    if (fixtureFilter === 'all') return true;
-    if (fixtureFilter === 'scheduled') return f.status === 'scheduled';
-    if (fixtureFilter === 'finished') return f.status === 'finished';
+    // 1. Filter by status
+    if (fixtureFilter === 'scheduled' && f.status !== 'scheduled') return false;
+    if (fixtureFilter === 'finished' && f.status !== 'finished') return false;
+
+    // 2. Filter by league pill
+    if (selectedLeagueFilter !== 'ALL') {
+      const l = f.league.toLowerCase();
+      const code = selectedLeagueFilter.toLowerCase();
+      if (code === 'pl' && !l.includes('premier league') && !l.includes('pl')) return false;
+      if (code === 'cl' && !l.includes('champions league') && !l.includes('cl')) return false;
+      if (code === 'pd' && !l.includes('la liga') && !l.includes('pd')) return false;
+      if (code === 'sa' && !l.includes('serie a') && !l.includes('sa')) return false;
+      if (code === 'bl1' && !l.includes('bundesliga') && !l.includes('bl1')) return false;
+      if (code === 'fl1' && !l.includes('ligue 1') && !l.includes('fl1')) return false;
+      if (code === 'sau' && !l.includes('saudi') && !l.includes('sau')) return false;
+      if (code === 'mls' && !l.includes('mls') && !l.includes('major league')) return false;
+      if (code === 'wc' && !l.includes('world cup') && !l.includes('wc') && !l.includes('fifa')) return false;
+      if (code === 'euro' && !l.includes('euro')) return false;
+      if (code === 'afcon' && !l.includes('afcon') && !l.includes('africa')) return false;
+    }
+
+    // 3. Filter by search input query
+    if (globalSearch.trim()) {
+      const q = globalSearch.toLowerCase().trim();
+      const homeMatch = f.homeTeam.name.toLowerCase().includes(q) || f.homeTeam.shortName.toLowerCase().includes(q);
+      const awayMatch = f.awayTeam.name.toLowerCase().includes(q) || f.awayTeam.shortName.toLowerCase().includes(q);
+      const leagueMatch = f.league.toLowerCase().includes(q);
+      if (!homeMatch && !awayMatch && !leagueMatch) return false;
+    }
+
     return true;
   });
 
@@ -877,8 +915,8 @@ export default function App() {
       )}
 
       {/* HEADER SECTION - Geometric Balance style with custom v2.4.0 banner */}
-      <header id="main-header" className="h-16 shrink-0 flex items-center justify-between px-6 border-b border-[#30363D] bg-[#0D1117] transition-all">
-        <div className="flex items-center gap-4">
+      <header id="main-header" className="h-16 shrink-0 flex items-center justify-between px-6 border-b border-[#30363D] bg-[#0D1117] transition-all gap-4">
+        <div className="flex items-center gap-4 shrink-0">
           <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-600 rounded flex items-center justify-center font-black text-black text-xs italic tracking-wider shadow-lg">
             GPT
           </div>
@@ -886,15 +924,35 @@ export default function App() {
             <h1 className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5 uppercase font-mono">
               FOOTBALL<span className="text-slate-400 font-light">GPT</span>
             </h1>
-            <span className="text-[9px] text-[#58A6FF] font-semibold tracking-widest uppercase font-mono">Predictive Matrix</span>
+            <span className="text-[9px] text-[#58A6FF] font-semibold tracking-widest uppercase font-mono">Global Intelligence</span>
           </div>
           <div className="hidden sm:inline-block px-2 py-0.5 rounded border border-green-900 bg-green-950/40 text-[9px] font-mono text-[#3FB950] uppercase tracking-widest">
-            Engine v2.4.0 (XGBoost)
+            v2.4.0 Global Engine
           </div>
         </div>
 
+        {/* Global Live Search input */}
+        <div className="flex-1 max-w-xs relative hidden md:block">
+          <input
+            id="global-search-input"
+            type="text"
+            placeholder="Search teams, competitions, matches..."
+            value={globalSearch}
+            onChange={(e) => setGlobalSearch(e.target.value)}
+            className="w-full bg-[#161B22] border border-[#30363D] rounded px-3 py-1.5 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:border-[#58A6FF]"
+          />
+          {globalSearch && (
+            <button
+              onClick={() => setGlobalSearch('')}
+              className="absolute right-2 top-1.5 text-slate-500 hover:text-white text-xs font-mono"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
         {/* Live sync indicators */}
-        <div className="flex items-center gap-6 font-mono text-[11px]">
+        <div className="flex items-center gap-6 font-mono text-[11px] shrink-0">
           <div className="hidden md:flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${wsStatus === 'connected' ? 'bg-green-500 animate-pulse' : wsStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' : 'bg-red-500 animate-bounce'}`}></span>
             <span className="opacity-70 uppercase tracking-wider text-slate-300">Telemetry:</span>
@@ -908,6 +966,38 @@ export default function App() {
           </div>
         </div>
       </header>
+
+      {/* COMPETITION SELECTION PILLS BAR */}
+      <div id="competition-pills-bar" className="bg-[#161B22]/80 border-b border-[#30363D] px-6 py-2 flex items-center gap-2 overflow-x-auto custom-scrollbar text-xs font-mono shrink-0">
+        <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold shrink-0 mr-2">LEAGUES:</span>
+        {[
+          { code: 'ALL', name: '🌍 All Global' },
+          { code: 'PL', name: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League' },
+          { code: 'CL', name: '🇪🇺 Champions League' },
+          { code: 'PD', name: '🇪🇸 La Liga' },
+          { code: 'SA', name: '🇮🇹 Serie A' },
+          { code: 'BL1', name: '🇩🇪 Bundesliga' },
+          { code: 'FL1', name: '🇫🇷 Ligue 1' },
+          { code: 'SAU', name: '🇸🇦 Saudi Pro League' },
+          { code: 'MLS', name: '🇺🇸 MLS' },
+          { code: 'WC', name: '🏆 World Cup' },
+          { code: 'EURO', name: '🇪🇺 Euro' },
+          { code: 'AFCON', name: '🌍 AFCON' }
+        ].map(comp => (
+          <button
+            key={comp.code}
+            id={`comp-pill-${comp.code}`}
+            onClick={() => setSelectedLeagueFilter(comp.code)}
+            className={`px-3 py-1 rounded-full whitespace-nowrap text-[11px] font-semibold transition-all border shrink-0 ${
+              selectedLeagueFilter === comp.code
+                ? 'bg-[#58A6FF] text-black border-[#58A6FF] shadow-sm'
+                : 'bg-[#0D1117] text-slate-300 border-[#30363D] hover:border-[#58A6FF]/60 hover:text-white'
+            }`}
+          >
+            {comp.name}
+          </button>
+        ))}
+      </div>
 
       {/* THREE-COLUMN GRID CONTAINER */}
       <main id="dashboard-layout" className="flex-grow grid grid-cols-12 lg:overflow-hidden bg-[#0A0B0E]">
@@ -1231,6 +1321,73 @@ export default function App() {
                     </div>
                   </div>
                 </div>
+
+                {/* ADVANCED MATCH MARKETS (Over/Under 2.5, BTTS, Expected Goals xG, Correct Score Matrix) */}
+                {activePrediction.prediction.over25Goals !== undefined && (
+                  <div id="advanced-markets-grid" className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    {/* Goals & BTTS Market Card */}
+                    <div className="bg-[#161B22] p-5 rounded border border-[#30363D] flex flex-col justify-between">
+                      <div className="flex items-center justify-between mb-3 border-b border-[#30363D]/60 pb-2">
+                        <span className="text-[10px] font-mono text-[#58A6FF] uppercase font-bold tracking-widest">⚽ GOALS & BTTS MARKETS</span>
+                        <span className="text-[9px] font-mono text-slate-400">POISSON XG MODEL</span>
+                      </div>
+
+                      {/* xG Row */}
+                      <div className="flex items-center justify-between text-xs font-mono mb-3 bg-[#0D1117] p-2 rounded border border-[#30363D]/50">
+                        <span className="text-slate-400">Expected Goals (xG):</span>
+                        <div className="font-bold flex items-center gap-2">
+                          <span className="text-[#3FB950]">{selectedFixture.homeTeam.shortName} {activePrediction.prediction.expectedGoalsHome}</span>
+                          <span className="text-slate-500">-</span>
+                          <span className="text-[#F85149]">{activePrediction.prediction.expectedGoalsAway} {selectedFixture.awayTeam.shortName}</span>
+                        </div>
+                      </div>
+
+                      {/* Over / Under 2.5 Goals */}
+                      <div className="space-y-1.5 mb-3">
+                        <div className="flex justify-between text-xs font-mono">
+                          <span className="text-slate-300">Over 2.5 Goals:</span>
+                          <span className="font-bold text-yellow-400">{activePrediction.prediction.over25Goals}%</span>
+                        </div>
+                        <div className="w-full bg-[#0D1117] h-1.5 rounded-full overflow-hidden">
+                          <div className="bg-yellow-400 h-full rounded-full" style={{ width: `${activePrediction.prediction.over25Goals}%` }}></div>
+                        </div>
+                      </div>
+
+                      {/* Both Teams To Score */}
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between text-xs font-mono">
+                          <span className="text-slate-300">Both Teams To Score (BTTS):</span>
+                          <span className="font-bold text-cyan-400">Yes {activePrediction.prediction.bttsYes}% / No {activePrediction.prediction.bttsNo}%</span>
+                        </div>
+                        <div className="w-full bg-[#0D1117] h-1.5 rounded-full overflow-hidden flex">
+                          <div className="bg-cyan-400 h-full" style={{ width: `${activePrediction.prediction.bttsYes}%` }}></div>
+                          <div className="bg-slate-600 h-full" style={{ width: `${activePrediction.prediction.bttsNo}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Top Correct Score Probabilities */}
+                    <div className="bg-[#161B22] p-5 rounded border border-[#30363D] flex flex-col justify-between">
+                      <div className="flex items-center justify-between mb-3 border-b border-[#30363D]/60 pb-2">
+                        <span className="text-[10px] font-mono text-[#58A6FF] uppercase font-bold tracking-widest">🎯 TOP CORRECT SCORES</span>
+                        <span className="text-[9px] font-mono text-slate-400">MOST PROBABLE</span>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2 my-auto">
+                        {activePrediction.prediction.topCorrectScores?.map((cs, idx) => (
+                          <div key={idx} className="bg-[#0D1117] border border-[#30363D] p-2.5 rounded text-center font-mono">
+                            <div className="text-sm font-bold text-white mb-0.5">{cs.score}</div>
+                            <div className="text-[10px] text-[#3FB950] font-semibold">{cs.probability}%</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="text-[9px] font-mono text-slate-500 text-center mt-2">
+                        Calculated using 5x5 Poisson goal distribution matrix
+                      </div>
+                    </div>
+                  </div>
+                )}
                 
                 {/* Shareable graphic download CTA */}
                 <button

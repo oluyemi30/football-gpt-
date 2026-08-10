@@ -85,12 +85,23 @@ export function generateLocalFallbackAnalysis(
     }
   }
 
-  const analysis: FootballGptAnalysis = {
-    prediction,
-    confidence,
-    reasoning,
-    keyInsight
-  };
+    if (prediction.over25Goals) {
+      reasoning.push(`Model projects an Over 2.5 Goals probability of ${prediction.over25Goals}% with expected goals of ${prediction.expectedGoalsHome || 1.5} (${homeTeam.name}) to ${prediction.expectedGoalsAway || 1.2} (${awayTeam.name}).`);
+    }
+
+    if (prediction.bttsYes) {
+      reasoning.push(`Both Teams To Score (BTTS) likelihood is calculated at ${prediction.bttsYes}%.`);
+    }
+
+    const analysis: FootballGptAnalysis = {
+      prediction,
+      confidence,
+      reasoning,
+      keyInsight,
+      tacticalStrengths: [`High pressing transition`, `Explosive wing play`],
+      tacticalWeaknesses: [`Defensive set-piece vulnerability`, `Midfield transition gaps`],
+      expectedTempo: prediction.over25Goals && prediction.over25Goals > 55 ? 'High' : 'Moderate'
+    };
 
   const socialPack: SocialMediaPack = generateSocialMediaPackLocally(homeTeam, awayTeam, prediction, keyInsight);
 
@@ -202,7 +213,7 @@ ${isWorldCup ? "Note that because this is a neutral territory FIFA World Cup mat
     }
   };
 
-  const modelsToTry = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
+  const modelsToTry = ["gemini-2.5-flash", "gemini-2.0-flash"];
   let lastError: any = null;
   let responseText = "";
 

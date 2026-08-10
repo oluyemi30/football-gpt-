@@ -114,6 +114,17 @@ async function handlePredict(homeId: string, awayId: string, leagueName = 'FIFA 
   console.log(`${bold}Draw:`.padEnd(22), drawProgressBar(prob.draw, yellow));
   console.log(`${bold}${awayTeam.name} Win:`.padEnd(22), drawProgressBar(prob.awayWin, blue));
   
+  if (prob.over25Goals) {
+    console.log(`\n${bold}${yellow}--- ADDITIONAL MATCH MARKETS ---${reset}`);
+    console.log(` • Expected Goals (xG):  ${homeTeam.shortName} (${prob.expectedGoalsHome}) - (${prob.expectedGoalsAway}) ${awayTeam.shortName}`);
+    console.log(` • Over 2.5 Goals:        ${prob.over25Goals}% (Under: ${prob.under25Goals}%)`);
+    console.log(` • Both Teams To Score:   Yes (${prob.bttsYes}%) / No (${prob.bttsNo}%)`);
+    if (prob.topCorrectScores && prob.topCorrectScores.length > 0) {
+      const topStr = prob.topCorrectScores.map(s => `${s.score} (${s.probability}%)`).join(' | ');
+      console.log(` • Top Correct Scores:    ${topStr}`);
+    }
+  }
+  
   console.log(`\n${dim}------------------------------------------------------------${reset}`);
   console.log(`${bold}System Status: ${green}Calculation complete.${reset}`);
   

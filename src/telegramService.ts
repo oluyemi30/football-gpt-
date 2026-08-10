@@ -262,6 +262,61 @@ export async function processTelegramMessage(text: string, username_sender: stri
     };
   }
 
+  // 3.5 STANDINGS Command
+  const standingsMatch = cleanText.match(/^\/(standings|table)(\s+(.+))?$/i);
+  if (standingsMatch) {
+    const db = readDb();
+    const query = standingsMatch[3] ? standingsMatch[3].trim().toLowerCase() : '';
+    let filteredStandings = db.standings;
+
+    if (query) {
+      filteredStandings = db.standings.filter(s => 
+        s.teamName.toLowerCase().includes(query)
+      );
+    }
+
+    if (filteredStandings.length === 0) {
+      return {
+        replyText: `📊 <b>Standings query for "${escapeHtml(query)}" yielded no results.</b>\nTry typing <code>/standings</code> to see global leaderboard.`
+      };
+    }
+
+    let standingsMsg = `📊 <b>FOOTBALLGPT LEAGUE STANDINGS</b> 📊\n` +
+                       `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                       `<b>#  Team              P  W  D  L  Pts  Form</b>\n`;
+    
+    filteredStandings.slice(0, 10).forEach(s => {
+      const namePad = (s.teamName.length > 12 ? s.teamName.slice(0, 10) + '..' : s.teamName).padEnd(12, ' ');
+      standingsMsg += `<b>${s.rank.toString().padStart(2, ' ')}</b> ${escapeHtml(namePad)} ${s.played}  ${s.won}  ${s.drawn}  ${s.lost}   <b>${s.points}</b>   <code>${s.form || '-'}</code>\n`;
+    });
+
+    addTelegramLog('response', `[Sent standings response for "${query}"]`);
+    return { replyText: standingsMsg };
+  }
+
+  // 3.6 TEAM Command
+  const teamMatch = cleanText.match(/^\/team\s+(.+)$/i);
+  if (teamMatch) {
+    const query = teamMatch[1].trim();
+    const matched = matchTeamByName(query);
+
+    if (!matched) {
+      return {
+        replyText: `⚠️ <b>Team not found!</b> Could not resolve team profile for "${escapeHtml(query)}".`
+      };
+    }
+
+    const teamMsg = `🛡️ <b>TEAM PROFILE: ${escapeHtml(matched.name)}</b> (${escapeHtml(matched.shortName)})\n` +
+                    `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                    `<b>Region/Confederation:</b> ${escapeHtml(matched.confederation || 'Global')}\n` +
+                    `<b>Emoji Badge:</b> ${matched.emoji || '⚽'}\n\n` +
+                    `👉 <i>Predict a match for this team:</i>\n` +
+                    `<code>/predict ${escapeHtml(matched.name)} vs France</code>`;
+
+    addTelegramLog('response', `[Sent team profile for ${matched.name}]`);
+    return { replyText: teamMsg };
+  }
+
   // 4. PREDICT & ANALYSIS commands
   const predictMatch = cleanText.match(/^\/(predict|analysis)\s+(.+)$/i);
   if (predictMatch) {

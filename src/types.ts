@@ -63,21 +63,35 @@ export interface MatchFixture {
   };
 }
 
+export interface CorrectScoreProb {
+  score: string; // e.g. "2-1"
+  probability: number; // percentage e.g. 18
+}
+
 export interface PredictionResult {
   homeWin: number; // percentage e.g. 52
   draw: number; // percentage e.g. 25
   awayWin: number; // percentage e.g. 23
+  over25Goals?: number; // percentage e.g. 64
+  under25Goals?: number; // percentage e.g. 36
+  bttsYes?: number; // Both Teams To Score Yes % e.g. 58
+  bttsNo?: number; // Both Teams To Score No % e.g. 42
+  expectedGoalsHome?: number; // xG Home e.g. 1.85
+  expectedGoalsAway?: number; // xG Away e.g. 1.15
+  cleanSheetHome?: number; // percentage e.g. 38
+  cleanSheetAway?: number; // percentage e.g. 22
+  topCorrectScores?: CorrectScoreProb[];
 }
 
 export interface FootballGptAnalysis {
-  prediction: {
-    homeWin: number;
-    draw: number;
-    awayWin: number;
-  };
+  prediction: PredictionResult;
   confidence: 'high' | 'medium' | 'low';
   reasoning: string[];
   keyInsight?: string;
+  tacticalStrengths?: string[];
+  tacticalWeaknesses?: string[];
+  importantPlayers?: string[];
+  expectedTempo?: 'High' | 'Moderate' | 'Tactical/Cautious';
 }
 
 export interface SocialMediaPack {

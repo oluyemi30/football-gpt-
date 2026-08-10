@@ -7,14 +7,27 @@ const BASE_URL = 'https://v3.football.api-sports.io';
 
 // Map our local UI league codes to API-Football league IDs
 const LEAGUE_ID_MAP: Record<string, number> = {
-  'PL': 39,   // Premier League
-  'PD': 140,  // La Liga
-  'SA': 135,  // Serie A
-  'BL1': 78,  // Bundesliga
-  'FL1': 61,  // Ligue 1
-  'CL': 2,    // Champions League
-  'FIFA': 1,  // FIFA World Cup
-  'WC': 1     // World Cup
+  'PL': 39,     // Premier League
+  'PD': 140,    // La Liga
+  'SA': 135,    // Serie A
+  'BL1': 78,    // Bundesliga
+  'FL1': 61,    // Ligue 1
+  'CL': 2,      // UEFA Champions League
+  'EL': 3,      // UEFA Europa League
+  'ECL': 848,   // UEFA Conference League
+  'DED': 88,    // Eredivisie
+  'PPL': 94,    // Primeira Liga
+  'TSL': 203,   // Süper Lig
+  'SP': 179,    // Scottish Premiership
+  'MLS': 253,   // MLS
+  'BSA': 71,    // Brasileirão
+  'SAU': 307,   // Saudi Pro League
+  'FIFA': 1,    // FIFA World Cup
+  'WC': 1,      // World Cup
+  'EURO': 4,    // Euro
+  'CA': 9,      // Copa America
+  'AFCON': 6,   // AFCON
+  'ASIAN': 7    // Asian Cup
 };
 
 // Map league UI code to human-readable name in case search falls back
@@ -24,9 +37,22 @@ const LEAGUE_NAME_MAP: Record<string, string> = {
   'SA': 'Serie A',
   'BL1': 'Bundesliga',
   'FL1': 'Ligue 1',
-  'CL': 'Champions League',
+  'CL': 'UEFA Champions League',
+  'EL': 'UEFA Europa League',
+  'ECL': 'UEFA Conference League',
+  'DED': 'Eredivisie',
+  'PPL': 'Primeira Liga',
+  'TSL': 'Süper Lig',
+  'SP': 'Scottish Premiership',
+  'MLS': 'Major League Soccer',
+  'BSA': 'Brasileirão',
+  'SAU': 'Saudi Pro League',
   'FIFA': 'FIFA World Cup',
-  'WC': 'World Cup'
+  'WC': 'FIFA World Cup',
+  'EURO': 'UEFA Euro',
+  'CA': 'Copa América',
+  'AFCON': 'Africa Cup of Nations',
+  'ASIAN': 'AFC Asian Cup'
 };
 
 /**

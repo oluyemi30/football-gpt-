@@ -1,5 +1,6 @@
 import { readDb, saveDb, TEAMS } from './db';
 import { MatchFixture, TeamStats, HeadToHead, Standing } from './types';
+import { GLOBAL_COMPETITIONS } from './competitions';
 
 export function getTodayMatches(): MatchFixture[] {
   const db = readDb();
@@ -46,6 +47,42 @@ export function getHeadToHead(teamA: string, teamB: string): HeadToHead {
 export function getAllStandings(): Standing[] {
   const db = readDb();
   return db.standings;
+}
+
+export function searchGlobal(query: string) {
+  const q = query.trim().toLowerCase();
+  if (!q) return { teams: [], competitions: [], matches: [] };
+
+  const db = readDb();
+  
+  // Search Teams
+  const allTeams = Object.values(TEAMS);
+  const matchedTeams = allTeams.filter(t => 
+    t.name.toLowerCase().includes(q) || 
+    t.shortName.toLowerCase().includes(q) ||
+    (t.confederation && t.confederation.toLowerCase().includes(q))
+  ).slice(0, 10);
+
+  // Search Competitions
+  const matchedCompetitions = GLOBAL_COMPETITIONS.filter(c => 
+    c.name.toLowerCase().includes(q) ||
+    c.code.toLowerCase().includes(q) ||
+    c.country.toLowerCase().includes(q)
+  );
+
+  // Search Matches/Fixtures
+  const matchedMatches = db.fixtures.filter(f => 
+    f.homeTeam.name.toLowerCase().includes(q) ||
+    f.awayTeam.name.toLowerCase().includes(q) ||
+    f.league.toLowerCase().includes(q) ||
+    f.id.toLowerCase() === q
+  ).slice(0, 10);
+
+  return {
+    teams: matchedTeams,
+    competitions: matchedCompetitions,
+    matches: matchedMatches
+  };
 }
 
 export function createNewFixture(homeId: string, awayId: string, league: string, time: string): MatchFixture {

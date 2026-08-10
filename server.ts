@@ -6,7 +6,8 @@ import { WebSocketServer, WebSocket } from 'ws';
 
 // Import our DB and service layers
 import { readDb, saveDb, getAccuracyMetrics, TEAMS } from './src/db.js';
-import { getTodayMatches, getTeamStats, getHeadToHead, createNewFixture } from './src/dataService.js';
+import { getTodayMatches, getTeamStats, getHeadToHead, createNewFixture, searchGlobal } from './src/dataService.js';
+import { GLOBAL_COMPETITIONS, getCompetitionByCode } from './src/competitions.js';
 import { calculatePrediction } from './src/predictor.js';
 import { generateFootballGptAnalysis } from './src/footballGptService.js';
 import { SavedPrediction } from './src/types.js';
@@ -57,9 +58,71 @@ app.get('/api/fixtures', (req: Request, res: Response) => {
   }
 });
 
-// 2. Get All Teams (for creating custom fixtures)
+// 2.5 Get Global Competitions
+app.get('/api/competitions', (req: Request, res: Response) => {
+  res.json(GLOBAL_COMPETITIONS);
+});
+
+// 2.55 Get All Teams
 app.get('/api/teams', (req: Request, res: Response) => {
   res.json(Object.values(TEAMS));
+});
+
+// 2.6 Get Single Competition Details (Standings + Fixtures + Stats)
+app.get('/api/competitions/:id', (req: Request, res: Response) => {
+  const comp = getCompetitionByCode(req.params.id);
+  if (!comp) {
+    res.status(404).json({ error: 'Competition not found' });
+    return;
+  }
+  const db = readDb();
+  const compFixtures = db.fixtures.filter(f => 
+    f.league.toLowerCase() === comp.name.toLowerCase() ||
+    f.league.toLowerCase() === comp.code.toLowerCase() ||
+    f.league.toLowerCase().includes(comp.name.toLowerCase())
+  );
+  
+  res.json({
+    competition: comp,
+    fixtures: compFixtures,
+    standings: db.standings,
+    totalMatches: compFixtures.length
+  });
+});
+
+// 2.7 Global Search (Teams, Competitions, Matches)
+app.get('/api/search', (req: Request, res: Response) => {
+  const q = req.query.q as string || '';
+  const results = searchGlobal(q);
+  res.json(results);
+});
+
+// 2.8 Daily Content Generator (Generates daily AI content package for top matches)
+app.post('/api/daily-content', async (req: Request, res: Response) => {
+  try {
+    const db = readDb();
+    const todayMatches = db.fixtures.slice(0, 3);
+    const contentPacks = [];
+
+    for (const fixture of todayMatches) {
+      const prediction = calculatePrediction(fixture.homeTeam.id, fixture.awayTeam.id, fixture.league);
+      const analysisWrapper = await generateFootballGptAnalysis(fixture.homeTeam, fixture.awayTeam, prediction, fixture.league);
+      contentPacks.push({
+        fixture,
+        prediction,
+        analysis: analysisWrapper.analysis,
+        socialPack: analysisWrapper.socialPack
+      });
+    }
+
+    res.json({
+      date: new Date().toISOString().split('T')[0],
+      title: "Today's Top AI Football Predictions & Tactical Intelligence",
+      packs: contentPacks
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 3. Get All Standings
