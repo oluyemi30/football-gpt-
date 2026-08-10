@@ -462,6 +462,24 @@ app.get('/api/telegram/logs', (req: Request, res: Response) => {
   res.json(getTelegramLogs());
 });
 
+// 3.5 Fetch Telegram Bot statistics summary
+app.get('/api/telegram/stats', (req: Request, res: Response) => {
+  try {
+    const config = getTelegramConfig();
+    const logs = getTelegramLogs();
+    const metrics = getAccuracyMetrics();
+    res.json({
+      enabled: config.enabled,
+      tokenConfigured: !!config.token,
+      logsCount: logs.length,
+      accuracyRate: metrics.accuracyRate,
+      totalForecasts: metrics.resolvedCount
+    });
+  } catch (err: any) {
+    res.json({ enabled: false, tokenConfigured: false, logsCount: 0, accuracyRate: 0, totalForecasts: 0 });
+  }
+});
+
 // 4. Manual client simulation for instant testing of message actions
 app.post('/api/telegram/simulate', async (req: Request, res: Response) => {
   try {

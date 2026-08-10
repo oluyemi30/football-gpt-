@@ -197,9 +197,8 @@ export default function App() {
         setTgEnabled(config.enabled || false);
         setTgChatId(config.chatId || '');
       }
-    } catch (err) {
-      // Soft fall-through for optional background stats poll
-      console.warn("Telegram bot config unavailable:", err);
+    } catch {
+      // Soft fall-through for background polls during server restart
     }
 
     try {
@@ -208,9 +207,14 @@ export default function App() {
         const logsData = await logsRes.json();
         setTgLogs(logsData || []);
       }
-    } catch (err) {
-      // Soft fall-through for optional background logs poll
-      console.warn("Telegram bot logs unavailable:", err);
+    } catch {
+      // Soft fall-through for background polls during server restart
+    }
+
+    try {
+      await fetch('/api/telegram/stats');
+    } catch {
+      // Soft fall-through for background polls during server restart
     }
   };
 
