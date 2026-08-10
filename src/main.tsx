@@ -14,13 +14,12 @@ if (typeof window !== 'undefined') {
     'MetaMask',
     'ethereum',
     'Could not establish connection',
-    'Receiving end does not exist'
+    'Receiving end does not exist',
+    'extension'
   ];
 
-  // Suppress console.error noise from browser extensions (e.g., MetaMask)
-  const originalConsoleError = console.error;
-  console.error = (...args: any[]) => {
-    const errorStr = args.map(arg => {
+  const filterArgs = (args: any[]) => {
+    return args.map(arg => {
       if (arg instanceof Error) {
         return arg.message + ' ' + arg.stack;
       }
@@ -33,30 +32,51 @@ if (typeof window !== 'undefined') {
       }
       return String(arg);
     }).join(' ');
+  };
 
+  // Suppress console.error & console.warn noise from browser extensions (e.g., MetaMask)
+  const originalConsoleError = console.error;
+  console.error = (...args: any[]) => {
+    const errorStr = filterArgs(args);
     if (ignorePatterns.some(pat => errorStr.toLowerCase().includes(pat.toLowerCase()))) {
-      // Quietly ignore MetaMask or browser extension error noise
       return;
     }
     originalConsoleError(...args);
   };
 
+  const originalConsoleWarn = console.warn;
+  console.warn = (...args: any[]) => {
+    const errorStr = filterArgs(args);
+    if (ignorePatterns.some(pat => errorStr.toLowerCase().includes(pat.toLowerCase()))) {
+      return;
+    }
+    originalConsoleWarn(...args);
+  };
+
   window.addEventListener('error', (event) => {
-    const errorMsg = event.message || (event.error && event.error.message) || '';
+    const errorMsg = event.message || (event.error && event.error.message) || String(event);
     if (ignorePatterns.some(pat => errorMsg.toLowerCase().includes(pat.toLowerCase()))) {
       event.stopImmediatePropagation();
       event.preventDefault();
     }
-  });
+  }, true);
 
   window.addEventListener('unhandledrejection', (event) => {
     const reason = event.reason;
-    const errorMsg = typeof reason === 'string' ? reason : (reason && reason.message) || '';
+    let errorMsg = '';
+    if (typeof reason === 'string') {
+      errorMsg = reason;
+    } else if (reason && typeof reason === 'object') {
+      errorMsg = (reason.message || '') + ' ' + (reason.stack || '') + ' ' + JSON.stringify(reason);
+    } else {
+      errorMsg = String(reason || '');
+    }
+
     if (ignorePatterns.some(pat => errorMsg.toLowerCase().includes(pat.toLowerCase()))) {
       event.stopImmediatePropagation();
       event.preventDefault();
     }
-  });
+  }, true);
 }
 
 createRoot(document.getElementById('root')!).render(
