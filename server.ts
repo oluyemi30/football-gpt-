@@ -684,16 +684,20 @@ app.get('/api/telegram/card/pnl', (req: Request, res: Response) => {
 app.get('/api/telegram/card/prediction/:homeId/:awayId', (req: Request, res: Response) => {
   try {
     const { homeId, awayId } = req.params;
-    const homeTeam = TEAMS[homeId];
-    const awayTeam = TEAMS[awayId];
-    if (!homeTeam || !awayTeam) {
-      res.status(404).send('One or both teams not found.');
-      return;
+    let homeTeam = TEAMS[homeId] || Object.values(TEAMS).find(t => t.shortName.toLowerCase() === homeId.toLowerCase() || t.name.toLowerCase() === homeId.toLowerCase());
+    let awayTeam = TEAMS[awayId] || Object.values(TEAMS).find(t => t.shortName.toLowerCase() === awayId.toLowerCase() || t.name.toLowerCase() === awayId.toLowerCase());
+    
+    if (!homeTeam) {
+      homeTeam = { id: homeId, name: homeId, shortName: homeId.slice(0, 3).toUpperCase(), confederation: 'Global', emoji: '⚽' };
     }
-    const prob = calculatePrediction(homeId, awayId, 'FIFA World Cup');
+    if (!awayTeam) {
+      awayTeam = { id: awayId, name: awayId, shortName: awayId.slice(0, 3).toUpperCase(), confederation: 'Global', emoji: '⚽' };
+    }
+    
+    const prob = calculatePrediction(homeTeam.id, awayTeam.id, 'Football Match');
     const svgCode = generatePredictionCardSvg(homeTeam, awayTeam, prob);
     res.setHeader('Content-Type', 'image/svg+xml');
-    res.setHeader('Content-Disposition', `attachment; filename="prediction_${homeId}_vs_${awayId}.svg"`);
+    res.setHeader('Content-Disposition', `attachment; filename="prediction_${homeTeam.shortName}_vs_${awayTeam.shortName}.svg"`);
     res.send(svgCode);
   } catch (err: any) {
     res.status(500).json({ error: err.message });

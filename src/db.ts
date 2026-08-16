@@ -79,7 +79,40 @@ export const TEAMS: Record<string, Team> = {
   '61': { id: '61', name: 'Atletico Madrid', shortName: 'ATM', confederation: 'UEFA (Europe)', emoji: '🔴⚪' },
   '62': { id: '62', name: 'Sporting CP', shortName: 'SCP', confederation: 'UEFA (Europe)', emoji: '🟢⚪' },
   '63': { id: '63', name: 'Al Hilal', shortName: 'HIL', confederation: 'AFC (Asia)', emoji: '🔵' },
-  '64': { id: '64', name: 'Inter Miami', shortName: 'MIA', confederation: 'CONCACAF (North/Central America)', emoji: '🩷' }
+  '64': { id: '64', name: 'Inter Miami', shortName: 'MIA', confederation: 'CONCACAF (North/Central America)', emoji: '🩷' },
+  '65': { id: '65', name: 'Manchester United', shortName: 'MUN', confederation: 'UEFA (Europe)', emoji: '🔴' },
+  '66': { id: '66', name: 'Tottenham Hotspur', shortName: 'TOT', confederation: 'UEFA (Europe)', emoji: '⚪' },
+  '67': { id: '67', name: 'Newcastle United', shortName: 'NEW', confederation: 'UEFA (Europe)', emoji: '⚫⚪' },
+  '68': { id: '68', name: 'Aston Villa', shortName: 'AVL', confederation: 'UEFA (Europe)', emoji: '🟣🔵' },
+  '69': { id: '69', name: 'Brighton & Hove Albion', shortName: 'BHA', confederation: 'UEFA (Europe)', emoji: '🔵⚪' },
+  '70': { id: '70', name: 'West Ham United', shortName: 'WHU', confederation: 'UEFA (Europe)', emoji: '⚒️' },
+  '71': { id: '71', name: 'Everton', shortName: 'EVE', confederation: 'UEFA (Europe)', emoji: '🔵' },
+  '72': { id: '72', name: 'Real Sociedad', shortName: 'RSO', confederation: 'UEFA (Europe)', emoji: '🔵⚪' },
+  '73': { id: '73', name: 'Athletic Bilbao', shortName: 'ATH', confederation: 'UEFA (Europe)', emoji: '🔴⚪' },
+  '74': { id: '74', name: 'Real Betis', shortName: 'BET', confederation: 'UEFA (Europe)', emoji: '🟢⚪' },
+  '75': { id: '75', name: 'Girona', shortName: 'GIR', confederation: 'UEFA (Europe)', emoji: '🔴⚪' },
+  '76': { id: '76', name: 'Sevilla', shortName: 'SEV', confederation: 'UEFA (Europe)', emoji: '⚪🔴' },
+  '77': { id: '77', name: 'AC Milan', shortName: 'MIL', confederation: 'UEFA (Europe)', emoji: '🔴⚫' },
+  '78': { id: '78', name: 'Napoli', shortName: 'NAP', confederation: 'UEFA (Europe)', emoji: '🔵' },
+  '79': { id: '79', name: 'AS Roma', shortName: 'ROM', confederation: 'UEFA (Europe)', emoji: '🟡🔴' },
+  '80': { id: '80', name: 'Lazio', shortName: 'LAZ', confederation: 'UEFA (Europe)', emoji: '🦅' },
+  '81': { id: '81', name: 'Atalanta', shortName: 'ATA', confederation: 'UEFA (Europe)', emoji: '⚫🔵' },
+  '82': { id: '82', name: 'RB Leipzig', shortName: 'RBL', confederation: 'UEFA (Europe)', emoji: '⚪🔴' },
+  '83': { id: '83', name: 'Eintracht Frankfurt', shortName: 'SGE', confederation: 'UEFA (Europe)', emoji: '🦅' },
+  '84': { id: '84', name: 'VfB Stuttgart', shortName: 'VFB', confederation: 'UEFA (Europe)', emoji: '⚪🔴' },
+  '85': { id: '85', name: 'AS Monaco', shortName: 'ASM', confederation: 'UEFA (Europe)', emoji: '⚪🔴' },
+  '86': { id: '86', name: 'Olympique Marseille', shortName: 'OM', confederation: 'UEFA (Europe)', emoji: '⚪🔵' },
+  '87': { id: '87', name: 'Olympique Lyon', shortName: 'OL', confederation: 'UEFA (Europe)', emoji: '🔵🔴' },
+  '88': { id: '88', name: 'Al Nassr', shortName: 'NAS', confederation: 'AFC (Asia)', emoji: '🟡🔵' },
+  '89': { id: '89', name: 'Al Ittihad', shortName: 'ITH', confederation: 'AFC (Asia)', emoji: '🟡⚫' },
+  '90': { id: '90', name: 'Al Ahli', shortName: 'AHL', confederation: 'AFC (Asia)', emoji: '🟢⚪' },
+  '91': { id: '91', name: 'Los Angeles FC', shortName: 'LAFC', confederation: 'CONCACAF (North/Central America)', emoji: '🖤💛' },
+  '92': { id: '92', name: 'LA Galaxy', shortName: 'LAG', confederation: 'CONCACAF (North/Central America)', emoji: '🔵⚪' },
+  '93': { id: '93', name: 'Italy', shortName: 'ITA', confederation: 'UEFA (Europe)', emoji: '🇮🇹' },
+  '94': { id: '94', name: 'Nigeria', shortName: 'NGA', confederation: 'CAF (Africa)', emoji: '🇳🇬' },
+  '95': { id: '95', name: 'Poland', shortName: 'POL', confederation: 'UEFA (Europe)', emoji: '🇵🇱' },
+  '96': { id: '96', name: 'Denmark', shortName: 'DEN', confederation: 'UEFA (Europe)', emoji: '🇩🇰' },
+  '97': { id: '97', name: 'Chile', shortName: 'CHI', confederation: 'CONMEBOL (South America)', emoji: '🇨🇱' }
 };
 
 interface DbSchema {
@@ -131,13 +164,40 @@ const defaultDb: DbSchema = {
     // Premier League
     { id: 'f_pl_1', date: new Date().toISOString().split('T')[0], time: '16:30', homeTeam: TEAMS['49'], awayTeam: TEAMS['57'], league: 'Premier League', status: 'scheduled' },
     { id: 'f_pl_2', date: new Date().toISOString().split('T')[0], time: '18:00', homeTeam: TEAMS['51'], awayTeam: TEAMS['55'], league: 'Premier League', status: 'scheduled' },
+    { id: 'f_pl_3', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['65'], awayTeam: TEAMS['66'], league: 'Premier League', status: 'scheduled' },
+    { id: 'f_pl_4', date: new Date().toISOString().split('T')[0], time: '15:00', homeTeam: TEAMS['68'], awayTeam: TEAMS['67'], league: 'Premier League', status: 'scheduled' },
 
     // UEFA Champions League
     { id: 'f_cl_1', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['50'], awayTeam: TEAMS['53'], league: 'UEFA Champions League', status: 'scheduled' },
     { id: 'f_cl_2', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['54'], awayTeam: TEAMS['56'], league: 'UEFA Champions League', status: 'scheduled' },
+    { id: 'f_cl_3', date: new Date().toISOString().split('T')[0], time: '20:45', homeTeam: TEAMS['52'], awayTeam: TEAMS['60'], league: 'UEFA Champions League', status: 'scheduled' },
+    { id: 'f_cl_4', date: new Date().toISOString().split('T')[0], time: '21:00', homeTeam: TEAMS['49'], awayTeam: TEAMS['58'], league: 'UEFA Champions League', status: 'scheduled' },
 
     // La Liga
     { id: 'f_pd_1', date: new Date().toISOString().split('T')[0], time: '21:00', homeTeam: TEAMS['52'], awayTeam: TEAMS['61'], league: 'La Liga', status: 'scheduled' },
+    { id: 'f_pd_2', date: new Date().toISOString().split('T')[0], time: '19:00', homeTeam: TEAMS['50'], awayTeam: TEAMS['76'], league: 'La Liga', status: 'scheduled' },
+    { id: 'f_pd_3', date: new Date().toISOString().split('T')[0], time: '17:30', homeTeam: TEAMS['73'], awayTeam: TEAMS['72'], league: 'La Liga', status: 'scheduled' },
+
+    // Serie A
+    { id: 'f_sa_1', date: new Date().toISOString().split('T')[0], time: '18:00', homeTeam: TEAMS['56'], awayTeam: TEAMS['77'], league: 'Serie A', status: 'scheduled' },
+    { id: 'f_sa_2', date: new Date().toISOString().split('T')[0], time: '20:45', homeTeam: TEAMS['58'], awayTeam: TEAMS['78'], league: 'Serie A', status: 'scheduled' },
+    { id: 'f_sa_3', date: new Date().toISOString().split('T')[0], time: '15:00', homeTeam: TEAMS['79'], awayTeam: TEAMS['80'], league: 'Serie A', status: 'scheduled' },
+
+    // Bundesliga
+    { id: 'f_bl_1', date: new Date().toISOString().split('T')[0], time: '18:30', homeTeam: TEAMS['53'], awayTeam: TEAMS['60'], league: 'Bundesliga', status: 'scheduled' },
+    { id: 'f_bl_2', date: new Date().toISOString().split('T')[0], time: '15:30', homeTeam: TEAMS['59'], awayTeam: TEAMS['82'], league: 'Bundesliga', status: 'scheduled' },
+
+    // Ligue 1
+    { id: 'f_fl_1', date: new Date().toISOString().split('T')[0], time: '21:00', homeTeam: TEAMS['54'], awayTeam: TEAMS['86'], league: 'Ligue 1', status: 'scheduled' },
+    { id: 'f_fl_2', date: new Date().toISOString().split('T')[0], time: '17:00', homeTeam: TEAMS['85'], awayTeam: TEAMS['87'], league: 'Ligue 1', status: 'scheduled' },
+
+    // Saudi Pro League
+    { id: 'f_sau_1', date: new Date().toISOString().split('T')[0], time: '20:00', homeTeam: TEAMS['63'], awayTeam: TEAMS['88'], league: 'Saudi Pro League', status: 'scheduled' },
+    { id: 'f_sau_2', date: new Date().toISOString().split('T')[0], time: '18:00', homeTeam: TEAMS['89'], awayTeam: TEAMS['90'], league: 'Saudi Pro League', status: 'scheduled' },
+
+    // Major League Soccer
+    { id: 'f_mls_1', date: new Date().toISOString().split('T')[0], time: '19:30', homeTeam: TEAMS['64'], awayTeam: TEAMS['92'], league: 'MLS', status: 'scheduled' },
+    { id: 'f_mls_2', date: new Date().toISOString().split('T')[0], time: '22:00', homeTeam: TEAMS['91'], awayTeam: TEAMS['64'], league: 'MLS', status: 'scheduled' },
   ],
   predictions: [
     {
