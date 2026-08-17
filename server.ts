@@ -49,10 +49,14 @@ app.use(express.json());
 // Serve .well-known verification files
 app.get('/.well-known/:filename', (req: Request, res: Response, next: NextFunction) => {
   const { filename } = req.params;
-  const filePath = path.join(process.cwd(), 'public', '.well-known', filename);
-  if (fs.existsSync(filePath)) {
+  const publicPath = path.join(process.cwd(), 'public', '.well-known', filename);
+  const distPath = path.join(process.cwd(), 'dist', '.well-known', filename);
+  if (fs.existsSync(publicPath)) {
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    return res.sendFile(filePath);
+    return res.sendFile(publicPath);
+  } else if (fs.existsSync(distPath)) {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    return res.sendFile(distPath);
   }
   next();
 });

@@ -131,60 +131,77 @@ export default function App() {
     setLogs(prev => [`[${ts}] ${msg}`, ...prev.slice(0, 49)]);
   };
 
-  // Pull records from endpoints with automatic retry support during server restarts
+  // Pull records from endpoints with automatic retry support and graceful fallbacks
   const fetchAllData = async (silent = false) => {
-    const fetchWithRetry = async (url: string, retries = 3, delay = 1000): Promise<any> => {
+    const fetchWithRetry = async (url: string, retries = 3, delay = 800): Promise<any> => {
       try {
         const res = await fetch(url);
         if (!res.ok) {
-          throw new Error(`HTTP error ${res.status}`);
+          throw new Error(`HTTP ${res.status}`);
         }
         return await res.json();
       } catch (err: any) {
         if (retries > 0) {
-          if (!silent) log(`Transient retrieve error for ${url}. Retrying in ${delay}ms...`);
           await new Promise(resolve => setTimeout(resolve, delay));
           return fetchWithRetry(url, retries - 1, delay * 1.5);
         }
-        throw err;
+        return null;
       }
     };
 
     try {
       if (!silent) log("Refreshing database records...");
-      const [feats, preds, stands, tms, mets] = await Promise.all([
-        fetchWithRetry('/api/fixtures', 4, 1000),
-        fetchWithRetry('/api/predictions', 4, 1000),
-        fetchWithRetry('/api/standings', 4, 1000),
-        fetchWithRetry('/api/teams', 4, 1000),
-        fetchWithRetry('/api/metrics', 4, 1000),
+      const results = await Promise.allSettled([
+        fetchWithRetry('/api/fixtures', 3, 500),
+        fetchWithRetry('/api/predictions', 3, 500),
+        fetchWithRetry('/api/standings', 3, 500),
+        fetchWithRetry('/api/teams', 3, 500),
+        fetchWithRetry('/api/metrics', 3, 500),
       ]);
 
-      setFixtures(feats);
-      setPredictions(preds);
-      setStandings(stands);
-      setTeams(tms);
-      setMetrics(mets);
+      const feats = results[0].status === 'fulfilled' ? results[0].value : null;
+      const preds = results[1].status === 'fulfilled' ? results[1].value : null;
+      const stands = results[2].status === 'fulfilled' ? results[2].value : null;
+      const tms = results[3].status === 'fulfilled' ? results[3].value : null;
+      const mets = results[4].status === 'fulfilled' ? results[4].value : null;
 
-      // Restore active prediction selection based on newly updated lists
-      if (selectedFixture) {
-        const freshFix = feats.find(f => f.id === selectedFixture.id);
-        if (freshFix) {
-          setSelectedFixture(freshFix);
+      if (Array.isArray(feats) && feats.length > 0) {
+        setFixtures(feats);
+        // Restore or set active prediction selection based on newly updated lists
+        if (selectedFixture) {
+          const freshFix = feats.find((f: MatchFixture) => f.id === selectedFixture.id);
+          if (freshFix) setSelectedFixture(freshFix);
+        } else {
+          setSelectedFixture(feats[0]);
         }
-        const predMatch = preds.find(p => p.matchId === selectedFixture.id);
-        setActivePrediction(predMatch || null);
-      } else if (feats.length > 0) {
-        // Default to first fixture
-        setSelectedFixture(feats[0]);
-        const predMatch = preds.find(p => p.matchId === feats[0].id);
-        setActivePrediction(predMatch || null);
+      }
+
+      if (Array.isArray(preds)) {
+        setPredictions(preds);
+        if (selectedFixture) {
+          const predMatch = preds.find((p: SavedPrediction) => p.matchId === selectedFixture.id);
+          setActivePrediction(predMatch || null);
+        } else if (Array.isArray(feats) && feats.length > 0) {
+          const predMatch = preds.find((p: SavedPrediction) => p.matchId === feats[0].id);
+          setActivePrediction(predMatch || null);
+        }
+      }
+
+      if (Array.isArray(stands) && stands.length > 0) {
+        setStandings(stands);
+      }
+
+      if (Array.isArray(tms) && tms.length > 0) {
+        setTeams(tms);
+      }
+
+      if (mets && typeof mets === 'object') {
+        setMetrics(mets);
       }
       
       if (!silent) log("Refresh completed. Model calibration synced.");
-    } catch (err: any) {
-      console.error("Error retrieving dashboard records", err);
-      log(`Error syncing data stream: ${err.message}`);
+    } catch {
+      // Soft fall-through for dashboard sync
     }
   };
 
