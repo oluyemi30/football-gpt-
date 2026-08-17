@@ -67,7 +67,7 @@ export default function App() {
   const [selectedCountry, setSelectedCountry] = useState<Team | null>(null);
 
   // Telegram Bot integration state variables
-  const [tgToken, setTgToken] = useState<string>('');
+  const [hasTgToken, setHasTgToken] = useState<boolean>(false);
   const [tgEnabled, setTgEnabled] = useState<boolean>(false);
   const [tgChatId, setTgChatId] = useState<string>('');
   const [tgLogs, setTgLogs] = useState<{ timestamp: string; type: 'info' | 'message' | 'response' | 'error'; text: string }[]>([]);
@@ -193,7 +193,7 @@ export default function App() {
       const configRes = await fetch('/api/telegram/config');
       if (configRes.ok) {
         const config = await configRes.json();
-        setTgToken(config.token || '');
+        setHasTgToken(Boolean(config.hasToken || config.token));
         setTgEnabled(config.enabled || false);
         setTgChatId(config.chatId || '');
       }
@@ -406,19 +406,18 @@ export default function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          token: tgToken,
           enabled: tgEnabled,
           chatId: tgChatId
         })
       });
       if (response.ok) {
         setAlertMessage({ type: 'success', text: `Telegram Configuration saved! Polling: ${tgEnabled ? 'ACTIVE' : 'STANDBY'}` });
-        log(`Telegram secrets updated. Polling toggle state matches: ${tgEnabled ? 'ON' : 'OFF'}`);
+        log(`Telegram status updated. Polling toggle state matches: ${tgEnabled ? 'ON' : 'OFF'}`);
       } else {
         throw new Error('Failed to update config');
       }
     } catch (err: any) {
-      setAlertMessage({ type: 'error', text: `Failed to save Telegram credentials: ${err.message}` });
+      setAlertMessage({ type: 'error', text: `Failed to update Telegram settings: ${err.message}` });
     } finally {
       setIsSavingTgConfig(false);
     }
@@ -1759,11 +1758,11 @@ export default function App() {
                   <h3 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
                     <span>FootballGPT Telegram Bot Console</span>
                     <span className={`text-[9px] px-2 py-0.5 rounded-full border tracking-widest uppercase font-mono font-bold ${
-                      tgEnabled && tgToken
+                      tgEnabled && hasTgToken
                         ? 'bg-green-500/10 text-green-400 border-green-500/30'
                         : 'bg-slate-500/10 text-slate-400 border-slate-500/20'
                     }`}>
-                      {tgEnabled && tgToken ? '🟢 Live API Connected' : '⚪ Polling Standby'}
+                      {tgEnabled && hasTgToken ? '🟢 Live API Connected' : '⚪ Polling Standby'}
                     </span>
                   </h3>
                 </div>
@@ -1787,11 +1786,13 @@ export default function App() {
                     <div className="flex flex-col gap-3">
                       <div className="bg-[#0D1117] p-4 rounded border border-[#30363D]/60 flex flex-col gap-2">
                         <div className="flex items-center gap-2">
-                          <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shrink-0"></span>
-                          <span className="text-xs font-bold text-green-400 uppercase tracking-wider font-mono">Master Live Bot Active</span>
+                          <span className={`w-2.5 h-2.5 rounded-full ${tgEnabled && hasTgToken ? 'bg-green-500 animate-pulse' : 'bg-slate-500'} shrink-0`}></span>
+                          <span className="text-xs font-bold text-slate-200 uppercase tracking-wider font-mono">
+                            {tgEnabled && hasTgToken ? 'Master Live Bot Active' : 'Bot Polling Standby'}
+                          </span>
                         </div>
-                        <p className="text-[11px] font-mono text-slate-400 bg-black/40 px-2 py-2 rounded select-none border border-[#30363D]/30 tracking-widest leading-none">
-                          8702990599:AAFeNJU0VddH3ZePKJz1GHa... (🔒 Sealed)
+                        <p className="text-[11px] font-mono text-slate-400 bg-black/40 px-3 py-2 rounded select-none border border-[#30363D]/30 tracking-wider leading-relaxed">
+                          {hasTgToken ? 'Bot connection configured via server environment' : 'Live server simulation active (no key stored)'}
                         </p>
                       </div>
 
@@ -1799,7 +1800,7 @@ export default function App() {
                         <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                         <div>
                           <p className="font-bold text-amber-400 font-mono text-[10px] uppercase tracking-wider">Access Restricted to Server Owner</p>
-                          <p className="text-slate-400 mt-0.5">This platform runs on the owner's pre-configured Telegram prediction stream. Standard guest accounts are blocked from overriding credentials to prevent tampering.</p>
+                          <p className="text-slate-400 mt-0.5">This platform runs on the server's Telegram prediction stream. Client-side credential entry is disabled to maintain security.</p>
                         </div>
                       </div>
 

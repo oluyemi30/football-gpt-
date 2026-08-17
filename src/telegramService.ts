@@ -752,7 +752,7 @@ export async function startTelegramPolling() {
   }
 
   isPollingActive = true;
-  addTelegramLog('info', `Active Telegram Polling initialized with Token: ${config.token.slice(0, 8)}...`);
+  addTelegramLog('info', `Active Telegram Polling initialized.`);
   console.log(`[Telegram Bot] Starting polling with update offset ${config.lastUpdateId}`);
 
   // Cleanly await deleteWebhook to ensure Conflict 409 is fully resolved first

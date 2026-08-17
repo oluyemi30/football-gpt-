@@ -2782,9 +2782,10 @@
     }
   ],
   "telegram": {
-    "token": "8702990599:AAFeNJU0VddH3ZePKJz1GHaKXQHWYq_dz0o",
-    "enabled": true,
+    "token": "",
+    "enabled": false,
     "chatId": "",
-    "lastUpdateId": 0
+    "lastUpdateId": 0,
+    "publicUrl": "http://localhost:3000"
   }
 }

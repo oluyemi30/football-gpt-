@@ -431,7 +431,14 @@ app.get('/api/telegram/config', (req: Request, res: Response) => {
     hostUrl = hostUrl.replace('http://', 'https://');
   }
   updateTelegramConfig({ publicUrl: hostUrl });
-  res.json(getTelegramConfig());
+  const conf = getTelegramConfig();
+  res.json({
+    enabled: conf.enabled,
+    hasToken: Boolean(conf.token),
+    chatId: conf.chatId,
+    lastUpdateId: conf.lastUpdateId,
+    publicUrl: conf.publicUrl
+  });
 });
 
 // 2. Update and active toggle telegram polling
@@ -442,7 +449,11 @@ app.post('/api/telegram/config', (req: Request, res: Response) => {
     if (hostUrl.startsWith('http://') && !hostUrl.includes('localhost') && !hostUrl.includes('127.0.0.1') && !hostUrl.includes('0.0.0.0')) {
       hostUrl = hostUrl.replace('http://', 'https://');
     }
-    const updatePayload = { ...req.body, publicUrl: hostUrl };
+    const updatePayload: any = { publicUrl: hostUrl };
+    if (req.body.enabled !== undefined) updatePayload.enabled = req.body.enabled;
+    if (req.body.token !== undefined) updatePayload.token = req.body.token;
+    if (req.body.chatId !== undefined) updatePayload.chatId = req.body.chatId;
+
     updateTelegramConfig(updatePayload);
     const config = getTelegramConfig();
     if (config.enabled && config.token) {
@@ -450,8 +461,15 @@ app.post('/api/telegram/config', (req: Request, res: Response) => {
     } else {
       stopTelegramPolling();
     }
-    broadcastUpdate('telegram_config_updated', config);
-    res.json({ success: true, config });
+    const sanitizedConfig = {
+      enabled: config.enabled,
+      hasToken: Boolean(config.token),
+      chatId: config.chatId,
+      lastUpdateId: config.lastUpdateId,
+      publicUrl: config.publicUrl
+    };
+    broadcastUpdate('telegram_config_updated', sanitizedConfig);
+    res.json({ success: true, config: sanitizedConfig });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
