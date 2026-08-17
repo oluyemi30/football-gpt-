@@ -46,6 +46,17 @@ export function broadcastUpdate(type: string, data?: any) {
 const app = express();
 app.use(express.json());
 
+// Serve .well-known verification files
+app.get('/.well-known/:filename', (req: Request, res: Response, next: NextFunction) => {
+  const { filename } = req.params;
+  const filePath = path.join(process.cwd(), 'public', '.well-known', filename);
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    return res.sendFile(filePath);
+  }
+  next();
+});
+
 // API Endpoints
 
 // 1. Get Today's Matches & All Fixtures
